@@ -1,1 +1,12 @@
 @import "tailwindcss";
+@font-face{
+    font-family: mecomicse;
+    src: url(src/assets/font/mecomicse.otf);
+    font-weight: 400;
+    font-display: swap;
+}
+
+
+@theme{
+    --font-sans: mecomicse
+}

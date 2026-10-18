@@ -18,7 +18,10 @@ export default defineConfig([
     languageOptions: {
       globals: globals.browser,
     },
-    "@typescript-eslint/no-explicit-any": "error"
+    rules: {
+      '@typescript-eslint/no-explicit-any': 'error',
+    },
+
   },
 
 ])
