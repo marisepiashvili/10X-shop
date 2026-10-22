@@ -11,13 +11,13 @@ const imageBgColors = [
 
 
 export default function ProductCard({product}: {product: Product}) {
-    const bgColor = imageBgColors[Math.floor(Math.random() * imageBgColors.length)]
+    const bgColor = imageBgColors[product.id % imageBgColors.length]
     const discountedPrice = product.price - (product.price * product.discountPercentage/100)
     const discount = Math.round(product.discountPercentage)
     const isOutOfStock = product.stock === 0
 
   return (
-    <div className="border-2 border-[#12424A] rounded-2xl flex flex-col w-60 h-120 overflow-hidden shadow-[6px_6px_0_#12424A] transition hover:-translate-y-1 hover:shadow-[8px_10px_0_#12424A]
+    <div className="border-2 border-[#12424A] rounded-2xl flex flex-col w-full h-120 overflow-hidden shadow-[6px_6px_0_#12424A] transition hover:-translate-y-1 hover:shadow-[8px_10px_0_#12424A]
 ">
         {/* image */}
       <div className={`border-b-2 border-[#12424A] w-full h-1/2 relative ${bgColor}`}>

@@ -9,15 +9,21 @@ type SelectFieldProps = {
     id: string
     label: string
     options: Option[]
+    value: string
+    onChange: (value: string) => void
+
 }
 
 
-export default function SelectField({id, label, options}:SelectFieldProps) {
+export default function SelectField({id, label, options,value, onChange}:SelectFieldProps) {
   return (
     <div className="flex flex-col gap-2">
       <label htmlFor={id} className="text-sm font-bold text-[#12424A]">{label}</label>
       <div className="relative">
-          <select id={id} className="appearance-none w-full h-14 rounded-full border-2 border-[#12424A]  bg-white pl-6 pr-12 text-lg text-[#12424A] cursor-pointer">
+          <select id={id} className="appearance-none w-full h-14 rounded-full border-2 border-[#12424A]  bg-white pl-6 pr-12 text-lg text-[#12424A] cursor-pointer"
+          value={value}
+          onChange={(e) => onChange(e.target.value)}
+          >
             {options.map((option)=>
             (<option key={option.value} value={option.value}>{option.label}</option>
              ))}

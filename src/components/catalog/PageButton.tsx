@@ -1,5 +1,6 @@
 type PageButtonProps = {
     children: React.ReactNode
+    onClick: () => void
     color?: string
     isActive?: boolean
     disabled?: boolean
@@ -9,6 +10,7 @@ type PageButtonProps = {
 
 export default function PageButton({
     children,
+    onClick,
     color = "bg-white",
     isActive = false,
     disabled = false,
@@ -22,6 +24,7 @@ export default function PageButton({
   return (
       <button className={`${baseStyles} ${colorStyles} ${hoverStyles} ${disabledStyles}`}
       type="button"
+      onClick={onClick}
       disabled={disabled}
       aria-label={ariaLabel}
       aria-current={isActive ? "page" : undefined}>

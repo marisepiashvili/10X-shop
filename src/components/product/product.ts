@@ -15,3 +15,16 @@ export interface ProductsResponse {
     skip: number
     limit: number
 }
+
+export interface ProductQuery {
+    search: string
+    category: string
+    sort: string
+    page: number
+}
+
+export interface Category {
+    slug: string
+    name: string
+    url: string
+}
