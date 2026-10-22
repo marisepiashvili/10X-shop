@@ -8,6 +8,10 @@ export interface Product {
     discountPercentage: number
     stock: number
     thumbnail: string
+    description: string
+    images: string[]
+    reviews: Review[]
+
 }
 export interface ProductsResponse {
     products: Product[]
@@ -27,4 +31,12 @@ export interface Category {
     slug: string
     name: string
     url: string
+}
+
+export interface Review {
+    rating: number
+    comment: string
+    date: string
+    reviewerName: string
+    reviewerEmail: string
 }

@@ -1,22 +1,21 @@
 
-import Footer from "./components/layout/Footer"
-import Header from "./components/layout/Header"
-
+import { Route, Routes } from "react-router"
+import Layout from "./components/layout/Layout"
 import CatalogPage from "./pages/CatalogPage"
+import NotFoundPage from "./pages/NotFoundPage"
+// import ProductPage from "./pages/ProductPage"
 
 function App() {
-
   return (
-    
-     <div className="flex flex-col min-h-screen">
-       <Header/>
-       <main className="flex-1 bg-[#e2f5f1] bg-[radial-gradient(#12424A33_1.5px,transparent_1.5px)] bg-size-[22px_22px]">
-       <CatalogPage/>
-       </main>
-       <Footer/>
-     </div>
-    
+    <Routes>
+      <Route element={<Layout />}>
+        <Route index element={<CatalogPage />} />
+        {/* <Route path="products/:id" element={<ProductPage />} /> */}
+        <Route path="*" element={<NotFoundPage />} />
+      </Route>
+    </Routes>
   )
 }
 
 export default App
+

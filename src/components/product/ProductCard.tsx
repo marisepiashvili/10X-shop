@@ -2,6 +2,8 @@ import starIcon from "../../assets/icons/star.svg"
 import DiscountBadge from "./DiscountBadge"
 import StockPill from "./StockPill"
 import type {Product} from "./product"
+import { Link } from "react-router"
+
 
 const imageBgColors = [
   "bg-[#7FC7BD]",
@@ -20,12 +22,13 @@ export default function ProductCard({product}: {product: Product}) {
     <div className="border-2 border-[#12424A] rounded-2xl flex flex-col w-full h-120 overflow-hidden shadow-[6px_6px_0_#12424A] transition hover:-translate-y-1 hover:shadow-[8px_10px_0_#12424A]
 ">
         {/* image */}
-      <div className={`border-b-2 border-[#12424A] w-full h-1/2 relative ${bgColor}`}>
+     <Link to={`/products/${product.id}`} className={`block border-b-2 border-[#12424A] w-full h-1/2 relative ${bgColor}`}>
+
         <img className="w-full h-full object-contain p-4"
          src={product.thumbnail} 
          alt={product.title} />
          <DiscountBadge discount={discount}/>
-      </div>
+      </Link>
       {/* details */}
       <div className="p-3 flex flex-col gap-2 bg-white h-full">
         <div className="text-[#3E6F73] text-sm capitalize">
@@ -33,7 +36,7 @@ export default function ProductCard({product}: {product: Product}) {
             <span>{product.brand}</span>
         </div>
         <h3 className="text-[#12424A] text-2xl line-clamp-2 min-h-[2lh]
-          ">{product.title}</h3>
+          "> <Link to={`/products/${product.id}`} className="hover:underline">{product.title}</Link></h3>
         {/* price/rating */}
         <div className="text-[#12424A] flex justify-between items-center">
             <div>

@@ -1,4 +1,5 @@
-import type { Category, ProductQuery, ProductsResponse } from "./product";
+import type { Category, Product, ProductQuery, ProductsResponse } from "./product";
+
 
 export const PAGE_SIZE = 12
 const BASE_URL = "https://dummyjson.com/products"
@@ -42,6 +43,19 @@ async function getProducts(query: ProductQuery, signal?: AbortSignal) {
     const data: ProductsResponse = await response.json()
     return data
 }
+
+export async function getProductById(id: number, signal?: AbortSignal) {
+    const response = await fetch(`${BASE_URL}/${id}`, { signal })
+    if (response.status === 404) {
+        throw new Error("Product not found")
+    }
+    if (!response.ok) {
+        throw new Error(`Failed to fetch product: ${response.status}`)
+    }
+    const data: Product = await response.json()
+    return data
+}
+
 
 export async function getCategories() {
     const response = await fetch(`${BASE_URL}/categories`)
