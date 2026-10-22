@@ -1,8 +1,10 @@
 import { Link, useParams } from "react-router"
 import chevronLeftIcon from "../assets/icons/chevron-left.svg"
-import ProductGallery from "../product/ProductGallery"
-import ProductInfo from "../product/ProductInfo"
-import useProduct from "../../hooks/useProduct"
+import ProductGallery from "../components/product/ProductGallery"
+import ProductInfo from "../components/product/ProductInfo"
+import ProductTabs from "../components/product/ProductTabs"
+import RelatedProducts from "../components/product/RelatedProducts"
+import useProduct from "../hooks/useProduct"
 
 export default function ProductPage() {
   const { id } = useParams()
@@ -19,14 +21,18 @@ export default function ProductPage() {
     content = <p className="text-center text-xl text-[#C4102C]">{error ?? "Product not found"}</p>
   } else {
     content = (
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-        <ProductGallery
-          images={product.images}
-          title={product.title}
-          discount={Math.round(product.discountPercentage)}
-        />
-        <ProductInfo product={product} />
-      </div>
+      <>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+          <ProductGallery
+            images={product.images}
+            title={product.title}
+            discount={Math.round(product.discountPercentage)}
+          />
+          <ProductInfo product={product} />
+        </div>
+        <ProductTabs product={product} />
+        <RelatedProducts category={product.category} currentId={product.id} />
+      </>
     )
   }
 
