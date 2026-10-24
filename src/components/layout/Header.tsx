@@ -1,6 +1,7 @@
 import NavPill from "./NavPill";
 // import sunIcon from '../../assets/icons/sun.svg'
 import moonIcon from '../../assets/icons/moon.svg'
+import { Link } from "react-router"
 
 
 
@@ -17,19 +18,20 @@ export default function Header() {
             <div className="flex gap-2">
                 <nav className="flex ">
                     <ul className="flex gap-2">
-                     <NavPill color="bg-[#7FC7bd]">Catalog</NavPill>
-                     <NavPill color="bg-[#B5E655]">Orders</NavPill>
-                     <NavPill color="bg-[#4CB6C2]">Cart
+                     <NavPill to="/" color="bg-[#7FC7bd]">Catalog</NavPill>
+                     <NavPill to="" color="bg-[#B5E655]">Orders</NavPill>
+                     <NavPill to="" color="bg-[#4CB6C2]">Cart
                         <div className="bg-[#12424A] rounded-full h-5 w-5 text-white flex items-center justify-center pt-0.5 ml-1">0</div>
                      </NavPill>
-                     <NavPill color="bg-[#7FC7bd]">Profile</NavPill>
+                     <NavPill to="" color="bg-[#7FC7bd]">Profile</NavPill>
                     </ul>
                 </nav>
                 <div className="flex gap-2">
                     <button className="border-2 border-[#12424A] rounded-3xl p-2 h-10 ">
                         <img src={moonIcon} alt="moon icon" className="h-5 w-5"/>
                     </button>
-                    <button className="border-2 border-dashed border-[#12424A] rounded-3xl p-2 h-10 text-xl flex items-center justify-center">Log out</button>
+                    <Link to="/login" className="border-2 border-dashed border-[#12424A] rounded-3xl p-2 h-10 text-xl flex items-center justify-center">Log in</Link>
+
                 </div>
             </div>
         </div>
