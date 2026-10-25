@@ -4,6 +4,8 @@ import ProductGallery from "../components/product/ProductGallery"
 import ProductInfo from "../components/product/ProductInfo"
 import ProductTabs from "../components/product/ProductTabs"
 import RelatedProducts from "../components/product/RelatedProducts"
+import LoadingState from "../components/ui/LoadingState"
+import MessagePanel from "../components/ui/MessagePanel"
 import useProduct from "../hooks/useProduct"
 
 export default function ProductPage() {
@@ -14,15 +16,15 @@ export default function ProductPage() {
 
   let content: React.ReactNode
   if (!isValidId) {
-    content = <p className="text-center text-xl text-[#12424A]">Product not found</p>
+    content = <MessagePanel variant="empty" title="Product not found" note="check the link" />
   } else if (loading) {
-    content = <p className="text-center text-xl text-[#12424A]">Loading...</p>
+    content = <LoadingState />
   } else if (error || !product) {
-    content = <p className="text-center text-xl text-[#C4102C]">{error ?? "Product not found"}</p>
+    content = <MessagePanel variant="error" title="Could not load product" note={error ?? "Product not found"} />
   } else {
     content = (
       <>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-start">
           <ProductGallery
             images={product.images}
             title={product.title}
@@ -37,9 +39,9 @@ export default function ProductPage() {
   }
 
   return (
-    <div className="max-w-266 mx-auto px-4 py-8 flex flex-col gap-8">
-      <Link to="/" className="flex items-center gap-2 w-fit text-sm text-[#12424A] hover:underline">
-        <img src={chevronLeftIcon} alt="" className="w-4 h-4" />
+    <div className="w-full max-w-330 mx-auto px-4 md:px-10 pt-6 pb-26 flex flex-col gap-14">
+      <Link to="/" className="flex items-center gap-2 h-11 w-fit font-extrabold hover:text-blue">
+        <img src={chevronLeftIcon} alt="" className="w-5 h-5" />
         Back to catalog
       </Link>
       {content}

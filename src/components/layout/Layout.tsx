@@ -8,7 +8,7 @@ export default function Layout() {
     <div className="flex flex-col min-h-screen">
       <ScrollToTop />
       <Header />
-      <main className="flex-1 bg-[#e2f5f1] bg-[radial-gradient(#12424A33_1.5px,transparent_1.5px)] bg-size-[22px_22px]">
+      <main className="flex-1 flex flex-col">
         <Outlet />
       </main>
       <Footer />

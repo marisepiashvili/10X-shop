@@ -30,8 +30,8 @@ export default function ProductTabs({ product }: { product: Product }) {
   ]
 
   return (
-    <section className="border-2 border-[#12424A] rounded-3xl overflow-hidden text-[#12424A]">
-      <div role="tablist" className="flex gap-2 p-3 border-b-2 border-[#12424A]">
+    <section className="flex flex-col gap-6">
+      <div role="tablist" aria-label="Product information" className="flex flex-wrap gap-2.5">
         {tabs.map((tab) => {
           const isActive = tab.id === activeTab
           return (
@@ -43,7 +43,7 @@ export default function ProductTabs({ product }: { product: Product }) {
               aria-selected={isActive}
               aria-controls={`panel-${tab.id}`}
               onClick={() => setActiveTab(tab.id)}
-              className={`px-5 py-1.5 rounded-full border-2 border-[#12424A] text-lg transition ${isActive ? "bg-[#12424A] text-white" : "bg-white hover:-translate-y-0.5"}`}
+              className={`h-13 px-6.5 rounded-full text-[17px] font-extrabold shadow-soft transition ${isActive ? "bg-ink text-white" : "bg-white hover:-translate-y-0.5"}`}
             >
               {tab.label}
             </button>
@@ -51,17 +51,31 @@ export default function ProductTabs({ product }: { product: Product }) {
         })}
       </div>
 
-      <div id={`panel-${activeTab}`} role="tabpanel" aria-labelledby={`tab-${activeTab}`} className="p-6">
+      <div id={`panel-${activeTab}`} role="tabpanel" aria-labelledby={`tab-${activeTab}`}>
         {activeTab === "description" ? (
-          <p className="leading-relaxed max-w-prose">{product.description}</p>
+          <div className="bg-white rounded-card shadow-card p-6 md:p-9 grid grid-cols-1 md:grid-cols-2 gap-8">
+            <p className="text-[17px] leading-relaxed">{product.description}</p>
+            <dl className="grid grid-cols-[max-content_1fr] gap-x-8 gap-y-3 self-start">
+              {product.brand && (
+                <>
+                  <dt>Brand</dt>
+                  <dd className="font-extrabold">{product.brand}</dd>
+                </>
+              )}
+              <dt>Category</dt>
+              <dd className="font-extrabold capitalize">{product.category}</dd>
+              <dt>Stock</dt>
+              <dd className="font-extrabold">{product.stock}</dd>
+            </dl>
+          </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-[1fr_280px] gap-6 items-start">
-            <div className="flex flex-col gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-[1fr_320px] gap-10 items-start">
+            <div className="flex flex-col gap-5">
               {reviews.length === 0 ? (
-                <p className="text-[#3E6F73]">No reviews yet. Be the first!</p>
+                <p className="font-note text-2xl">No reviews yet. Be the first!</p>
               ) : (
-                reviews.map((review) => (
-                  <ReviewCard key={review.id} review={review} />
+                reviews.map((review, index) => (
+                  <ReviewCard key={review.id} review={review} index={index} />
                 ))
               )}
             </div>

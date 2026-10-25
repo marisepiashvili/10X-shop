@@ -47,11 +47,11 @@ export default function CatalogToolbar({
     }, [])
 
   return (
-    <section className="border-2 border-[#12424A] rounded-3xl p-6 bg-[#e2f5f1]">
-        <div className="grid grid-cols-1 md:grid-cols-[2fr_1fr_1fr] gap-6">
+    <section className="bg-white rounded-card shadow-card p-4.5">
+        <div className="grid grid-cols-1 md:grid-cols-[2fr_1fr_1fr] gap-4">
             <SearchInput value={search} onChange={onSearchChange} />
-            <SelectField id="category" label="Category" options={categoryOptions} value={category} onChange={onCategoryChange} />
-            <SelectField id="sort" label="Sort by" options={sortOptions} value={sort} onChange={onSortChange} />
+            <SelectField id="category" label="Category" color="bg-yellow" options={categoryOptions} value={category} onChange={onCategoryChange} />
+            <SelectField id="sort" label="Sort by" color="bg-sky" options={sortOptions} value={sort} onChange={onSortChange} />
         </div>
     </section>
   )

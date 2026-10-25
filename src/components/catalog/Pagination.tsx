@@ -2,8 +2,6 @@ import PageButton from "./PageButton"
 import chevronLeftIcon from "../../assets/icons/chevron-left.svg"
 import chevronRightIcon from "../../assets/icons/chevron-right.svg"
 
-const pageColors = ["bg-[#9DBFC0]", "bg-[#B5E655]", "bg-[#4CB6C2]"]
-
 type PaginationProps = {
     currentPage: number
     totalPages: number
@@ -43,13 +41,12 @@ export default function Pagination({ currentPage, totalPages, onPageChange }: Pa
             </li>
             {pages.map((item, index)=> item === "..." ? (
                 <li key={`dots-${index}`}>
-                    <span className="px-1 font-bold text-[#12424A]">…</span>
+                    <span className="px-1 font-extrabold">…</span>
                 </li>
             ) : (
                 <li key={item}>
-                    <PageButton 
+                    <PageButton
                     isActive={item === currentPage}
-                    color={pageColors[item % pageColors.length]}
                     onClick={() => onPageChange(item)}>{item}</PageButton>
                 </li>
             ))}

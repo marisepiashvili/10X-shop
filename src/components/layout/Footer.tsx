@@ -1,11 +1,9 @@
-
-
 export default function Footer() {
   return (
-    <footer className="bg-[#0A2C32] py-8">
-        <div className="flex justify-between mx-10 text-white ">
-            <span className="text-2xl">10X Shop</span>
-            <span className="text-sm"> Product data from DummyJSON · © 2026 </span>
+    <footer className="bg-ink text-paper">
+        <div className="max-w-330 mx-auto px-4 md:px-10 py-6.5 flex flex-wrap justify-between items-center gap-4 text-sm">
+            <span className="font-display text-[22px] text-orange">10X SHOP</span>
+            <span>Product data from DummyJSON · © 2026</span>
         </div>
     </footer>
   )

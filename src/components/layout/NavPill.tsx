@@ -2,16 +2,16 @@ import { NavLink } from "react-router";
 
 type NavPillProps = {
     to: string
-    color: string;
     children: React.ReactNode
 }
 
-export default function NavPill({color, children, to} : NavPillProps) {
+export default function NavPill({to, children} : NavPillProps) {
   return (
-   <li >
-    <NavLink 
+   <li>
+    <NavLink
     to={to}
-    className={`border-2 border-[#12424A] rounded-3xl p-2 h-10 text-[#12424A] text-xl flex items-center justify-center ${color} transition hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[3px_3px_0_#12424A] active:translate-x-0 active:translate-y-0 active:shadow-none`}>{children}</NavLink>
+    end
+    className={({ isActive }) => `flex items-center h-12 px-4 rounded-full font-extrabold transition hover:text-blue ${isActive ? "bg-yellow border-[3px] border-white shadow-soft -rotate-2" : ""}`}>{children}</NavLink>
    </li>
   )
 }

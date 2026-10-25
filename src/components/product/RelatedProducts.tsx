@@ -16,7 +16,7 @@ export default function RelatedProducts({ category, currentId }: RelatedProducts
 
   return (
     <section className="flex flex-col gap-6">
-      <h2 className="text-4xl md:text-5xl font-bold text-[#12424A]">Related products.</h2>
+      <h2 className="font-display text-4xl md:text-[44px] leading-none">Related products</h2>
       <ProductGrid products={related} />
     </section>
   )

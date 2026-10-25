@@ -14,8 +14,8 @@ export default function FormField ({name, label, type = "text", autoComplete}: F
     
 
     return(
-        <div className="flex flex-col gap-2">
-            <label htmlFor={name} className="text-sm font-bold">{label}</label>
+        <div className="flex flex-col gap-1.5">
+            <label htmlFor={name} className="text-sm font-extrabold">{label}</label>
             <input
             {...field} 
             id={name}
@@ -23,8 +23,8 @@ export default function FormField ({name, label, type = "text", autoComplete}: F
             autoComplete={autoComplete}
             aria-invalid={hasError}
             aria-describedby={hasError ? errorId : undefined}
-            className={`h-12 rounded-full border-2 bg-white px-5 text-[#12424A] focus:outline-none focus-visible:shadow-[3px_3px_0_#12424A] ${hasError ? "border-red-600" : "border-[#12424A]"}`}/>
-            {hasError && <p id={errorId} className="text-xs text-red-600">{meta.error}</p>}
+            className={`h-13.5 rounded-full bg-white px-5.5 ${hasError ? "border-[3px] border-danger" : "border-2 border-ink"}`}/>
+            {hasError && <p id={errorId} className="text-sm font-bold text-danger pl-2.5">{meta.error}</p>}
         </div>
     )
 }

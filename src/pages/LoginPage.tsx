@@ -1,5 +1,6 @@
 import { Form, Formik, type FormikHelpers } from "formik"
 import { Link, useNavigate } from "react-router"
+import AuthShell from "../components/auth/AuthShell"
 import FormField from "../components/auth/FormField"
 import { loginSchema, type LoginFormValues } from "../components/auth/authSchemas"
 import { loginUser } from "../components/auth/authStorage"
@@ -20,28 +21,29 @@ export default function LoginPage (){
         
     }
     return(
-        <section className="max-w-md mx-auto my-10 px-4">
+        <AuthShell
+            note="welcome back ✶"
+            title="Log in & check out"
+            text="One quick step and your order is on its way."
+            ticketTitle="MEMBER PASS"
+        >
             <Formik initialValues={initialValues} onSubmit={handleSubmit} validationSchema={loginSchema}>
                 {({isSubmitting, status}) => (
-                    <Form noValidate>
-                        <fieldset className="flex flex-col gap-4 border-2 border-[#12424A] rounded-2xl p-4 text-[#12424A]">
-                            <legend className="px-3 py-1 rounded-md bg-[#12424A] text-white text-sm font-bold uppercase">Log in</legend>
+                    <Form noValidate className="flex flex-col gap-4.5">
+                        <FormField name="email" label="Email" type="email" autoComplete="email"/>
+                        <FormField name="password" label="Password" type="password" autoComplete="current-password"/>
 
-                            <FormField name="email" label="Email" type="email" autoComplete="email"/>
-                            <FormField name="password" label="Password" type="password" autoComplete="current-password"/>
+                        {status && <p role="alert" className="text-sm font-bold text-danger">{status}</p>}
 
-                            {status && <p role="alert" className="text-sm text-red-600">{status}</p>}
+                        <button
+                        type="submit"
+                        disabled={isSubmitting}
+                        className="mt-1 h-15 rounded-full bg-orange text-white border-4 border-white text-lg font-extrabold shadow-sticker transition enabled:hover:-translate-y-0.5 disabled:opacity-60 disabled:cursor-not-allowed">Log in</button>
 
-                            <button  
-                            type="submit"
-                            disabled={isSubmitting}
-                            className="h-11 rounded-full border-2 border-[#12424A] bg-[#B5E655] text-lg transition enabled:hover:-translate-y-0.5 enabled:hover:shadow-[3px_3px_0_#12424A] disabled:opacity-60 disabled:cursor-not-allowed">Log in</button>
-
-                            <p className="text-sm text-center"> No account yet? <Link to="/register" className="font-bold underline">Register</Link></p>
-                        </fieldset>
+                        <p className="text-sm text-center">No account yet? <Link to="/register" className="font-extrabold underline hover:text-blue">Register</Link></p>
                     </Form>
                 )}
             </Formik>
-        </section>
+        </AuthShell>
     )
 }

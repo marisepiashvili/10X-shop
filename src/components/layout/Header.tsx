@@ -1,40 +1,51 @@
-import NavPill from "./NavPill";
-// import sunIcon from '../../assets/icons/sun.svg'
-import moonIcon from '../../assets/icons/moon.svg'
-import { Link } from "react-router"
-
-
+import { Link, NavLink } from "react-router"
+import moonIcon from "../../assets/icons/moon.svg"
+import NavPill from "./NavPill"
 
 export default function Header() {
   return (
-    <header className="border-b-2 border-[#12424A]">
-        <div className="flex justify-between  my-5 mx-10 items-center">
-            <div className="flex items-center gap-2">
-                <div className="border-2 border-[#12424A] rounded-full p-2 bg-[#B5E655]">
-                    <h2 className=" -rotate-10 text-2xl font-bold text-[#12424A]">10X</h2>
-                </div>
-                <h2 className="text-3xl font-bold text-[#12424A]">Shop</h2>
-            </div>
-            <div className="flex gap-2">
-                <nav className="flex ">
-                    <ul className="flex gap-2">
-                     <NavPill to="/" color="bg-[#7FC7bd]">Catalog</NavPill>
-                     <NavPill to="" color="bg-[#B5E655]">Orders</NavPill>
-                     <NavPill to="" color="bg-[#4CB6C2]">Cart
-                        <div className="bg-[#12424A] rounded-full h-5 w-5 text-white flex items-center justify-center pt-0.5 ml-1">0</div>
-                     </NavPill>
-                     <NavPill to="" color="bg-[#7FC7bd]">Profile</NavPill>
-                    </ul>
-                </nav>
-                <div className="flex gap-2">
-                    <button className="border-2 border-[#12424A] rounded-3xl p-2 h-10 ">
-                        <img src={moonIcon} alt="moon icon" className="h-5 w-5"/>
-                    </button>
-                    <Link to="/login" className="border-2 border-dashed border-[#12424A] rounded-3xl p-2 h-10 text-xl flex items-center justify-center">Log in</Link>
+    <header className="bg-paper">
+      <div className="max-w-330 mx-auto px-4 md:px-10 py-4.5 flex flex-wrap items-center justify-between gap-5">
+        <Link
+          to="/"
+          aria-label="10X Shop, home"
+          className="font-display text-3xl px-4 pt-1 pb-1.5 rounded-[14px] bg-orange text-white border-4 border-white shadow-soft -rotate-3"
+        >
+          10X SHOP
+        </Link>
 
-                </div>
-            </div>
+        <div className="flex flex-wrap items-center gap-1.5">
+          <nav aria-label="Main">
+            <ul className="flex flex-wrap items-center gap-1.5">
+              <NavPill to="/">Catalog</NavPill>
+              <NavPill to="/orders">Orders</NavPill>
+              <NavPill to="/profile">Profile</NavPill>
+              <li>
+                <NavLink
+                  to="/cart"
+                  className={({ isActive }) =>
+                    `flex items-center gap-2.5 h-12 pl-5 pr-3 rounded-full text-white font-extrabold transition hover:-translate-y-0.5 ${isActive ? "bg-blue" : "bg-ink"}`
+                  }
+                >
+                  Cart
+                  <span className="min-w-6.5 h-6.5 px-1.5 rounded-full bg-pink text-ink text-[13px] grid place-items-center">0</span>
+                </NavLink>
+              </li>
+            </ul>
+          </nav>
+
+          <button
+            type="button"
+            aria-label="Toggle dark mode"
+            className="w-12 h-12 rounded-full grid place-items-center transition hover:bg-white"
+          >
+            <img src={moonIcon} alt="" className="w-5 h-5" />
+          </button>
+          <Link to="/login" className="flex items-center h-12 px-3 text-[15px] font-semibold underline hover:text-blue">
+            Log in
+          </Link>
         </div>
+      </div>
     </header>
   )
 }
