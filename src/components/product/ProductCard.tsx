@@ -3,6 +3,7 @@ import DiscountBadge from "./DiscountBadge"
 import StockPill from "./StockPill"
 import type {Product} from "./product"
 import { Link } from "react-router"
+import useCart from "../../hooks/useCart"
 
 
 const imageBgColors = ["bg-pink", "bg-yellow", "bg-mint", "bg-sky"]
@@ -16,6 +17,7 @@ export default function ProductCard({product}: {product: Product}) {
     const discount = Math.round(product.discountPercentage)
     const isOutOfStock = product.stock === 0
     const isLowStock = product.stock > 0 && product.stock <= 5
+    const { addItem } = useCart()
 
   return (
     <article className={`relative h-full flex flex-col p-3 bg-white rounded-card shadow-card transition ${tilt} motion-safe:hover:rotate-0`}>
@@ -54,6 +56,7 @@ export default function ProductCard({product}: {product: Product}) {
       <div className="px-1.5 pt-3 pb-1">
         <button
         type="button"
+        onClick={() => addItem(product, 1)}
         className="h-12 w-full rounded-full bg-ink text-white text-[17px] font-extrabold transition enabled:hover:bg-blue disabled:bg-muted disabled:text-muted-ink disabled:cursor-not-allowed"
         disabled={isOutOfStock}>{isOutOfStock ? "Out of stock" : "Add to cart"}</button>
       </div>

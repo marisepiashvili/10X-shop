@@ -1,3 +1,5 @@
+import { Minus, Plus } from "lucide-react"
+
 type QuantityStepperProps = {
   value: number
   max: number
@@ -18,7 +20,7 @@ export default function QuantityStepper({ value, max, onChange }: QuantitySteppe
         disabled={value <= MIN_QUANTITY}
         aria-label="Decrease quantity"
       >
-        −
+        <Minus size={18} strokeWidth={2.4} />
       </button>
       <span aria-live="polite" className="min-w-11 text-center font-display text-xl">{value}</span>
       <button
@@ -28,7 +30,7 @@ export default function QuantityStepper({ value, max, onChange }: QuantitySteppe
         disabled={value >= max}
         aria-label="Increase quantity"
       >
-        +
+        <Plus size={18} strokeWidth={2.4} />
       </button>
     </div>
   )
