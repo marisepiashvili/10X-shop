@@ -23,7 +23,7 @@ export default function ProductCard({product}: {product: Product}) {
     <article className={`relative h-full flex flex-col p-3 bg-white rounded-card shadow-card transition ${tilt} motion-safe:hover:rotate-0`}>
         {/* image */}
      <Link to={`/products/${product.id}`} className={`block aspect-square rounded-[20px] ${bgColor}`}>
-        <img className="w-full h-full object-contain p-4"
+        <img className="w-full h-full object-contain p-4 transition duration-300 motion-safe:hover:scale-108 motion-safe:hover:-rotate-3"
          src={product.thumbnail}
          alt={product.title}
          loading="lazy" />
@@ -38,7 +38,12 @@ export default function ProductCard({product}: {product: Product}) {
             {product.category}{product.brand && ` · ${product.brand}`}
         </span>
         <h3 className="text-lg font-extrabold leading-tight line-clamp-2 min-h-[2lh]">
-            <Link to={`/products/${product.id}`} className="hover:text-blue">{product.title}</Link>
+            <Link
+              to={`/products/${product.id}`}
+              className="bg-linear-to-r from-yellow to-yellow bg-no-repeat bg-position-[left_bottom] bg-size-[0%_45%] box-decoration-clone hover:bg-size-[100%_45%] motion-safe:transition-[background-size] motion-safe:duration-300"
+            >
+              {product.title}
+            </Link>
         </h3>
         {/* price/rating */}
         <div className="flex flex-wrap justify-between items-center gap-2">

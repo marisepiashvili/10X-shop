@@ -6,7 +6,7 @@ import useCart from "../../hooks/useCart"
 export default function Header() {
   const { totals } = useCart()
   return (
-    <header className="bg-paper">
+    <header className="md:sticky md:top-0 z-40 bg-paper/90 backdrop-blur-md">
       <div className="max-w-330 mx-auto px-4 md:px-10 py-4.5 flex flex-wrap items-center justify-between gap-5">
         <Link
           to="/"
@@ -30,7 +30,12 @@ export default function Header() {
                   }
                 >
                   Cart
-                  <span className="min-w-6.5 h-6.5 px-1.5 rounded-full bg-pink text-ink text-[13px] grid place-items-center">{totals.itemCount}</span>
+                  <span
+                    key={totals.itemCount}
+                    className="min-w-6.5 h-6.5 px-1.5 rounded-full bg-pink text-ink text-[13px] grid place-items-center motion-safe:animate-pop"
+                  >
+                    {totals.itemCount}
+                  </span>
                 </NavLink>
               </li>
             </ul>

@@ -23,6 +23,15 @@
     --shadow-card: 0 14px 28px rgba(17, 17, 17, 0.14);
     --shadow-soft: 0 6px 14px rgba(17, 17, 17, 0.14);
     --shadow-sticker: 0 8px 18px rgba(17, 17, 17, 0.25);
+
+    --animate-pop: pop 450ms ease-out;
+
+    @keyframes pop {
+        0% { scale: 1; rotate: 0deg; }
+        30% { scale: 1.5; rotate: -12deg; }
+        60% { scale: 0.9; rotate: 6deg; }
+        100% { scale: 1; rotate: 0deg; }
+    }
 }
 
 @layer base {
@@ -34,6 +43,20 @@
     :focus-visible {
         outline: 3px solid var(--color-blue);
         outline-offset: 2px;
+    }
+
+    /* press feedback: shrink buttons and links while held down */
+    button:not(:disabled):active,
+    a:active {
+        scale: 0.94;
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+        button,
+        a {
+            transition-property: scale, translate, rotate, color, background-color, box-shadow;
+            transition-duration: 120ms;
+        }
     }
 }
 
