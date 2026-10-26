@@ -7,12 +7,15 @@ import ProductPage from "./pages/ProductPage"
 import LoginPage from "./pages/LoginPage"
 import RegisterPage from "./pages/RegisterPage"
 import CartPage from "./pages/CartPage"
+import HomePage from "./pages/HomePage"
+
 
 function App() {
   return (
     <Routes>
       <Route element={<Layout />}>
-        <Route index element={<CatalogPage />} />
+        <Route index element={<HomePage />} />
+        <Route path="catalog" element={<CatalogPage />} />
         <Route path="products/:id" element={<ProductPage/>} />
         <Route path="login" element={<LoginPage />} />
         <Route path="register" element={<RegisterPage />} />

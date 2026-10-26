@@ -14,7 +14,7 @@ export default function NotFoundPage() {
       <h1 className="font-display text-5xl md:text-7xl leading-[0.95]">Page not found</h1>
       <p className="text-xl font-semibold">The page you are looking for does not exist.</p>
       <Link
-        to="/"
+        to="/catalog"
         className="mt-2 flex items-center gap-2.5 h-15 px-7.5 rounded-full bg-orange text-white border-4 border-white text-lg font-extrabold shadow-sticker transition hover:-translate-y-0.5"
       >
         <span aria-hidden="true">←</span> Go to catalog

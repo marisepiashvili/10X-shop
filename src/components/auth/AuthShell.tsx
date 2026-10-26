@@ -37,7 +37,7 @@ export default function AuthShell({ note, title, text, ticketTitle, children }: 
             <div aria-hidden="true" className="zigzag-bottom" />
             <span aria-hidden="true" className="absolute -left-4 -top-3 w-21.5 h-7 bg-yellow/85 -rotate-[24deg]" />
           </div>
-          <Link to="/" className="self-center flex items-center gap-2 h-11 font-extrabold text-white hover:underline">
+          <Link to="/catalog" className="self-center flex items-center gap-2 h-11 font-extrabold text-white hover:underline">
             <span aria-hidden="true">←</span> Back to catalog
           </Link>
         </div>

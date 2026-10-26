@@ -40,7 +40,7 @@ export default function ProductPage() {
 
   return (
     <div className="w-full max-w-330 mx-auto px-4 md:px-10 pt-6 pb-26 flex flex-col gap-14">
-      <Link to="/" className="flex items-center gap-2 h-11 w-fit font-extrabold hover:text-blue">
+      <Link to="/catalog" className="flex items-center gap-2 h-11 w-fit font-extrabold hover:text-blue">
         <img src={chevronLeftIcon} alt="" className="w-5 h-5" />
         Back to catalog
       </Link>

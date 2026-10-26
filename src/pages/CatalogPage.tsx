@@ -7,10 +7,14 @@ import LoadingState from "../components/ui/LoadingState";
 import MessagePanel from "../components/ui/MessagePanel";
 import useDebounce from "../hooks/useDebounce";
 import useProducts from "../hooks/useProducts";
+import { useSearchParams } from "react-router";
+
 
 export default function CatalogPage() {
-    const [search, setSearch] = useState("")
-    const [category, setCategory] = useState("all")
+   const [searchParams] = useSearchParams()
+   const [search, setSearch] = useState(searchParams.get("search") ?? "")
+   const [category, setCategory] = useState(searchParams.get("category") ?? "all")
+
     const [sort, setSort] = useState("default")
     const [page, setPage] = useState(1)
 

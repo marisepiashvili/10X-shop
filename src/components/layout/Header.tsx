@@ -19,7 +19,7 @@ export default function Header() {
         <div className="flex flex-wrap items-center gap-1.5">
           <nav aria-label="Main">
             <ul className="flex flex-wrap items-center gap-1.5">
-              <NavPill to="/">Catalog</NavPill>
+              <NavPill to="/catalog">Catalog</NavPill>
               <NavPill to="/orders">Orders</NavPill>
               <NavPill to="/profile">Profile</NavPill>
               <li>

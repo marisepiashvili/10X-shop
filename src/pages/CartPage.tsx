@@ -41,11 +41,11 @@ export default function CartPage() {
       </div>
 
       {isEmpty ? (
-        <div className="self-center w-full max-w-140 px-8 py-16 flex flex-col items-center gap-4.5 text-center bg-pink border-[6px] border-white rounded-[40px] shadow-[0_18px_34px_rgba(17,17,17,0.18)] -rotate-[1.5deg]">
+        <div className="self-center w-full max-w-140 px-8 py-16 flex flex-col items-center gap-4.5 text-center bg-pink border-[6px] border-white rounded-[40px] shadow-[0_18px_34px_rgba(17,17,17,0.18)] rotate-[1.5deg]">
           <ShoppingBag size={56} strokeWidth={1.6} />
           <p className="font-display text-[40px] leading-none">Your cart is empty</p>
           <span className="font-note text-[28px]">let's fix that ↓</span>
-          <Link to="/" className="flex items-center h-14 px-7 rounded-full bg-ink text-white text-[17px] font-extrabold transition hover:bg-blue">
+          <Link to="/catalog" className="flex items-center h-14 px-7 rounded-full bg-ink text-white text-[17px] font-extrabold transition hover:bg-blue">
             Browse products
           </Link>
         </div>
