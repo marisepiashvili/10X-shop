@@ -14,7 +14,7 @@ export default function SearchInput({ value, onChange }: SearchInputProps) {
         <input
           type="search"
           id="search"
-          placeholder="Try “phone”"
+          placeholder="Search product"
           value={value}
           onChange={(e) => onChange(e.target.value)}
           className="bg-white w-full h-13.5 rounded-full border-2 border-ink pl-13 pr-5.5 text-base placeholder:text-muted-ink"

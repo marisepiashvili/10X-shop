@@ -1,6 +1,7 @@
 import { Link } from "react-router"
 import CategoryPills from "../components/home/CategoryPills"
 import HeroSection from "../components/home/HeroSection"
+import PromoMarquee from "../components/home/PromoMarquee"
 import ProductGrid from "../components/product/ProductGrid"
 import LoadingState from "../components/ui/LoadingState"
 import MessagePanel from "../components/ui/MessagePanel"
@@ -47,6 +48,8 @@ export default function HomePage() {
           {dealsContent}
         </section>
       </div>
+
+      <PromoMarquee />
     </>
   )
 }

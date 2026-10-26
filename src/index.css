@@ -25,6 +25,12 @@
     --shadow-sticker: 0 8px 18px rgba(17, 17, 17, 0.25);
 
     --animate-pop: pop 450ms ease-out;
+    --animate-marquee: marquee 40s linear infinite;
+
+    @keyframes marquee {
+        from { translate: 0; }
+        to { translate: -50%; }
+    }
 
     @keyframes pop {
         0% { scale: 1; rotate: 0deg; }
