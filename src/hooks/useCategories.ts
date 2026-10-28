@@ -10,7 +10,7 @@ export default function useCategories(){
             try {
                 setCategories(await getCategories())
             } catch {
-                
+                // categories are optional: on error the list just stays empty
             }
         }
         loadCategories()

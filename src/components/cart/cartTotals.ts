@@ -19,3 +19,6 @@ export function getCartTotals({ items, promoCode }: CartState) {
 
   return { itemCount, subtotal, discount, shipping, total: afterDiscount + shipping }
 }
+
+export type CartTotals = ReturnType<typeof getCartTotals>
+
