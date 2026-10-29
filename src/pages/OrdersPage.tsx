@@ -22,11 +22,19 @@ export default function OrdersPage() {
             Browse products
           </Link>
         </div>
-      ) : (<ul className="flex flex-col gap-5.5">
+      ) : (
+      <><ul className="flex flex-col gap-5.5">
             {orders.map((order, index) => (
                 <OrderRow key={order.id} order={order} index={index}/>
             ))}
-      </ul>)}
+      </ul>
+                <p className="flex flex-wrap items-center gap-3 text-[15px] font-semibold">
+            <span className="font-note text-[26px] text-blue">psst —</span>
+            statuses update by themselves: Processing for the first minute, then Shipped, then Delivered after 3 minutes.
+          </p>
+
+      </>
+      )}
     </div>
   )
 }

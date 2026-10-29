@@ -2,6 +2,9 @@ import { ChevronRight } from "lucide-react";
 import { Link } from "react-router";
 import { formatPrice } from "../../utils/price";
 import type { Order } from "./order";
+import { getOrderStatus } from "./orderStatus"
+import StatusPill from "./StatusPill"
+
 
 const stubColors = ["bg-pink", "bg-sky", "bg-mint", "bg-yellow"]
 const rowTilts = ["-rotate-[0.5deg]", "rotate-[0.4deg]", "-rotate-[0.3deg]"]
@@ -28,6 +31,7 @@ export default function OrderRow({order, index} : OrderRowProps) {
             <span className="text-[19px] font-extrabold">{date}</span>
             <span className="text-[15px] font-semibold">{count} {count === 1 ? "item" : "items"}</span>
           </div>
+          <StatusPill status={getOrderStatus(order)} />
           <span className="sm:min-w-32 sm:text-right font-display text-[26px]">{formatPrice(order.totals.total)}</span>
           <span className="hidden sm:grid w-11 h-11 rounded-full bg-ink text-white place-items-center transition group-hover:bg-blue">
             <ChevronRight size={20} strokeWidth={2.4} />
