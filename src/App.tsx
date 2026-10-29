@@ -11,6 +11,7 @@ import HomePage from "./pages/HomePage"
 import CheckoutPage from "./pages/CheckoutPage"
 import ConfirmationPage from "./pages/ConfirmationPage"
 import OrdersPage from "./pages/OrdersPage"
+import OrderDetailPage from "./pages/OrderDetailPage"
 
 
 
@@ -27,6 +28,7 @@ function App() {
         <Route path="checkout" element={<CheckoutPage />} />
         <Route path="confirmation/:orderId" element={<ConfirmationPage />} />
         <Route path="orders" element={<OrdersPage/>}/>
+        <Route path="orders/:orderId" element={<OrderDetailPage/>}/>
 
         <Route path="*" element={<NotFoundPage />} />
       </Route>
