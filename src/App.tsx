@@ -10,6 +10,7 @@ import CartPage from "./pages/CartPage"
 import HomePage from "./pages/HomePage"
 import CheckoutPage from "./pages/CheckoutPage"
 import ConfirmationPage from "./pages/ConfirmationPage"
+import OrdersPage from "./pages/OrdersPage"
 
 
 
@@ -25,6 +26,7 @@ function App() {
         <Route path="cart" element={<CartPage />} />
         <Route path="checkout" element={<CheckoutPage />} />
         <Route path="confirmation/:orderId" element={<ConfirmationPage />} />
+        <Route path="orders" element={<OrdersPage/>}/>
 
         <Route path="*" element={<NotFoundPage />} />
       </Route>
