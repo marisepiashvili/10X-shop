@@ -3,6 +3,7 @@ import { Link, useParams } from "react-router"
 import Receipt from "../components/cart/Receipt"
 import { getOrderById } from "../components/orders/orderStorage"
 import MessagePanel from "../components/ui/MessagePanel"
+import StatusTimeline from "../components/orders/StatusTimeline"
 
 export default function OrderDetailPage() {
   const { orderId } = useParams()
@@ -33,7 +34,7 @@ export default function OrderDetailPage() {
           </h1>
         </div>
       </div>
-
+        <StatusTimeline order={order}/>
       <div className="flex flex-wrap items-start gap-12">
         <section aria-label="Items" className="flex-[999_1_560px] min-w-0 flex flex-col gap-7">
         </section>
