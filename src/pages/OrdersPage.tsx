@@ -1,5 +1,6 @@
 import { Link } from "react-router"
 import { readOrders } from "../components/orders/orderStorage"
+import OrderRow from "../components/orders/OrderRow"
 
 export default function OrdersPage() {
   const orders = readOrders().toReversed()
@@ -21,7 +22,11 @@ export default function OrdersPage() {
             Browse products
           </Link>
         </div>
-      ) : null}
+      ) : (<ul className="flex flex-col gap-5.5">
+            {orders.map((order, index) => (
+                <OrderRow key={order.id} order={order} index={index}/>
+            ))}
+      </ul>)}
     </div>
   )
 }
