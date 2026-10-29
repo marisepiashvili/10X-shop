@@ -1,6 +1,8 @@
 import type { Product } from "../product/product";
 
-export type CartItem = Pick<Product, "id" | "title" | "thumbnail" | "price" | "discountPercentage" | "stock"> & {
+export type CartProduct = Pick<Product, "id" | "title" | "thumbnail" | "price" | "discountPercentage" | "stock">
+
+export type CartItem = CartProduct & {
     quantity: number
 }
 
@@ -10,7 +12,7 @@ export type CartState = {
 }
 
 export type CartAction = 
-| {type: "add"; product: Product; quantity: number}
+| {type: "add"; product: CartProduct; quantity: number}
 | {type: "remove"; id: number}
 | {type: "setQuantity"; id: number; quantity: number}
 | {type: "clear"}
