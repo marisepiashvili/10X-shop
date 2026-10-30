@@ -1,5 +1,5 @@
 import { Form, Formik, type FormikHelpers } from "formik"
-import { Link, useNavigate } from "react-router"
+import { Link, useLocation, useNavigate } from "react-router"
 import AuthShell from "../components/auth/AuthShell"
 import FormField from "../components/auth/FormField"
 import { loginSchema, type LoginFormValues } from "../components/auth/authSchemas"
@@ -11,13 +11,16 @@ const initialValues : LoginFormValues = {email: "", password:""}
 export default function LoginPage (){
     const navigate = useNavigate()
     const {login} = useAuth()
+    const location = useLocation()
+    const from = (location.state as { from?: string } | null)?.from ?? "/"
+
 
     async function handleSubmit(values: LoginFormValues, {setStatus} : FormikHelpers<LoginFormValues>) {
 
         try{
             login(values.email.trim().toLowerCase(), values.password)
 
-            navigate("/")
+            navigate(from, {replace: true})
         }catch (error){
             setStatus(error instanceof Error ? error.message : "Login failed")
         }

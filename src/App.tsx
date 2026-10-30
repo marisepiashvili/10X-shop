@@ -12,6 +12,7 @@ import CheckoutPage from "./pages/CheckoutPage"
 import ConfirmationPage from "./pages/ConfirmationPage"
 import OrdersPage from "./pages/OrdersPage"
 import OrderDetailPage from "./pages/OrderDetailPage"
+import ProtectedRoute from "./components/auth/ProtectedRoute"
 
 
 
@@ -25,11 +26,12 @@ function App() {
         <Route path="login" element={<LoginPage />} />
         <Route path="register" element={<RegisterPage />} />
         <Route path="cart" element={<CartPage />} />
-        <Route path="checkout" element={<CheckoutPage />} />
         <Route path="confirmation/:orderId" element={<ConfirmationPage />} />
         <Route path="orders" element={<OrdersPage/>}/>
         <Route path="orders/:orderId" element={<OrderDetailPage/>}/>
-
+        <Route element={<ProtectedRoute />}>
+           <Route path="checkout" element={<CheckoutPage />} />
+        </Route>
         <Route path="*" element={<NotFoundPage />} />
       </Route>
     </Routes>
