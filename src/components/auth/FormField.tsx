@@ -3,7 +3,7 @@ import { useField } from "formik";
 type FormFieldProps = {
     name: string
     label: string
-    type?: "text" | "email" | "password"
+    type?: "text" | "email" | "password" | "tel"
     autoComplete?: string
 }
 

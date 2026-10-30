@@ -5,6 +5,8 @@ export type StoredUser = {
     name: string
     email: string
     password: string
+    phone?: string
+
 }
 
 export type AuthUser = Omit<StoredUser, "password">
@@ -32,7 +34,7 @@ export function loginUser(email: string, password: string): AuthUser {
     if(!user){
         throw new Error("Wrong email or password")
     }
-    return{name: user.name, email: user.email}
+    return{name: user.name, email: user.email, phone: user.phone}
 }
 
 export function loadCurrentUser(): AuthUser | null {
@@ -42,4 +44,14 @@ export function loadCurrentUser(): AuthUser | null {
     } catch{
         return null
     }
+}
+
+export function updateUser(currentEmail: string, changes: AuthUser): AuthUser {
+    const users = readUsers()
+    if(changes.email !== currentEmail && users.some((u)=>u.email === changes.email)){
+        throw new Error("An account with this email already exists")
+    }
+    const updated = users.map((u)=> u.email === currentEmail ? {...u, ...changes} : u)
+    localStorage.setItem(USER_KEY, JSON.stringify(updated))
+    return changes
 }
