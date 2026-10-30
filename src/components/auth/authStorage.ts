@@ -1,4 +1,5 @@
 const USER_KEY = "shop_users"
+export const CURRENT_USER_KEY = "shop_user"
 
 export type StoredUser = {
     name: string
@@ -32,4 +33,13 @@ export function loginUser(email: string, password: string): AuthUser {
         throw new Error("Wrong email or password")
     }
     return{name: user.name, email: user.email}
+}
+
+export function loadCurrentUser(): AuthUser | null {
+    try {
+       const raw = localStorage.getItem(CURRENT_USER_KEY) 
+       return raw ? (JSON.parse(raw) as AuthUser) : null
+    } catch{
+        return null
+    }
 }
