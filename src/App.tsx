@@ -13,6 +13,7 @@ import ConfirmationPage from "./pages/ConfirmationPage"
 import OrdersPage from "./pages/OrdersPage"
 import OrderDetailPage from "./pages/OrderDetailPage"
 import ProtectedRoute from "./components/auth/ProtectedRoute"
+import ProfilePage from "./pages/ProfilePage"
 
 
 
@@ -31,6 +32,7 @@ function App() {
         <Route path="orders/:orderId" element={<OrderDetailPage/>}/>
         <Route element={<ProtectedRoute />}>
            <Route path="checkout" element={<CheckoutPage />} />
+           <Route path="profile" element={<ProfilePage/>}/>
         </Route>
         <Route path="*" element={<NotFoundPage />} />
       </Route>
