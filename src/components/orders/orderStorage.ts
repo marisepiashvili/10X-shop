@@ -25,3 +25,7 @@ export function saveOrder(order: Omit<Order, "id" | "createdAt">): Order {
 export function getOrderById(id: string) {
   return readOrders().find((order) => order.id === id) ?? null
 }
+
+export function clearOrders() {
+  localStorage.removeItem(ORDERS_KEY)
+}

@@ -3,7 +3,7 @@ import { useState } from "react"
 import { readOrders } from "../components/orders/orderStorage"
 import ProfileCard from "../components/profile/ProfileCard"
 import ProfileForm from "../components/profile/ProfileForm"
-
+import LocalDataCard from "../components/profile/LocalDataCard"
 
 export default function ProfilePage() {
   const { user } = useAuth()
@@ -26,6 +26,8 @@ export default function ProfilePage() {
         <ProfileCard user={user} orderCount={orderCount} />
         <div className="flex-[999_1_560px] min-w-0 flex flex-col gap-7">
             <ProfileForm user={user} />
+            <LocalDataCard onCleared={() => setOrderCount(0)} />
+
         </div>
 
       </div>
