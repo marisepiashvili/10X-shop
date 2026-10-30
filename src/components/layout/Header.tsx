@@ -2,9 +2,11 @@ import { Link, NavLink } from "react-router"
 import moonIcon from "../../assets/icons/moon.svg"
 import NavPill from "./NavPill"
 import useCart from "../../hooks/useCart"
+import useAuth from "../../hooks/useAuth"
 
 export default function Header() {
   const { totals } = useCart()
+  const {user, logout} = useAuth()
   return (
     <header className="md:sticky md:top-0 z-40 bg-paper/90 backdrop-blur-md">
       <div className="max-w-330 mx-auto px-4 md:px-10 py-4.5 flex flex-wrap items-center justify-between gap-5">
@@ -48,9 +50,15 @@ export default function Header() {
           >
             <img src={moonIcon} alt="" className="w-5 h-5" />
           </button>
-          <Link to="/login" className="flex items-center h-12 px-3 text-[15px] font-semibold underline hover:text-blue">
+          {user ? (
+            <button type="button" onClick={logout} className="flex items-center h-12 px-3 text-[15px] font-semibold underline hover:text-blue">
+              Log out
+            </button>
+          ) : (
+            <Link to="/login" className="flex items-center h-12 px-3 text-[15px] font-semibold underline hover:text-blue">
             Log in
-          </Link>
+            </Link>
+          )}
         </div>
       </div>
     </header>
