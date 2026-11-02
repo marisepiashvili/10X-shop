@@ -16,7 +16,7 @@ type ReceiptProps = {
 export default function Receipt({ title, subtitle, footer, items, promoCode, totals, tilt = "rotate-[1.5deg]", children }: ReceiptProps) {
   return (
     <div className={`relative [--zigzag:var(--color-receipt)] drop-shadow-[0_16px_24px_rgba(17,17,17,0.22)] ${tilt}`}>
-      <div className="bg-receipt px-7 pt-7.5 pb-5 flex flex-col gap-2.5 font-mono text-sm text-ink">
+      <div className="relative bg-receipt px-7 pt-7.5 pb-5 flex flex-col gap-2.5 font-mono text-sm text-ink">
         <div className="text-center flex flex-col gap-1">
           <span className="font-display text-2xl">{title}</span>
           <span className="text-[11px]">{subtitle}</span>
@@ -55,6 +55,15 @@ export default function Receipt({ title, subtitle, footer, items, promoCode, tot
             <dd>{formatPrice(totals.total)}</dd>
           </div>
         </dl>
+
+        {promoCode && (
+          <span
+            aria-hidden="true"
+            className="absolute right-21 bottom-36 w-21 h-21 grid place-items-center border-[5px] border-double border-danger rounded-full font-display text-xl leading-none text-center text-danger -rotate-12 opacity-85 pointer-events-none"
+          >
+            −{PROMO_PERCENT}%
+          </span>
+        )}
 
         <span aria-hidden="true" className="block barcode mt-2" />
         <span className="text-center text-[11px] tracking-[0.2em]">{footer}</span>
