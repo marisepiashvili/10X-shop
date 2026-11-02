@@ -6,11 +6,13 @@ const MIN_COMMENT_LENGTH = 10
 
 type ReviewFormProps = {
   onSubmit: (rating: number, comment: string) => void
+  initialRating?: number
+  initialComment?: string
 }
 
-export default function ReviewForm({ onSubmit }: ReviewFormProps) {
-  const [rating, setRating] = useState(0)
-  const [comment, setComment] = useState("")
+export default function ReviewForm({ onSubmit, initialRating = 0, initialComment = "" }: ReviewFormProps) {
+  const [rating, setRating] = useState(initialRating)
+  const [comment, setComment] = useState(initialComment)
 
   const isValid = rating > 0 && comment.trim().length >= MIN_COMMENT_LENGTH
 

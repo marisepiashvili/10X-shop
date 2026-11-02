@@ -1,18 +1,52 @@
-import { useState } from "react"
+import { useEffect, useRef, useState } from "react"
+import { useLocation, useNavigate } from "react-router"
+import useAuth from "../../hooks/useAuth"
 import type { Product, Review } from "./product"
 import ReviewCard from "./ReviewCard"
 import ReviewForm from "./ReviewForm"
 
 type Tab = "description" | "reviews"
 type ReviewWithId = Review & { id: string }
+type ReviewDraft = { productId: number, rating: number, comment: string }
+
+const DRAFT_KEY = "shop_review_draft"
+
+function loadDraft(productId: number): ReviewDraft | null {
+  try {
+    const raw = sessionStorage.getItem(DRAFT_KEY)
+    const draft = raw ? (JSON.parse(raw) as ReviewDraft) : null
+    return draft?.productId === productId ? draft : null
+  } catch {
+    return null
+  }
+}
 
 export default function ProductTabs({ product }: { product: Product }) {
-  const [activeTab, setActiveTab] = useState<Tab>("description")
+  const { user } = useAuth()
+  const { pathname, hash } = useLocation()
+  const navigate = useNavigate()
+  const sectionRef = useRef<HTMLElement>(null)
+  const openReviews = hash === "#reviews"
+  const [activeTab, setActiveTab] = useState<Tab>(openReviews ? "reviews" : "description")
+  const [draft, setDraft] = useState(() => loadDraft(product.id))
   const [reviews, setReviews] = useState<ReviewWithId[]>(
     product.reviews.map((review, index) => ({ ...review, id: `api-${index}` }))
   )
 
+  useEffect(() => {
+    if (openReviews) sectionRef.current?.scrollIntoView({ block: "start" })
+  }, [openReviews])
+
   function handleAddReview(rating: number, comment: string) {
+    if (!user) {
+      // keep what they wrote so the form is filled in again after login
+      const newDraft: ReviewDraft = { productId: product.id, rating, comment }
+      sessionStorage.setItem(DRAFT_KEY, JSON.stringify(newDraft))
+      navigate("/login", { state: { from: `${pathname}#reviews` } })
+      return
+    }
+    sessionStorage.removeItem(DRAFT_KEY)
+    setDraft(null)
     const newReview: ReviewWithId = {
       id: crypto.randomUUID(),
       rating,
@@ -30,7 +64,7 @@ export default function ProductTabs({ product }: { product: Product }) {
   ]
 
   return (
-    <section className="flex flex-col gap-6">
+    <section ref={sectionRef} className="flex flex-col gap-6 scroll-mt-24">
       <div role="tablist" aria-label="Product information" className="flex flex-wrap gap-2.5">
         {tabs.map((tab) => {
           const isActive = tab.id === activeTab
@@ -79,7 +113,7 @@ export default function ProductTabs({ product }: { product: Product }) {
                 ))
               )}
             </div>
-            <ReviewForm onSubmit={handleAddReview} />
+            <ReviewForm onSubmit={handleAddReview} initialRating={draft?.rating} initialComment={draft?.comment} />
           </div>
         )}
       </div>
