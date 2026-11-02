@@ -31,7 +31,7 @@ export default function ConfirmationPage() {
           <div className="flex flex-wrap gap-3 pt-2">
             <Link
               to="/catalog"
-              className="flex items-center h-15 px-7.5 rounded-full bg-orange dark:bg-receipt text-white border-4 border-sticker text-lg font-extrabold shadow-sticker transition hover:-translate-y-0.5"
+              className="flex items-center h-15 px-7.5 rounded-full bg-orange text-white border-4 border-sticker text-lg font-extrabold shadow-sticker transition hover:-translate-y-0.5"
             >
               Continue shopping
             </Link>

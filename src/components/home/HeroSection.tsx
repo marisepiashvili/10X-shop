@@ -36,7 +36,7 @@ export default function HeroSection({ total, products }: HeroSectionProps) {
         <div className="flex flex-wrap justify-center gap-3">
           <Link
             to="/catalog"
-            className="flex items-center gap-2 h-15.5 px-7.5 rounded-full bg-orange dark:bg-receipt text-white border-4 border-sticker text-lg font-extrabold shadow-sticker transition hover:-translate-y-0.5"
+            className="flex items-center gap-2 h-15.5 px-7.5 rounded-full bg-orange text-white border-4 border-sticker text-lg font-extrabold shadow-sticker transition hover:-translate-y-0.5"
           >
             Start shopping <ArrowRight size={20} strokeWidth={2.4} />
           </Link>

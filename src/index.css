@@ -53,10 +53,11 @@
     .dark {
         color-scheme: dark;
         --color-paper: #3A302B;
-        --color-card: #5E5046;
+        --color-card: #644A3A;
         --color-coal: #2C2420;
-        --color-blue: #4B3B31;
-        --color-orange: #FFD23F;
+        --color-blue: #1F2A4D;
+        --color-orange: #EDE4D6;
+        --color-yellow: #EDE4D6;
         --color-sticker: #6B5648;
         --color-receipt: #EDE4D6;
     }
@@ -66,7 +67,7 @@
         --color-ink: #F3ECE2;
         --color-accent: #E9C08A;
         --color-danger: #FFB3BB;
-        --color-muted: #77665B;
+        --color-muted: #7D6556;
         --color-muted-ink: #E3D9CC;
         color: var(--color-ink);
     }
@@ -80,12 +81,12 @@
         --color-ink: #111111;
         --color-accent: #4B3B31;
         --color-danger: #D7263D;
-        --color-muted: #EDE6D8;
+        --color-muted: #D3C7B6;
         --color-muted-ink: #6B655B;
         color: var(--color-ink);
     }
 
-    /* the dark theme's orange is yellow, so its white labels turn dark */
+    /* the dark theme's orange is a pale cream, so its white labels turn dark */
     .dark .bg-orange {
         --color-white: #111111;
     }
