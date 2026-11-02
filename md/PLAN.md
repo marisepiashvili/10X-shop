@@ -1,7 +1,7 @@
 # 10X Shop — Project Plan
 
 > Individual graduation project · 10X Front-end · 2026
-> Author: Mariam Sepiashvili · Repo: `10x-shop` · Live: _TBD (added after first deploy)_
+> Author: Mariam Sepiashvili · Repo: `10x-shop` · Live: https://10-x-shop.vercel.app/
 > Timeline: **17 Oct – 6 Nov 2026** · Code freeze: **6 Nov, 23:59 (GMT+4)**
 
 ---
