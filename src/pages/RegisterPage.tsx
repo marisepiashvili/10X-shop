@@ -1,5 +1,5 @@
 import { Form, Formik, type FormikHelpers } from "formik"
-import { Link, useNavigate } from "react-router"
+import { Link, useNavigate, useLocation } from "react-router"
 import AuthShell from "../components/auth/AuthShell"
 import FormField from "../components/auth/FormField"
 import { registerSchema, type RegiterFormValues } from "../components/auth/authSchemas"
@@ -9,6 +9,8 @@ const initialValues : RegiterFormValues = {name: "", email: "", password: "", co
 
 export default function RegisterPage() {
     const navigate = useNavigate()
+    const location = useLocation()
+    const from = (location.state as {from?: string} | null)?.from ?? "/"
 
     async function handleSubmit(values:RegiterFormValues, {setFieldError} : FormikHelpers<RegiterFormValues>) {
         try{
@@ -18,7 +20,7 @@ export default function RegisterPage() {
                 password: values.password
             })
 
-            navigate("/login")
+            navigate("/login", {state: {from}})
         }catch(error){
             setFieldError("email", error instanceof Error ? error.message : "Registration failed")
         }
@@ -61,7 +63,10 @@ export default function RegisterPage() {
                     className="mt-1 h-15 rounded-full bg-orange text-white border-4 border-white text-lg font-extrabold shadow-sticker transition enabled:hover:-translate-y-0.5 disabled:opacity-60 disabled:cursor-not-allowed">
                         Create account</button>
 
-                    <p className="text-sm text-center">Already have an account? <Link to="/login" className="font-extrabold underline hover:text-blue">Log in</Link></p>
+                    <p className="text-sm text-center">Already have an account? <Link 
+                    to="/login" 
+                    state={{from}} 
+                    className="font-extrabold underline hover:text-blue">Log in</Link></p>
             </Form>
         )}
     </Formik>
