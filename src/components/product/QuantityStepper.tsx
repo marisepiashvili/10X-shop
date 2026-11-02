@@ -9,10 +9,10 @@ type QuantityStepperProps = {
 const MIN_QUANTITY = 1
 
 export default function QuantityStepper({ value, max, onChange }: QuantityStepperProps) {
-  const buttonStyles = "w-12 h-12 rounded-full bg-paper grid place-items-center text-xl transition enabled:hover:bg-yellow disabled:opacity-30 disabled:cursor-not-allowed"
+  const buttonStyles = "w-12 h-12 rounded-full bg-paper grid place-items-center text-xl transition enabled:hover:bg-yellow enabled:hover:text-on-bright disabled:opacity-30 disabled:cursor-not-allowed"
 
   return (
-    <div role="group" aria-label="Quantity" className="flex items-center h-15 px-1.5 rounded-full bg-white shadow-soft">
+    <div role="group" aria-label="Quantity" className="flex items-center h-15 px-1.5 rounded-full bg-card shadow-soft">
       <button
         type="button"
         className={buttonStyles}

@@ -15,7 +15,7 @@ type SelectFieldProps = {
 }
 
 
-export default function SelectField({id, label, options, value, onChange, color = "bg-white"}:SelectFieldProps) {
+export default function SelectField({id, label, options, value, onChange, color = "bg-card"}:SelectFieldProps) {
   return (
     <div className="flex flex-col gap-1.5">
       <label htmlFor={id} className="text-sm font-extrabold pl-3.5">{label}</label>

@@ -47,9 +47,9 @@ export default function LoginPage (){
                         <button
                         type="submit"
                         disabled={isSubmitting}
-                        className="mt-1 h-15 rounded-full bg-orange text-white border-4 border-white text-lg font-extrabold shadow-sticker transition enabled:hover:-translate-y-0.5 disabled:opacity-60 disabled:cursor-not-allowed">Log in</button>
+                        className="mt-1 h-15 rounded-full bg-orange text-white border-4 border-sticker text-lg font-extrabold shadow-sticker transition enabled:hover:-translate-y-0.5 disabled:opacity-60 disabled:cursor-not-allowed">Log in</button>
 
-                        <p className="text-sm text-center">No account yet? <Link to="/register" state={{from}} className="font-extrabold underline hover:text-blue">Register</Link></p>
+                        <p className="text-sm text-center">No account yet? <Link to="/register" state={{from}} className="font-extrabold underline hover:text-accent">Register</Link></p>
                     </Form>
                 )}
             </Formik>

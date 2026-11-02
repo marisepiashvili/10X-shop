@@ -16,7 +16,7 @@ export default function OrderDetailPage() {
     return (
       <div className="w-full px-4 py-20 flex flex-col items-center gap-6">
         <MessagePanel variant="empty" title="Order not found" note="check your orders" />
-        <Link to="/orders" className="font-extrabold underline hover:text-blue">All orders</Link>
+        <Link to="/orders" className="font-extrabold underline hover:text-accent">All orders</Link>
       </div>
     )
   }
@@ -25,13 +25,13 @@ export default function OrderDetailPage() {
 
   return (
     <div className="w-full max-w-330 mx-auto px-4 md:px-10 pt-6 pb-24 flex flex-col gap-10">
-      <Link to="/orders" className="self-start flex items-center gap-2 h-11 font-extrabold hover:text-blue">
+      <Link to="/orders" className="self-start flex items-center gap-2 h-11 font-extrabold hover:text-accent">
         <ArrowLeft size={20} strokeWidth={2.4} /> All orders
       </Link>
 
       <div className="flex flex-wrap items-end justify-between gap-5">
         <div className="flex flex-col gap-2">
-          <span className="self-start font-note text-3xl text-blue -rotate-3">placed on {date}</span>
+          <span className="self-start font-note text-3xl text-accent -rotate-3">placed on {date}</span>
           <h1 className="font-display text-5xl md:text-7xl leading-[0.95]">
             Order <span className="font-mono font-bold text-4xl md:text-[56px] tracking-tight">#{order.id}</span>
           </h1>

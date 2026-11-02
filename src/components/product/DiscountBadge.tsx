@@ -12,7 +12,7 @@ export default function DiscountBadge({ discount, size = "sm" }: DiscountBadgePr
   if (discount === 0) return null
 
   return (
-    <span className={`absolute grid place-items-center bg-orange text-white border-4 border-white font-display leading-none shadow-soft ${sizeStyles[size]}`}>
+    <span className={`absolute grid place-items-center bg-orange text-white border-4 border-sticker font-display leading-none shadow-soft ${sizeStyles[size]}`}>
       −{discount}%
     </span>
   )

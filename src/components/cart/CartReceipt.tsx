@@ -25,7 +25,7 @@ export default function CartReceipt({ items, promoCode, totals }: CartReceiptPro
         totals={totals}
       >
         {promoCode && (
-          <span aria-hidden="true" className="hidden lg:grid absolute -left-21.5 top-59 w-24 h-24 rounded-full bg-orange text-white border-4 border-white place-items-center font-display text-xl leading-none -rotate-14 shadow-sticker">
+          <span aria-hidden="true" className="hidden lg:grid absolute -left-21.5 top-59 w-24 h-24 rounded-full bg-orange text-white border-4 border-sticker place-items-center font-display text-xl leading-none -rotate-14 shadow-sticker">
             −{PROMO_PERCENT}%
           </span>
         )}
@@ -33,7 +33,7 @@ export default function CartReceipt({ items, promoCode, totals }: CartReceiptPro
 
       <Link
         to="/checkout"
-        className="flex items-center justify-center gap-2.5 h-15 px-7.5 rounded-full bg-orange text-white border-4 border-white text-lg font-extrabold shadow-sticker transition hover:-translate-y-0.5"
+        className="flex items-center justify-center gap-2.5 h-15 px-7.5 rounded-full bg-orange text-white border-4 border-sticker text-lg font-extrabold shadow-sticker transition hover:-translate-y-0.5"
       >
         Proceed to checkout <ArrowRight size={20} strokeWidth={2.4} />
       </Link>

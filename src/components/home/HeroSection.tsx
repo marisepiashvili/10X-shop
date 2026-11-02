@@ -28,7 +28,7 @@ export default function HeroSection({ total, products }: HeroSectionProps) {
       {/* blue band stops halfway down the cards so they overlap the page below */}
       <div aria-hidden="true" className="absolute inset-x-0 top-0 bottom-24 sm:bottom-32 lg:bottom-36 -z-10 bg-blue" />
 
-      <div className="max-w-330 mx-auto px-4 md:px-10 pt-16 md:pt-18 flex flex-col items-center gap-6 text-center text-white">
+      <div className="max-w-330 mx-auto px-4 md:px-10 pt-16 md:pt-18 flex flex-col items-center gap-6 text-center text-white dark:text-ink">
         <h1 className="font-display text-6xl md:text-8xl lg:text-[116px] leading-[0.92]">Shop 10X faster.</h1>
         <p className="text-xl leading-normal max-w-[34ch]">
           {total > 0 && `${total} products. `}Real discounts. Stock you can see — no small print.
@@ -36,13 +36,13 @@ export default function HeroSection({ total, products }: HeroSectionProps) {
         <div className="flex flex-wrap justify-center gap-3">
           <Link
             to="/catalog"
-            className="flex items-center gap-2 h-15.5 px-7.5 rounded-full bg-orange border-4 border-white text-lg font-extrabold shadow-sticker transition hover:-translate-y-0.5"
+            className="flex items-center gap-2 h-15.5 px-7.5 rounded-full bg-orange dark:bg-receipt text-white border-4 border-sticker text-lg font-extrabold shadow-sticker transition hover:-translate-y-0.5"
           >
             Start shopping <ArrowRight size={20} strokeWidth={2.4} />
           </Link>
           <Link
             to="/catalog"
-            className="flex items-center gap-2 h-15.5 px-6.5 rounded-full bg-white text-ink text-lg font-extrabold transition hover:-translate-y-0.5"
+            className="flex items-center gap-2 h-15.5 px-6.5 rounded-full bg-card text-ink text-lg font-extrabold transition hover:-translate-y-0.5"
           >
             <Search size={20} strokeWidth={2.4} /> Search product
           </Link>
@@ -53,7 +53,7 @@ export default function HeroSection({ total, products }: HeroSectionProps) {
         <div className="relative mt-14 pb-6 flex justify-center items-start">
           <span
             aria-hidden="true"
-            className="hidden xl:grid absolute left-[calc(50%-420px)] top-2 z-20 w-32.5 h-32.5 rounded-full bg-orange text-white border-[5px] border-white place-items-center text-center font-display text-2xl leading-none -rotate-12 shadow-sticker"
+            className="hidden xl:grid absolute left-[calc(50%-420px)] top-2 z-20 w-32.5 h-32.5 rounded-full bg-orange text-white border-[5px] border-sticker place-items-center text-center font-display text-2xl leading-none -rotate-12 shadow-sticker"
           >
             <span>
               −10%
@@ -69,7 +69,7 @@ export default function HeroSection({ total, products }: HeroSectionProps) {
                 key={product.id}
                 to={`/products/${product.id}`}
                 aria-label={`${product.title}, ${price}`}
-                className={`relative shrink-0 p-2 sm:p-2.5 bg-white rounded-[22px] text-ink shadow-[0_16px_30px_rgba(17,17,17,0.25)] transition duration-300 motion-safe:hover:rotate-0 motion-safe:hover:-translate-y-2 ${style.card}`}
+                className={`relative shrink-0 p-2 sm:p-2.5 bg-card rounded-[22px] text-ink shadow-[0_16px_30px_rgba(17,17,17,0.25)] transition duration-300 motion-safe:hover:rotate-0 motion-safe:hover:-translate-y-2 ${style.card}`}
               >
                 <span className={`block overflow-hidden ${style.well}`}>
                   <img src={product.thumbnail} alt="" className="w-full h-full object-contain p-3" />

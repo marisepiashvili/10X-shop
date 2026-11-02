@@ -1,7 +1,7 @@
 import type { Review } from "./product"
 import StarRating from "./StarRating"
 
-const cardColors = ["bg-white", "bg-mint", "bg-sky"]
+const cardColors = ["bg-card", "bg-mint", "bg-sky"]
 const cardTilts = ["-rotate-1", "rotate-[0.5deg]", "-rotate-[0.5deg]"]
 
 type ReviewCardProps = {

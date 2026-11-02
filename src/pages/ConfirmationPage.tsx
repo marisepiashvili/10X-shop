@@ -19,7 +19,7 @@ export default function ConfirmationPage() {
   const date = new Date(order.createdAt).toLocaleDateString("en-US")
 
   return (
-    <div className="flex-1 bg-blue text-white">
+    <div className="flex-1 bg-blue text-white dark:text-ink">
       <div className="max-w-330 mx-auto px-4 md:px-10 pt-18 pb-24 flex flex-wrap items-center justify-center gap-16">
         <div className="flex-[1_1_440px] max-w-140 flex flex-col gap-5.5">
           <span className="self-start font-note text-[34px] text-yellow -rotate-3">woohoo! ✶</span>
@@ -31,13 +31,13 @@ export default function ConfirmationPage() {
           <div className="flex flex-wrap gap-3 pt-2">
             <Link
               to="/catalog"
-              className="flex items-center h-15 px-7.5 rounded-full bg-orange border-4 border-white text-lg font-extrabold shadow-sticker transition hover:-translate-y-0.5"
+              className="flex items-center h-15 px-7.5 rounded-full bg-orange dark:bg-receipt text-white border-4 border-sticker text-lg font-extrabold shadow-sticker transition hover:-translate-y-0.5"
             >
               Continue shopping
             </Link>
             <Link
               to="/orders"
-              className="flex items-center h-15 px-6 rounded-full bg-white text-ink font-extrabold shadow-soft transition hover:-translate-y-0.5"
+              className="flex items-center h-15 px-6 rounded-full bg-card text-ink font-extrabold shadow-soft transition hover:-translate-y-0.5"
             >
               View my orders
             </Link>
@@ -54,7 +54,7 @@ export default function ConfirmationPage() {
             totals={order.totals}
             tilt="rotate-3"
           >
-            <span aria-hidden="true" className="absolute -right-6 -bottom-14 w-31 h-31 rounded-full bg-mint text-ink border-[5px] border-white grid place-items-center text-center font-display text-[22px] leading-none -rotate-16 shadow-sticker">
+            <span aria-hidden="true" className="absolute -right-6 -bottom-14 w-31 h-31 rounded-full bg-mint text-ink border-[5px] border-sticker grid place-items-center text-center font-display text-[22px] leading-none -rotate-16 shadow-sticker">
               ORDER<br />PLACED
             </span>
           </Receipt>

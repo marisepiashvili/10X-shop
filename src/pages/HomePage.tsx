@@ -43,7 +43,7 @@ export default function HomePage() {
         <section aria-labelledby="home-deals" className="flex flex-col gap-6">
           <div className="flex flex-wrap items-baseline justify-between gap-4">
             <h2 id="home-deals" className="font-display text-4xl md:text-5xl">Steals of the day</h2>
-            <Link to="/catalog" className="text-[17px] font-extrabold hover:text-blue">See all products →</Link>
+            <Link to="/catalog" className="text-[17px] font-extrabold hover:text-accent">See all products →</Link>
           </div>
           {dealsContent}
         </section>

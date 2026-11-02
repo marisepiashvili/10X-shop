@@ -33,7 +33,7 @@ export default function CartPage() {
     <div className="w-full max-w-330 mx-auto px-4 md:px-10 pt-10 pb-24 flex flex-col gap-10">
       <div className="flex flex-col gap-2">
         {!isEmpty && (
-          <span className="self-start font-note text-3xl text-blue -rotate-3">
+          <span className="self-start font-note text-3xl text-accent -rotate-3">
             {totals.itemCount} {totals.itemCount === 1 ? "item" : "items"} waiting for you ♥
           </span>
         )}
@@ -41,11 +41,11 @@ export default function CartPage() {
       </div>
 
       {isEmpty ? (
-        <div className="self-center w-full max-w-140 px-8 py-16 flex flex-col items-center gap-4.5 text-center bg-pink border-[6px] border-white rounded-[40px] shadow-[0_18px_34px_rgba(17,17,17,0.18)] rotate-[1.5deg]">
+        <div className="self-center w-full max-w-140 px-8 py-16 flex flex-col items-center gap-4.5 text-center bg-pink border-[6px] border-sticker rounded-[40px] shadow-[0_18px_34px_rgba(17,17,17,0.18)] rotate-[1.5deg]">
           <ShoppingBag size={56} strokeWidth={1.6} />
           <p className="font-display text-[40px] leading-none">Your cart is empty</p>
           <span className="font-note text-[28px]">let's fix that ↓</span>
-          <Link to="/catalog" className="flex items-center h-14 px-7 rounded-full bg-ink text-white text-[17px] font-extrabold transition hover:bg-blue">
+          <Link to="/catalog" className="flex items-center h-14 px-7 rounded-full bg-coal text-white text-[17px] font-extrabold transition hover:bg-blue">
             Browse products
           </Link>
         </div>
@@ -65,7 +65,7 @@ export default function CartPage() {
             <button
               type="button"
               onClick={clearCart}
-              className="self-start h-11.5 px-5.5 rounded-full border-2 border-dashed border-ink text-[15px] font-extrabold transition hover:bg-white"
+              className="self-start h-11.5 px-5.5 rounded-full border-2 border-dashed border-ink text-[15px] font-extrabold transition hover:bg-card"
             >
               Clear cart
             </button>

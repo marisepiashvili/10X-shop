@@ -14,7 +14,7 @@ export default function LocalDataCard({ onCleared }: { onCleared: () => void }) 
   }
 
   return (
-    <section className="p-7 flex flex-col gap-3.5 bg-white rounded-[30px] shadow-card -rotate-[0.6deg]">
+    <section className="p-7 flex flex-col gap-3.5 bg-card rounded-[30px] shadow-card -rotate-[0.6deg]">
       <h2 className="font-display text-2xl">Local data</h2>
       <p className="text-[15px] leading-normal">
         Clearing removes your cart and orders from this browser. You stay logged in.
@@ -23,7 +23,7 @@ export default function LocalDataCard({ onCleared }: { onCleared: () => void }) 
         <button
           type="button"
           onClick={handleClear}
-          className="h-12 px-7 rounded-full bg-danger text-white text-[17px] font-extrabold transition hover:-translate-y-0.5"
+          className="h-12 px-7 rounded-full bg-danger text-white dark:text-coal text-[17px] font-extrabold transition hover:-translate-y-0.5"
         >
           Clear local data
         </button>

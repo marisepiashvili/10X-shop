@@ -8,6 +8,16 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Bowlby+One&family=Caveat:wght@700&family=Figtree:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;600;700&display=swap" rel="stylesheet" />
     <title>10X Shop</title>
+    <script>
+      // runs before first paint so a dark page never flashes light
+      try {
+        const saved = localStorage.getItem("shop_theme")
+        const isDark = saved ? saved === "dark" : matchMedia("(prefers-color-scheme: dark)").matches
+        document.documentElement.classList.toggle("dark", isDark)
+      } catch {
+        // storage unavailable: keep the light theme
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>

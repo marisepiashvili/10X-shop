@@ -10,7 +10,7 @@ const LOOP = [...MESSAGES, ...MESSAGES]
 
 export default function PromoMarquee() {
   return (
-    <div className="relative z-10 -mt-6 w-[104%] -ml-[2%] -rotate-1 overflow-hidden bg-ink text-paper border-y-4 border-white shadow-sticker">
+    <div className="relative z-10 -mt-6 w-[104%] -ml-[2%] -rotate-1 overflow-hidden bg-coal text-cream border-y-4 border-sticker shadow-sticker">
       <div className="flex w-max py-4 motion-safe:animate-marquee hover:[animation-play-state:paused]">
         {[0, 1].map((copy) => (
           <ul key={copy} aria-hidden={copy === 1} className="flex shrink-0 items-center">

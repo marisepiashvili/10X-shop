@@ -25,7 +25,7 @@ export default function ProfileForm({ user }: { user: AuthUser }) {
   return (
     <Formik initialValues={initialValues} validationSchema={profileSchema} onSubmit={handleSubmit}>
       {({ dirty, status }) => (
-        <Form noValidate className="p-6 md:p-8 flex flex-col gap-5.5 bg-white rounded-card shadow-card">
+        <Form noValidate className="p-6 md:p-8 flex flex-col gap-5.5 bg-card rounded-card shadow-card">
           <h2 className="font-display text-[28px] leading-tight">Personal details</h2>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4.5">
@@ -40,12 +40,12 @@ export default function ProfileForm({ user }: { user: AuthUser }) {
             <button
               type="submit"
               disabled={!dirty}
-              className="h-14 px-7 rounded-full bg-ink text-white text-[17px] font-extrabold transition enabled:hover:bg-blue disabled:bg-muted disabled:text-muted-ink disabled:cursor-not-allowed"
+              className="h-14 px-7 rounded-full bg-coal text-white text-[17px] font-extrabold transition enabled:hover:bg-blue disabled:bg-muted disabled:text-muted-ink disabled:cursor-not-allowed"
             >
               Save changes
             </button>
             {status === "saved" && !dirty && (
-              <p role="status" className="font-note text-2xl text-blue">saved! ✶</p>
+              <p role="status" className="font-note text-2xl text-accent">saved! ✶</p>
             )}
           </div>
         </Form>

@@ -20,13 +20,13 @@ export default function CartItemRow({ item, onQuantityChange, onRemove }: CartIt
   const tilt = rowTilts[item.id % rowTilts.length]
 
   return (
-    <li className={`flex flex-wrap items-center gap-5 py-3 pl-3 pr-5 bg-white rounded-card shadow-card ${tilt}`}>
+    <li className={`flex flex-wrap items-center gap-5 py-3 pl-3 pr-5 bg-card rounded-card shadow-card ${tilt}`}>
       <Link to={`/products/${item.id}`} className={`shrink-0 w-26 h-26 rounded-[20px] ${bgColor}`}>
         <img src={item.thumbnail} alt={item.title} width={104} height={104} loading="lazy" className="w-full h-full object-contain p-2" />
       </Link>
 
       <div className="flex-[1_1_180px] min-w-0 flex flex-col gap-1">
-        <Link to={`/products/${item.id}`} className="text-xl font-extrabold hover:text-blue">{item.title}</Link>
+        <Link to={`/products/${item.id}`} className="text-xl font-extrabold hover:text-accent">{item.title}</Link>
         <span className="text-sm font-semibold">{formatPrice(unitPrice)} each</span>
       </div>
 

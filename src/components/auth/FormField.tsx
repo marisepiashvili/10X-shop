@@ -23,7 +23,7 @@ export default function FormField ({name, label, type = "text", autoComplete}: F
             autoComplete={autoComplete}
             aria-invalid={hasError}
             aria-describedby={hasError ? errorId : undefined}
-            className={`h-13.5 rounded-full bg-white px-5.5 ${hasError ? "border-[3px] border-danger" : "border-2 border-ink"}`}/>
+            className={`h-13.5 rounded-full bg-card px-5.5 ${hasError ? "border-[3px] border-danger" : "border-2 border-ink"}`}/>
             {hasError && <p id={errorId} className="text-sm font-bold text-danger pl-2.5">{meta.error}</p>}
         </div>
     )

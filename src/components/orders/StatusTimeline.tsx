@@ -13,7 +13,7 @@ export default function StatusTimeline({ order }: { order: Order }) {
   const placedAt = new Date(order.createdAt).toLocaleString("en-US", { dateStyle: "short", timeStyle: "short" })
 
   return (
-    <section aria-label="Order status" className="bg-white rounded-card shadow-card px-5 md:px-8 py-7">
+    <section aria-label="Order status" className="bg-card rounded-card shadow-card px-5 md:px-8 py-7">
       <ol className="grid grid-cols-3 gap-4">
         {ORDER_STEPS.map((step, index) => {
           const isReached = index <= currentIndex
@@ -21,7 +21,7 @@ export default function StatusTimeline({ order }: { order: Order }) {
 
           let caption: React.ReactNode
           if (isCurrent) {
-            caption = <span className="font-note text-2xl text-blue">{CURRENT_NOTES[step]}</span>
+            caption = <span className="font-note text-2xl text-accent">{CURRENT_NOTES[step]}</span>
           } else if (index === 0) {
             caption = <span className="font-mono text-[13px]">{placedAt}</span>
           } else {
@@ -31,7 +31,7 @@ export default function StatusTimeline({ order }: { order: Order }) {
           return (
             <li key={step} aria-current={isCurrent ? "step" : undefined} className="flex flex-col items-start gap-2.5">
               {isReached ? (
-                <span className={`w-14 h-14 rounded-full border-4 border-white grid place-items-center shadow-soft ${STATUS_COLORS[step]} ${isCurrent ? "ring-[3px] ring-ink -rotate-8" : ""}`}>
+                <span className={`w-14 h-14 rounded-full border-4 border-sticker grid place-items-center shadow-soft ${STATUS_COLORS[step]} ${isCurrent ? "ring-[3px] ring-ink dark:ring-cream -rotate-8" : ""}`}>
                   <Check size={18} strokeWidth={2.8} />
                 </span>
               ) : (

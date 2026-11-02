@@ -20,7 +20,7 @@ export default function ProductCard({product}: {product: Product}) {
     const { addItem } = useCart()
 
   return (
-    <article className={`relative h-full flex flex-col p-3 bg-white rounded-card shadow-card transition ${tilt} motion-safe:hover:rotate-0`}>
+    <article className={`relative h-full flex flex-col p-3 bg-card rounded-card shadow-card transition ${tilt} motion-safe:hover:rotate-0`}>
         {/* image */}
      <Link to={`/products/${product.id}`} className={`block aspect-square rounded-[20px] ${bgColor}`}>
         <img className="w-full h-full object-contain p-4 transition duration-300 motion-safe:hover:scale-108 motion-safe:hover:-rotate-3"
@@ -40,7 +40,7 @@ export default function ProductCard({product}: {product: Product}) {
         <h3 className="text-lg font-extrabold leading-tight line-clamp-2 min-h-[2lh]">
             <Link
               to={`/products/${product.id}`}
-              className="bg-linear-to-r from-yellow to-yellow bg-no-repeat bg-position-[left_bottom] bg-size-[0%_45%] box-decoration-clone hover:bg-size-[100%_45%] motion-safe:transition-[background-size] motion-safe:duration-300"
+              className="bg-linear-to-r from-yellow to-yellow dark:from-sticker dark:to-sticker bg-no-repeat bg-position-[left_bottom] bg-size-[0%_45%] box-decoration-clone hover:bg-size-[100%_45%] motion-safe:transition-[background-size] motion-safe:duration-300"
             >
               {product.title}
             </Link>
@@ -62,7 +62,7 @@ export default function ProductCard({product}: {product: Product}) {
         <button
         type="button"
         onClick={() => addItem(product, 1)}
-        className="h-12 w-full rounded-full bg-ink text-white text-[17px] font-extrabold transition enabled:hover:bg-blue disabled:bg-muted disabled:text-muted-ink disabled:cursor-not-allowed"
+        className="h-12 w-full rounded-full bg-coal text-white text-[17px] font-extrabold transition enabled:hover:bg-blue disabled:bg-muted disabled:text-muted-ink disabled:cursor-not-allowed"
         disabled={isOutOfStock}>{isOutOfStock ? "Out of stock" : "Add to cart"}</button>
       </div>
     </article>

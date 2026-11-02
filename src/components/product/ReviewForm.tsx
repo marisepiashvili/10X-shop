@@ -23,7 +23,7 @@ export default function ReviewForm({ onSubmit }: ReviewFormProps) {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-4.5 px-6.5 pt-7.5 pb-6.5 bg-white rounded-card shadow-card">
+    <form onSubmit={handleSubmit} className="flex flex-col gap-4.5 px-6.5 pt-7.5 pb-6.5 bg-card rounded-card shadow-card">
       <h3 className="font-display text-[26px] leading-tight">Write a review</h3>
 
       <fieldset className="flex flex-col gap-2">
@@ -52,7 +52,7 @@ export default function ReviewForm({ onSubmit }: ReviewFormProps) {
           value={comment}
           onChange={(e) => setComment(e.target.value)}
           placeholder="What did you like or dislike?"
-          className="border-2 border-ink rounded-3xl bg-white p-4 resize-none placeholder:text-muted-ink"
+          className="border-2 border-ink rounded-3xl bg-card p-4 resize-none placeholder:text-muted-ink"
         />
         <p className="text-xs text-muted-ink">At least {MIN_COMMENT_LENGTH} characters.</p>
       </div>
@@ -60,7 +60,7 @@ export default function ReviewForm({ onSubmit }: ReviewFormProps) {
       <button
         type="submit"
         disabled={!isValid}
-        className="h-12 rounded-full bg-ink text-white text-[17px] font-extrabold transition enabled:hover:bg-blue disabled:bg-muted disabled:text-muted-ink disabled:cursor-not-allowed"
+        className="h-12 rounded-full bg-coal text-white text-[17px] font-extrabold transition enabled:hover:bg-blue disabled:bg-muted disabled:text-muted-ink disabled:cursor-not-allowed"
       >
         Submit review
       </button>

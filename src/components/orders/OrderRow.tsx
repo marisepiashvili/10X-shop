@@ -26,14 +26,14 @@ export default function OrderRow({order, index} : OrderRowProps) {
           <span className="text-[11px] font-semibold tracking-[0.14em]">ORDER</span>
           <span className="text-sm sm:text-[17px] font-bold">#{order.id}</span>
         </div>
-        <div className="flex-1 min-w-0 flex flex-wrap items-center gap-x-6 gap-y-3 px-5 sm:px-6.5 py-4.5 bg-white rounded-r-[22px]">
+        <div className="flex-1 min-w-0 flex flex-wrap items-center gap-x-6 gap-y-3 px-5 sm:px-6.5 py-4.5 bg-card rounded-r-[22px]">
           <div className="flex-[1_1_160px] flex flex-col gap-1">
             <span className="text-[19px] font-extrabold">{date}</span>
             <span className="text-[15px] font-semibold">{count} {count === 1 ? "item" : "items"}</span>
           </div>
           <StatusPill status={getOrderStatus(order)} />
           <span className="sm:min-w-32 sm:text-right font-display text-[26px]">{formatPrice(order.totals.total)}</span>
-          <span className="hidden sm:grid w-11 h-11 rounded-full bg-ink text-white place-items-center transition group-hover:bg-blue">
+          <span className="hidden sm:grid w-11 h-11 rounded-full bg-coal text-white place-items-center transition group-hover:bg-blue">
             <ChevronRight size={20} strokeWidth={2.4} />
           </span>
         </div>

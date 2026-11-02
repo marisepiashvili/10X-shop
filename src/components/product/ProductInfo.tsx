@@ -18,7 +18,7 @@ export default function ProductInfo({ product }: { product: Product }) {
     <div className="flex flex-col gap-5.5 pt-2">
       <div className="flex flex-wrap gap-2.5 text-sm font-extrabold">
         {product.brand && (
-          <span className="px-4 py-1.5 rounded-full bg-white shadow-soft">{product.brand}</span>
+          <span className="px-4 py-1.5 rounded-full bg-card shadow-soft">{product.brand}</span>
         )}
         <span className="px-4 py-1.5 rounded-full bg-sky capitalize -rotate-2">{product.category}</span>
       </div>
@@ -46,7 +46,7 @@ export default function ProductInfo({ product }: { product: Product }) {
           type="button"
           onClick={() => addItem(product, quantity)}
           disabled={isOutOfStock}
-          className="flex-1 basis-60 h-15 rounded-full bg-orange text-white border-4 border-white text-lg font-extrabold shadow-sticker transition enabled:hover:-translate-y-0.5 disabled:bg-muted disabled:text-muted-ink disabled:shadow-none disabled:cursor-not-allowed"
+          className="flex-1 basis-60 h-15 rounded-full bg-orange dark:enabled:bg-receipt text-white border-4 border-sticker text-lg font-extrabold shadow-sticker transition enabled:hover:-translate-y-0.5 disabled:bg-muted disabled:text-muted-ink disabled:shadow-none disabled:cursor-not-allowed"
         >
           {isOutOfStock ? "Out of stock" : "Add to cart"}
         </button>

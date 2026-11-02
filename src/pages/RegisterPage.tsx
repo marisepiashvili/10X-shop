@@ -60,13 +60,13 @@ export default function RegisterPage() {
                     <button 
                     type="submit"
                     disabled={isSubmitting}
-                    className="mt-1 h-15 rounded-full bg-orange text-white border-4 border-white text-lg font-extrabold shadow-sticker transition enabled:hover:-translate-y-0.5 disabled:opacity-60 disabled:cursor-not-allowed">
+                    className="mt-1 h-15 rounded-full bg-orange text-white border-4 border-sticker text-lg font-extrabold shadow-sticker transition enabled:hover:-translate-y-0.5 disabled:opacity-60 disabled:cursor-not-allowed">
                         Create account</button>
 
                     <p className="text-sm text-center">Already have an account? <Link 
                     to="/login" 
                     state={{from}} 
-                    className="font-extrabold underline hover:text-blue">Log in</Link></p>
+                    className="font-extrabold underline hover:text-accent">Log in</Link></p>
             </Form>
         )}
     </Formik>

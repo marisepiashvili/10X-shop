@@ -43,7 +43,7 @@ export default function ProductTabs({ product }: { product: Product }) {
               aria-selected={isActive}
               aria-controls={`panel-${tab.id}`}
               onClick={() => setActiveTab(tab.id)}
-              className={`h-13 px-6.5 rounded-full text-[17px] font-extrabold shadow-soft transition ${isActive ? "bg-ink text-white" : "bg-white hover:-translate-y-0.5"}`}
+              className={`h-13 px-6.5 rounded-full text-[17px] font-extrabold shadow-soft transition ${isActive ? "bg-coal text-white" : "bg-card hover:-translate-y-0.5"}`}
             >
               {tab.label}
             </button>
@@ -53,7 +53,7 @@ export default function ProductTabs({ product }: { product: Product }) {
 
       <div id={`panel-${activeTab}`} role="tabpanel" aria-labelledby={`tab-${activeTab}`}>
         {activeTab === "description" ? (
-          <div className="bg-white rounded-card shadow-card p-6 md:p-9 grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="bg-card rounded-card shadow-card p-6 md:p-9 grid grid-cols-1 md:grid-cols-2 gap-8">
             <p className="text-[17px] leading-relaxed">{product.description}</p>
             <dl className="grid grid-cols-[max-content_1fr] gap-x-8 gap-y-3 self-start">
               {product.brand && (

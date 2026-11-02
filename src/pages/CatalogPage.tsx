@@ -74,13 +74,13 @@ export default function CatalogPage() {
       <section className="flex flex-wrap items-end justify-between gap-8">
         <div className="flex flex-col gap-2">
           {total > 0 && (
-            <span className="self-start font-note text-3xl text-blue -rotate-3">{total} things to love ✶</span>
+            <span className="self-start font-note text-3xl text-accent -rotate-3">{total} things to love ✶</span>
           )}
           <h1 className="font-display text-6xl md:text-[84px] leading-[0.95]">Catalog</h1>
         </div>
 
         <div className="flex items-stretch rotate-2 drop-shadow-[0_12px_20px_rgba(17,17,17,0.18)]">
-          <div className="bg-white rounded-l-[18px] px-5.5 py-4 flex flex-col gap-1 font-mono text-[13px]">
+          <div className="bg-receipt rounded-l-[18px] px-5.5 py-4 flex flex-col gap-1 font-mono text-[13px]">
             <span className="font-bold tracking-[0.14em]">COUPON · ONE PER ORDER</span>
             <span className="font-sans text-[15px]">10% off your cart. Free shipping from $100.</span>
             <span className="self-start mt-1 px-2.5 py-0.5 border-2 border-dashed border-ink rounded-lg text-lg font-bold">10X10</span>

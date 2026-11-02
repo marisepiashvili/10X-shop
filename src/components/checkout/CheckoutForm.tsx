@@ -14,7 +14,7 @@ export default function CheckoutForm({ totalText, onSubmit }: CheckoutFormProps)
     <Formik initialValues={initialValues} validationSchema={checkoutSchema} onSubmit={onSubmit}>
       <Form
         noValidate
-        className="flex-[999_1_560px] min-w-0 p-6 md:p-8 flex flex-col gap-6 bg-white rounded-card shadow-card"
+        className="flex-[999_1_560px] min-w-0 p-6 md:p-8 flex flex-col gap-6 bg-card rounded-card shadow-card"
       >
         <div className="flex items-center gap-3">
           <span className="w-10 h-10 shrink-0 rounded-full bg-yellow grid place-items-center font-display text-lg">1</span>
@@ -32,13 +32,13 @@ export default function CheckoutForm({ totalText, onSubmit }: CheckoutFormProps)
           <FormField name="city" label="City" autoComplete="address-level2" />
         </div>
 
-        <p className="px-5 py-3.5 rounded-[18px] bg-yellow/40 text-[15px] font-semibold leading-normal">
+        <p className="px-5 py-3.5 rounded-[18px] bg-yellow/40 dark:bg-yellow/20 text-[15px] font-semibold leading-normal">
           No payment is taken — this is a demo store. Your order is saved on this device only.
         </p>
 
         <button
           type="submit"
-          className="h-15 rounded-full bg-orange text-white border-4 border-white text-lg font-extrabold shadow-sticker transition hover:-translate-y-0.5"
+          className="h-15 rounded-full bg-orange text-white border-4 border-sticker text-lg font-extrabold shadow-sticker transition hover:-translate-y-0.5"
         >
           Place order · {totalText}
         </button>

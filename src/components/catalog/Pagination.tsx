@@ -36,7 +36,7 @@ export default function Pagination({ currentPage, totalPages, onPageChange }: Pa
         <ul className="flex items-center gap-2 md:gap-3">
             <li>
                 <PageButton disabled={isFirstPage} ariaLabel="Previous page" onClick={() => onPageChange(currentPage - 1)}>
-                    <img src={chevronLeftIcon} alt="" className={`w-5 h-5 ${isFirstPage ? "opacity-40" : ""}`}/>
+                    <img src={chevronLeftIcon} alt="" className={`w-5 h-5 dark:invert ${isFirstPage ? "opacity-40" : ""}`}/>
                 </PageButton>
             </li>
             {pages.map((item, index)=> item === "..." ? (
@@ -52,7 +52,7 @@ export default function Pagination({ currentPage, totalPages, onPageChange }: Pa
             ))}
             <li>
                 <PageButton disabled={isLastPage} ariaLabel="Next page" onClick={() => onPageChange(currentPage + 1)}>
-                    <img src={chevronRightIcon} alt="" className={`w-5 h-5 ${isLastPage ? "opacity-40" : ""}`} />
+                    <img src={chevronRightIcon} alt="" className={`w-5 h-5 dark:invert ${isLastPage ? "opacity-40" : ""}`} />
                 </PageButton>
             </li>
         </ul>
