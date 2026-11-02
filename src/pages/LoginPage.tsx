@@ -13,6 +13,8 @@ export default function LoginPage (){
     const {login} = useAuth()
     const location = useLocation()
     const from = (location.state as { from?: string } | null)?.from ?? "/"
+    const isFromCheckout = from === "/checkout"
+
 
 
     async function handleSubmit(values: LoginFormValues, {setStatus} : FormikHelpers<LoginFormValues>) {
@@ -29,8 +31,9 @@ export default function LoginPage (){
     return(
         <AuthShell
             note="welcome back ✶"
-            title="Log in & check out"
-            text="One quick step and your order is on its way."
+            title={isFromCheckout ? "Log in & check out" : "Log in"}
+            text={isFromCheckout ? "One quick step and your order is on its way." : "Good to see you again. Your account is ready when you are."}
+
             ticketTitle="MEMBER PASS"
         >
             <Formik initialValues={initialValues} onSubmit={handleSubmit} validationSchema={loginSchema}>
