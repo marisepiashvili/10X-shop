@@ -27,6 +27,9 @@ function buildProductsUrl(query: ProductQuery) {
     const search = query.search.trim()
     if (search) {
         params.set("q", search)
+        params.set("limit", "0")
+        params.set("skip", "0")
+
         return `${BASE_URL}/search?${params.toString()}`
     }
     if (query.category !== "all") {
@@ -41,7 +44,19 @@ async function getProducts(query: ProductQuery, signal?: AbortSignal) {
         throw new Error(`Failed to fetch products: ${response.status}`)
     }
     const data: ProductsResponse = await response.json()
-    return data
+
+    const search = query.search.trim().toLowerCase()
+    if (!search) return data
+
+    const matches = data.products.filter((product) => product.title.toLowerCase().includes(search))
+    const skip = (query.page - 1) * PAGE_SIZE
+    return {
+        ...data,
+        products: matches.slice(skip, skip + PAGE_SIZE),
+        total: matches.length,
+        skip,
+        limit: PAGE_SIZE,
+    }
 }
 
 export async function getProductById(id: number, signal?: AbortSignal) {
