@@ -1,8 +1,7 @@
 import { Form, Formik } from "formik"
+import useAuth from "../../hooks/useAuth"
 import FormField from "../auth/FormField"
 import { checkoutSchema, type ShippingInfo } from "./checkoutSchema"
-
-const initialValues: ShippingInfo = { fullName: "", email: "", address: "", city: "" }
 
 type CheckoutFormProps = {
   totalText: string
@@ -10,6 +9,15 @@ type CheckoutFormProps = {
 }
 
 export default function CheckoutForm({ totalText, onSubmit }: CheckoutFormProps) {
+
+  const { user } = useAuth()
+  const initialValues: ShippingInfo = {
+    fullName: user?.name ?? "",
+    email: user?.email ?? "",
+    address: "",
+    city: "",
+  }
+
   return (
     <Formik initialValues={initialValues} validationSchema={checkoutSchema} onSubmit={onSubmit}>
       <Form
