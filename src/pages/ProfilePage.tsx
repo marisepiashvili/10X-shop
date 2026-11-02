@@ -7,10 +7,9 @@ import LocalDataCard from "../components/profile/LocalDataCard"
 
 export default function ProfilePage() {
   const { user } = useAuth()
+   const [orderCount, setOrderCount] = useState(() => readOrders().length)
 
   if (!user) return null
-
-  const [orderCount, setOrderCount] = useState(() => readOrders().length)
 
 
   const firstName = user.name.trim().split(/\s+/)[0]

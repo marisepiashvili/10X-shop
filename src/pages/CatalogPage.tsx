@@ -11,7 +11,7 @@ import { useSearchParams } from "react-router";
 
 
 export default function CatalogPage() {
-   const [searchParams] = useSearchParams()
+   const [searchParams, setSearchParams] = useSearchParams()
    const [search, setSearch] = useState(searchParams.get("search") ?? "")
    const [category, setCategory] = useState(searchParams.get("category") ?? "all")
 
@@ -38,6 +38,15 @@ export default function CatalogPage() {
         setSort(value)
         setPage(1)
     }
+
+    function handleReset() {
+    setSearch("")
+    setCategory("all")
+    setSort("default")
+    setPage(1)
+    setSearchParams({}, { replace: true })
+}
+
 
     function handlePageChange(newPage: number) {
         setPage(newPage)
@@ -89,6 +98,7 @@ export default function CatalogPage() {
         onSearchChange={handleSearchChange}
         onCategoryChange={handleCategoryChange}
         onSortChange={handleSortChange}
+        onReset={handleReset}
       />
       {content}
     </div>
