@@ -63,6 +63,7 @@ export default function CatalogPage() {
     } else {
         content = (
             <>
+                <h2 className="sr-only">Products</h2>
                 <ProductGrid products={products} />
                 <Pagination currentPage={page} totalPages={totalPages} onPageChange={handlePageChange} />
             </>

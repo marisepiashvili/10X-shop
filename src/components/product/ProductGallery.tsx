@@ -18,7 +18,7 @@ export default function ProductGallery({ images, title, discount }: ProductGalle
     <div className="flex flex-col gap-5.5">
       <div className="relative p-3 bg-card rounded-[36px] shadow-[0_20px_36px_rgba(17,17,17,0.2)] -rotate-[1.5deg]">
         <div className={`aspect-square rounded-[26px] overflow-hidden ${selectedColor}`}>
-          <img src={images[selectedIndex]} alt={title} className="w-full h-full object-contain p-8" />
+          <img src={images[selectedIndex]} alt={title} width={600} height={600} fetchPriority="high" className="w-full h-full object-contain p-8" />
         </div>
         <DiscountBadge discount={discount} size="lg" />
       </div>

@@ -1,78 +1,75 @@
-# React + TypeScript + Vite
+# 10X Shop
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## About
 
-Currently, two official plugins are available:
+10X Shop is a single-page online store built as an individual graduation project for the 10X Front-end course. Shoppers can browse and search products, add them to a cart, place a simulated order, and follow its status. Product data comes from the public DummyJSON API; accounts, carts, and orders are stored in the browser.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+**Live demo:** https://10-x-shop.vercel.app/
 
-## React Compiler
+## Features
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+### CORE
 
-Note: This will impact Vite dev & build performances.
-You can also try [the experimental native React Compiler support in plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md#rust-react-compiler) by using `compiler: true` in the plugin options instead of using the Babel plugin.
+- Catalog loaded from DummyJSON with typed product cards
+- Product details with price, discount, and stock status
+- Cart with add, quantity, remove, and totals
+- Local login with a protected checkout that returns to the original page after login
+- Checkout form with validation and an order confirmation
+- Loading, error, and empty states, a 404 page, and an Error Boundary
+- Responsive layout built with Tailwind CSS v4
 
-## Expanding the ESLint configuration
+### FULL
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- Debounced search by product title, category filter, sorting, and pagination
+- Product gallery, reviews, and related products
+- Promo code `10X10` and free shipping from $100, using `useReducer` with typed actions
+- Order history with simulated statuses and an order detail page
+- Profile editing and clearing local data
+- Dark mode with a saved preference
+- Formik and Yup forms, and `@theme` design tokens
+- Lazy-loaded routes for pages other than Home and Catalog
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Tech Stack
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+React 19, TypeScript (strict), Vite, React Router, Tailwind CSS v4, Formik, Yup, lucide-react, DummyJSON API, Vercel.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Architecture
 
+```text
+src/
+  assets/       fonts and icons
+  components/   auth, cart, catalog, checkout, home, layout, orders, product, profile, ui
+  hooks/        useAuth, useCart, useCategories, useDebounce, useProduct, useProducts, useTheme
+  pages/        one component per route
+  utils/        price formatting
 ```
 
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
+Pages combine reusable components and read shared state from `AuthProvider` and `CartProvider`. A user action calls a handler, which updates React state, and React renders the result. Product data is fetched in `useEffect` through `useProducts` and `useProduct`, which cancel outdated requests with `AbortController`. The cart, users, orders, and theme are saved to `localStorage`.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## How to Run
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
+```bash
+npm install
+npm run dev
 ```
+
+## Scripts
+
+| Script | Purpose |
+|---|---|
+| `npm run dev` | Start the development server |
+| `npm run build` | Type-check and create a production build |
+| `npm run preview` | Preview the production build |
+| `npm run typecheck` | Run the TypeScript compiler without emitting files |
+| `npm run lint` | Run ESLint |
+
+## Test Account
+
+There is no shared test account. Accounts are stored only in your browser, so create one on the **Register** page and use it to log in.
+
+Promo code: `10X10`
+
+## Credits
+
+<!-- TODO: list who helped you -->
+Product data: [DummyJSON](https://dummyjson.com).

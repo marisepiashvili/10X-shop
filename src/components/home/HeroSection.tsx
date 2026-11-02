@@ -15,9 +15,10 @@ const LOW_STOCK = 10
 type HeroSectionProps = {
   total: number
   products: Product[]
+  loading: boolean
 }
 
-export default function HeroSection({ total, products }: HeroSectionProps) {
+export default function HeroSection({ total, products, loading }: HeroSectionProps) {
   const fanProducts = products.slice(0, fanStyles.length)
   const inStock = fanProducts.filter((product) => product.stock > 0)
   const lowestStock = Math.min(...inStock.map((product) => product.stock))
@@ -48,6 +49,8 @@ export default function HeroSection({ total, products }: HeroSectionProps) {
           </Link>
         </div>
       </div>
+
+      {loading && <div aria-hidden="true" className="mt-14 h-64 sm:h-[343px] lg:h-[383px]" />}
 
       {fanProducts.length > 0 && (
         <div className="relative mt-14 pb-6 flex justify-center items-start">

@@ -30,7 +30,7 @@ export default function HomePage() {
 
   return (
     <>
-      <HeroSection total={total} products={heroProducts} />
+      <HeroSection total={total} products={heroProducts} loading={loading} />
 
       <div className="w-full max-w-330 mx-auto px-4 md:px-10 pt-18 pb-24 flex flex-col gap-20">
         {categories.length > 0 && (
