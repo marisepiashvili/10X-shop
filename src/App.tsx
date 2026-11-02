@@ -28,11 +28,11 @@ function App() {
         <Route path="register" element={<RegisterPage />} />
         <Route path="cart" element={<CartPage />} />
         <Route path="confirmation/:orderId" element={<ConfirmationPage />} />
-        <Route path="orders" element={<OrdersPage/>}/>
-        <Route path="orders/:orderId" element={<OrderDetailPage/>}/>
         <Route element={<ProtectedRoute />}>
            <Route path="checkout" element={<CheckoutPage />} />
            <Route path="profile" element={<ProfilePage/>}/>
+           <Route path="orders" element={<OrdersPage/>}/>
+           <Route path="orders/:orderId" element={<OrderDetailPage/>}/>
         </Route>
         <Route path="*" element={<NotFoundPage />} />
       </Route>
