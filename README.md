@@ -28,6 +28,7 @@
 - Dark mode with a saved preference
 - Formik and Yup forms, and `@theme` design tokens
 - Lazy-loaded routes for pages other than Home and Catalog
+- Toast notifications for cart and review actions
 
 ## Tech Stack
 

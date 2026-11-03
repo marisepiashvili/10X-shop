@@ -6,7 +6,8 @@ export type CartContextValue = {
   items: CartItem[]
   promoCode: string | null
   totals: ReturnType<typeof getCartTotals>
-  addItem: (product: CartProduct, quantity: number) => void
+  // returns false when the cart would hold more than the stock
+  addItem: (product: CartProduct, quantity: number) => boolean
   removeItem: (id: number) => void
   setQuantity: (id: number, quantity: number) => void
   clearCart: () => void

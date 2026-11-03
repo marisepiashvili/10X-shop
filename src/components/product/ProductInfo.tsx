@@ -5,14 +5,21 @@ import type { Product } from "./product"
 import QuantityStepper from "./QuantityStepper"
 import StockPill from "./StockPill"
 import useCart from "../../hooks/useCart"
+import useToast from "../../hooks/useToast"
 
 
 export default function ProductInfo({ product }: { product: Product }) {
   const [quantity, setQuantity] = useState(1)
   const { addItem } = useCart()
+  const { showToast } = useToast()
   const discountedPrice = getDiscountedPrice(product.price, product.discountPercentage)
   const isOutOfStock = product.stock === 0
   const reviewCount = product.reviews.length
+
+  function handleAdd() {
+    if (addItem(product, quantity)) showToast("Added to cart ✓")
+    else showToast(`Only ${product.stock} in stock`, "error")
+  }
 
   return (
     <div className="flex flex-col gap-5.5 pt-2">
@@ -44,7 +51,7 @@ export default function ProductInfo({ product }: { product: Product }) {
         <QuantityStepper value={quantity} max={product.stock} onChange={setQuantity} />
         <button
           type="button"
-          onClick={() => addItem(product, quantity)}
+          onClick={handleAdd}
           disabled={isOutOfStock}
           className="flex-1 basis-60 h-15 rounded-full bg-orange text-white border-4 border-sticker text-lg font-extrabold shadow-sticker transition enabled:hover:-translate-y-0.5 disabled:bg-muted disabled:text-muted-ink disabled:shadow-none disabled:cursor-not-allowed"
         >

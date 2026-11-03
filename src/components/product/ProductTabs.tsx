@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react"
 import { useLocation, useNavigate } from "react-router"
 import useAuth from "../../hooks/useAuth"
+import useToast from "../../hooks/useToast"
 import type { Product, Review } from "./product"
 import ReviewCard from "./ReviewCard"
 import ReviewForm from "./ReviewForm"
@@ -23,6 +24,7 @@ function loadDraft(productId: number): ReviewDraft | null {
 
 export default function ProductTabs({ product }: { product: Product }) {
   const { user } = useAuth()
+  const { showToast } = useToast()
   const { pathname, hash } = useLocation()
   const navigate = useNavigate()
   const sectionRef = useRef<HTMLElement>(null)
@@ -56,6 +58,7 @@ export default function ProductTabs({ product }: { product: Product }) {
       reviewerEmail: "",
     }
     setReviews([newReview, ...reviews])
+    showToast("Review added ✓")
   }
 
   const tabs: { id: Tab, label: string }[] = [

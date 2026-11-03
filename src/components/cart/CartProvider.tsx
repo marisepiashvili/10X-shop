@@ -15,7 +15,12 @@ export default function CartProvider({ children }: { children: React.ReactNode }
     items: state.items,
     promoCode: state.promoCode,
     totals: getCartTotals(state),
-    addItem: (product: CartProduct, quantity: number) => dispatch({ type: "add", product, quantity }),
+    addItem: (product: CartProduct, quantity: number) => {
+      const inCart = state.items.find((item) => item.id === product.id)?.quantity ?? 0
+      if (inCart + quantity > product.stock) return false
+      dispatch({ type: "add", product, quantity })
+      return true
+    },
     removeItem: (id: number) => dispatch({ type: "remove", id }),
     setQuantity: (id: number, quantity: number) => dispatch({ type: "setQuantity", id, quantity }),
     clearCart: () => dispatch({ type: "clear" }),

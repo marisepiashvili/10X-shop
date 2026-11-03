@@ -6,9 +6,11 @@ import CartReceipt from "../components/cart/CartReceipt"
 import { PROMO_CODE } from "../components/cart/cartTotals"
 import PromoCodeForm from "../components/cart/PromoCodeForm"
 import useCart from "../hooks/useCart"
+import useToast from "../hooks/useToast"
 
 export default function CartPage() {
   const { items, promoCode, totals, setQuantity, removeItem, clearCart, applyPromo, removePromo } = useCart()
+  const { showToast } = useToast()
   const [promoInput, setPromoInput] = useState("")
   const [promoError, setPromoError] = useState("")
 
@@ -58,7 +60,10 @@ export default function CartPage() {
                   key={item.id}
                   item={item}
                   onQuantityChange={(quantity) => setQuantity(item.id, quantity)}
-                  onRemove={() => removeItem(item.id)}
+                  onRemove={() => {
+                    removeItem(item.id)
+                    showToast("Removed from cart")
+                  }}
                 />
               ))}
             </ul>

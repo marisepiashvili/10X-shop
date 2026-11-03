@@ -43,7 +43,8 @@ Status as of 2 November 2026. Update this report before submission.
 | Profile | Partial | No first/last name split or theme switch |
 | Formik and Yup | Partial | Uses `<Formik>` instead of `useFormik` |
 | URL state | Done | `q`, `category`, `sort` and `page` live in the URL; refresh, Back/Forward and shared links keep them |
-| Toast, Skeleton, Retry | Not done | |
+| Toast | Done | Add to cart, stock limit, remove from cart, and review added |
+| Skeleton, Retry | Not done | |
 | `ApiClient`, `ApiError`, OOP classes, type guards | Not done | |
 | Lazy routes | Done | Home and Catalog load up front; other pages load on demand |
 | Lighthouse targets | Done | All medians met on the live site |
