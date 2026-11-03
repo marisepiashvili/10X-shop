@@ -6,6 +6,8 @@ export default function useProduct(id: number | null) {
     const [product, setProduct] = useState<Product | null>(null)
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState<string | null>(null)
+    // bumping this re-runs the request (Retry button)
+    const [attempt, setAttempt] = useState(0)
 
     useEffect(() => {
         if (id === null) return
@@ -27,7 +29,11 @@ export default function useProduct(id: number | null) {
         loadProduct(id)
 
         return () => controller.abort()
-    }, [id])
+    }, [id, attempt])
 
-    return { product, loading, error }
+    function retry() {
+        setAttempt((count) => count + 1)
+    }
+
+    return { product, loading, error, retry }
 }

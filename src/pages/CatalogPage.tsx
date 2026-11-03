@@ -3,7 +3,7 @@ import CatalogToolbar from "../components/catalog/CatalogToolbar";
 import Pagination from "../components/catalog/Pagination";
 import ProductGrid from "../components/product/ProductGrid";
 import { PAGE_SIZE } from "../components/product/productFetch";
-import LoadingState from "../components/ui/LoadingState";
+import ProductGridSkeleton from "../components/product/ProductGridSkeleton";
 import MessagePanel from "../components/ui/MessagePanel";
 import useDebounce from "../hooks/useDebounce";
 import useProducts from "../hooks/useProducts";
@@ -29,8 +29,10 @@ export default function CatalogPage() {
     }
     const debouncedSearch = useDebounce(search, 400)
 
-    const { products, total, loading, error } = useProducts({ search: q, category, sort, page })
+    const { products, total, loading, error, retry } = useProducts({ search: q, category, sort, page })
     const totalPages = Math.ceil(total / PAGE_SIZE)
+    const firstShown = (page - 1) * PAGE_SIZE + 1
+    const lastShown = firstShown + products.length - 1
 
     function updateParams(changes: ParamChanges) {
         setSearchParams((prev) => {
@@ -75,9 +77,9 @@ export default function CatalogPage() {
 
     let content: React.ReactNode
     if (loading) {
-        content = <LoadingState />
+        content = <ProductGridSkeleton count={PAGE_SIZE} />
     } else if (error) {
-        content = <MessagePanel variant="error" title="Could not load products" note={error} />
+        content = <MessagePanel variant="error" title="Could not load products" note={error} onRetry={retry} />
     } else if (products.length === 0) {
         content = <MessagePanel variant="empty" title="No products found" note="try another word" />
     } else {
@@ -86,6 +88,9 @@ export default function CatalogPage() {
                 <h2 className="sr-only">Products</h2>
                 <ProductGrid products={products} />
                 <Pagination currentPage={page} totalPages={totalPages} onPageChange={handlePageChange} />
+                <p className="text-center text-[15px] font-semibold">
+                    Showing {firstShown}–{lastShown} of {total}
+                </p>
             </>
         )
     }

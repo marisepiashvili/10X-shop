@@ -12,11 +12,12 @@ const rowTilts = ["-rotate-[0.5deg]", "rotate-[0.4deg]", "-rotate-[0.3deg]"]
 type OrderRowProps = {
     order: Order
     index: number
+    now: number
 }
 
 
 
-export default function OrderRow({order, index} : OrderRowProps) {
+export default function OrderRow({order, index, now} : OrderRowProps) {
     const date = new Date(order.createdAt).toLocaleDateString("en-Us")
     const count = order.totals.itemCount
   return (
@@ -31,7 +32,7 @@ export default function OrderRow({order, index} : OrderRowProps) {
             <span className="text-[19px] font-extrabold">{date}</span>
             <span className="text-[15px] font-semibold">{count} {count === 1 ? "item" : "items"}</span>
           </div>
-          <StatusPill status={getOrderStatus(order)} />
+          <StatusPill status={getOrderStatus(order, now)} />
           <span className="sm:min-w-32 sm:text-right font-display text-[26px]">{formatPrice(order.totals.total)}</span>
           <span className="hidden sm:grid w-11 h-11 rounded-full bg-coal text-white place-items-center transition group-hover:bg-blue">
             <ChevronRight size={20} strokeWidth={2.4} />

@@ -10,8 +10,8 @@ const sortOptions: Option[] = [
     { value: "default", label: "Default" },
     { value: "price-asc", label: "Price: low to high" },
     { value: "price-desc", label: "Price: high to low" },
-    { value: "rating-desc", label: "Top rated" },
-    { value: "discount-desc", label: "Discount: high to low" },
+    { value: "rating-desc", label: "Rating: high to low" },
+    { value: "title-asc", label: "Name A→Z" },
 ]
 
 type CatalogToolbarProps = {

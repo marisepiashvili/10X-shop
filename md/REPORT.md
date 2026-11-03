@@ -23,8 +23,8 @@ Status as of 2 November 2026. Update this report before submission.
 | Deployment with SPA rewrite | Done | Vercel |
 | PLAN, README, and Git history | Done | |
 | DEBUG-LOG | Done | 5 entries |
-| Login with username and 6-character password rule | Changed | Uses email and local registration; the login form has no password-length rule |
-| 375px layout | Partial | No horizontal scrolling on the 8 pages checked; some targets are under 44px |
+| Login with username and 6-character password rule | Changed | Uses email and local registration instead of a username; passwords need at least 6 characters |
+| 375px layout | Done | No horizontal scrolling; tap targets are at least 44px, and product cards are clickable as a whole |
 | Compatibility matrix | Partial | Chromium checked; Firefox still needs testing |
 | Lighthouse report | Done | Before and after results recorded |
 
@@ -36,15 +36,15 @@ Status as of 2 November 2026. Update this report before submission.
 | Product gallery, related products | Done | |
 | Promo code and typed cart reducer | Done | |
 | Dark mode and `@theme` tokens | Done | |
-| Sorting | Partial | No `Name A→Z`; adds a discount sort |
-| Pagination | Partial | No `Showing X–Y of Z` text |
+| Sorting | Done | The five options from the PRD, including `Name A→Z` |
+| Pagination | Done | Includes `Showing X–Y of Z` |
 | Reviews | Done | Saved in `shop_reviews`; average rating and count update; field error messages not shown |
-| Orders | Partial | No live status refresh or Reorder |
-| Profile | Partial | No first/last name split or theme switch |
+| Orders | Done | Statuses refresh every 30 seconds without a reload; Reorder adds the items back to the cart |
+| Profile | Done | First and last name fields and a theme switch that shares state with the header |
 | Formik and Yup | Partial | Uses `<Formik>` instead of `useFormik` |
 | URL state | Done | `q`, `category`, `sort` and `page` live in the URL; refresh, Back/Forward and shared links keep them |
 | Toast | Done | Add to cart, stock limit, remove from cart, and review added |
-| Skeleton, Retry | Not done | |
+| Skeleton, Retry | Done | Skeletons on Home, Catalog, and Product; Retry on load errors |
 | `ApiClient`, `ApiError`, OOP classes, type guards | Not done | |
 | Lazy routes | Done | Home and Catalog load up front; other pages load on demand |
 | Lighthouse targets | Done | All medians met on the live site |

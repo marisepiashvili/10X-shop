@@ -26,7 +26,7 @@ export default function CartItemRow({ item, onQuantityChange, onRemove }: CartIt
       </Link>
 
       <div className="flex-[1_1_180px] min-w-0 flex flex-col gap-1">
-        <Link to={`/products/${item.id}`} className="text-xl font-extrabold hover:text-accent">{item.title}</Link>
+        <Link to={`/products/${item.id}`} className="inline-block py-2 -my-2 text-xl font-extrabold hover:text-accent">{item.title}</Link>
         <span className="text-sm font-semibold">{formatPrice(unitPrice)} each</span>
       </div>
 

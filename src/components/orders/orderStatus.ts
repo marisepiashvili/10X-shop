@@ -12,8 +12,8 @@ export const STATUS_COLORS: Record<OrderStatus, string> = {
 
 const MINUTE = 60 * 1000
 
-export function getOrderStatus(order: Order) : OrderStatus {
-    const age = Date.now() - new Date(order.createdAt).getTime()
+export function getOrderStatus(order: Order, now: number = Date.now()) : OrderStatus {
+    const age = now - new Date(order.createdAt).getTime()
     if(age < MINUTE) return "Processing"
     if(age < 3 * MINUTE) return "Shipped"
     return "Delivered"

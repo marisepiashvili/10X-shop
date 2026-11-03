@@ -2,7 +2,7 @@ import { Link, useParams } from "react-router"
 import chevronLeftIcon from "../assets/icons/chevron-left.svg"
 import ProductDetails from "../components/product/ProductDetails"
 import RelatedProducts from "../components/product/RelatedProducts"
-import LoadingState from "../components/ui/LoadingState"
+import ProductDetailsSkeleton from "../components/product/ProductDetailsSkeleton"
 import MessagePanel from "../components/ui/MessagePanel"
 import useProduct from "../hooks/useProduct"
 
@@ -10,15 +10,17 @@ export default function ProductPage() {
   const { id } = useParams()
   const productId = Number(id)
   const isValidId = Number.isInteger(productId) && productId > 0
-  const { product, loading, error } = useProduct(isValidId ? productId : null)
+  const { product, loading, error, retry } = useProduct(isValidId ? productId : null)
 
   let content: React.ReactNode
   if (!isValidId) {
     content = <MessagePanel variant="empty" title="Product not found" note="check the link" />
   } else if (loading) {
-    content = <LoadingState />
+    content = <ProductDetailsSkeleton />
+  } else if (error === "Product not found" || (!error && !product)) {
+    content = <MessagePanel variant="empty" title="Product not found" note="check the link" />
   } else if (error || !product) {
-    content = <MessagePanel variant="error" title="Could not load product" note={error ?? "Product not found"} />
+    content = <MessagePanel variant="error" title="Could not load product" note={error ?? "Something went wrong"} onRetry={retry} />
   } else {
     content = (
       <>

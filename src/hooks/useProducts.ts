@@ -7,6 +7,8 @@ export default function useProducts({ search, category, sort, page }: ProductQue
     const [total, setTotal] = useState(0)
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState<string | null>(null)
+    // bumping this re-runs the request (Retry button)
+    const [attempt, setAttempt] = useState(0)
 
     useEffect(() => {
         const controller = new AbortController()
@@ -28,7 +30,11 @@ export default function useProducts({ search, category, sort, page }: ProductQue
         loadProducts()
 
         return () => controller.abort()
-    }, [search, category, sort, page])
+    }, [search, category, sort, page, attempt])
 
-    return { products, total, loading, error }
+    function retry() {
+        setAttempt((count) => count + 1)
+    }
+
+    return { products, total, loading, error, retry }
 }

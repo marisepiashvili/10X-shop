@@ -66,7 +66,7 @@ export default function RegisterPage() {
                     <p className="text-sm text-center">Already have an account? <Link 
                     to="/login" 
                     state={{from}} 
-                    className="font-extrabold underline hover:text-accent">Log in</Link></p>
+                    className="inline-block px-1.5 -mx-1.5 py-3.5 -my-3.5 font-extrabold underline hover:text-accent">Log in</Link></p>
             </Form>
         )}
     </Formik>

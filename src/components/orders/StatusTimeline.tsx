@@ -8,8 +8,13 @@ const CURRENT_NOTES: Record<OrderStatus, string> = {
   Delivered: "enjoy! ✶",
 }
 
-export default function StatusTimeline({ order }: { order: Order }) {
-  const currentIndex = ORDER_STEPS.indexOf(getOrderStatus(order))
+type StatusTimelineProps = {
+  order: Order
+  now: number
+}
+
+export default function StatusTimeline({ order, now }: StatusTimelineProps) {
+  const currentIndex = ORDER_STEPS.indexOf(getOrderStatus(order, now))
   const placedAt = new Date(order.createdAt).toLocaleString("en-US", { dateStyle: "short", timeStyle: "short" })
 
   return (

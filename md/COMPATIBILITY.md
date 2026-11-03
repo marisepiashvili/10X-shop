@@ -8,9 +8,9 @@ Chromium results come from automated Playwright checks on 2 November 2026. Those
 
 | Page | Chromium desktop (1280px) | Chromium mobile (375px) | Firefox desktop | Firefox mobile |
 |---|---|---|---|---|
-| Home `/` | ✓ | ⚠️ small targets | ⬜ | ⬜ |
-| Catalog `/catalog` | ✓ | ⚠️ small targets | ⬜ | ⬜ |
-| Product `/products/1` | ✓ | ⚠️ small targets | ⬜ | ⬜ |
+| Home `/` | ✓ | ✓ | ⬜ | ⬜ |
+| Catalog `/catalog` | ✓ | ✓ | ⬜ | ⬜ |
+| Product `/products/1` | ✓ | ✓ | ⬜ | ⬜ |
 | Cart `/cart` | ✓ | ✓ | ⬜ | ⬜ |
 | Checkout `/checkout` | ✓ | ✓ | ⬜ | ⬜ |
 | Orders `/orders` | ✓ | ✓ | ⬜ | ⬜ |
@@ -24,7 +24,7 @@ Chromium results come from automated Playwright checks on 2 November 2026. Those
 
 | Issue | Where | Status |
 |---|---|---|
-| Some interactive elements are smaller than 44px | Home, Catalog, and Product at 375px | Open |
+| Some interactive elements were smaller than 44px | Home, Catalog, Product, Cart, Login, and Register at 375px | Fixed on 3 November 2026 |
 
 ## Screenshots
 

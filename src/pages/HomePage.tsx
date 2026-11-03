@@ -3,7 +3,7 @@ import CategoryPills from "../components/home/CategoryPills"
 import HeroSection from "../components/home/HeroSection"
 import PromoMarquee from "../components/home/PromoMarquee"
 import ProductGrid from "../components/product/ProductGrid"
-import LoadingState from "../components/ui/LoadingState"
+import ProductGridSkeleton from "../components/product/ProductGridSkeleton"
 import MessagePanel from "../components/ui/MessagePanel"
 import useCategories from "../hooks/useCategories"
 import useProducts from "../hooks/useProducts"
@@ -13,7 +13,7 @@ const HERO_COUNT = 3
 const FEATURED_CATEGORIES = 8
 
 export default function HomePage() {
-  const { products, total, loading, error } = useProducts({ search: "", category: "all", sort: "discount-desc", page: 1 })
+  const { products, total, loading, error, retry } = useProducts({ search: "", category: "all", sort: "discount-desc", page: 1 })
   const categories = useCategories()
 
   const deals = products.slice(0, DEALS_COUNT)
@@ -21,9 +21,9 @@ export default function HomePage() {
 
   let dealsContent: React.ReactNode
   if (loading) {
-    dealsContent = <LoadingState />
+    dealsContent = <ProductGridSkeleton count={DEALS_COUNT} />
   } else if (error) {
-    dealsContent = <MessagePanel variant="error" title="Could not load deals" note={error} />
+    dealsContent = <MessagePanel variant="error" title="Could not load deals" note={error} onRetry={retry} />
   } else {
     dealsContent = <ProductGrid products={deals} />
   }
@@ -43,7 +43,7 @@ export default function HomePage() {
         <section aria-labelledby="home-deals" className="flex flex-col gap-6">
           <div className="flex flex-wrap items-baseline justify-between gap-4">
             <h2 id="home-deals" className="font-display text-4xl md:text-5xl">Steals of the day</h2>
-            <Link to="/catalog" className="text-[17px] font-extrabold hover:text-accent">See all products →</Link>
+            <Link to="/catalog" className="inline-flex items-center min-h-11 text-[17px] font-extrabold hover:text-accent">See all products →</Link>
           </div>
           {dealsContent}
         </section>

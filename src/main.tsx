@@ -6,10 +6,12 @@ import App from './App.tsx'
 import CartProvider from './components/cart/CartProvider.tsx'
 import AuthProvider from './components/auth/AuthProvider.tsx'
 import ToastProvider from './components/ui/ToastProvider.tsx'
+import ThemeProvider from './components/theme/ThemeProvider.tsx'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <BrowserRouter>
+    <ThemeProvider>
     <ToastProvider>
     <AuthProvider>
        <CartProvider>
@@ -17,6 +19,7 @@ createRoot(document.getElementById('root')!).render(
     </CartProvider>
     </AuthProvider>
     </ToastProvider>
+    </ThemeProvider>
     </BrowserRouter>
   </StrictMode>,
 )

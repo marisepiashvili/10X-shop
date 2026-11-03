@@ -15,7 +15,7 @@
 - Cart with add, quantity, remove, and totals
 - Local login with a protected checkout that returns to the original page after login
 - Checkout form with validation and an order confirmation
-- Loading, error, and empty states, a 404 page, and an Error Boundary
+- Loading skeletons, error states with Retry, empty states, a 404 page, and an Error Boundary
 - Responsive layout built with Tailwind CSS v4
 
 ### FULL
@@ -23,8 +23,8 @@
 - Debounced search by product title, category filter, sorting, and pagination, all kept in the URL
 - Product gallery, related products, and reviews saved in the browser with a live average rating
 - Promo code `10X10` and free shipping from $100, using `useReducer` with typed actions
-- Order history with simulated statuses and an order detail page
-- Profile editing and clearing local data
+- Order history with statuses that update live, an order detail page, and Reorder
+- Profile editing with first and last name, a theme switch, and clearing local data
 - Dark mode with a saved preference
 - Formik and Yup forms, and `@theme` design tokens
 - Lazy-loaded routes for pages other than Home and Catalog

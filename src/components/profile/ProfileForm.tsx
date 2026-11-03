@@ -6,16 +6,19 @@ import FormField from "../auth/FormField"
 
 export default function ProfileForm({ user }: { user: AuthUser }) {
   const { updateProfile } = useAuth()
-  const initialValues: ProfileFormValues = { name: user.name, email: user.email, phone: user.phone ?? "" }
+  // the account stores one name; the form edits it as first and last name
+  const [firstName = "", ...rest] = user.name.trim().split(/\s+/)
+  const initialValues: ProfileFormValues = { firstName, lastName: rest.join(" "), email: user.email, phone: user.phone ?? "" }
 
   function handleSubmit(values: ProfileFormValues, { resetForm, setFieldError }: FormikHelpers<ProfileFormValues>) {
     const cleaned = {
-      name: values.name.trim(),
+      firstName: values.firstName.trim(),
+      lastName: values.lastName.trim(),
       email: values.email.trim().toLowerCase(),
       phone: values.phone?.trim() ?? "",
     }
     try {
-      updateProfile(cleaned)
+      updateProfile({ name: `${cleaned.firstName} ${cleaned.lastName}`, email: cleaned.email, phone: cleaned.phone })
       resetForm({ values: cleaned, status: "saved" })
     } catch (error) {
       setFieldError("email", error instanceof Error ? error.message : "Could not save changes")
@@ -29,9 +32,8 @@ export default function ProfileForm({ user }: { user: AuthUser }) {
           <h2 className="font-display text-[28px] leading-tight">Personal details</h2>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4.5">
-            <div className="sm:col-span-2">
-              <FormField name="name" label="Name" autoComplete="name" />
-            </div>
+            <FormField name="firstName" label="First name" autoComplete="given-name" />
+            <FormField name="lastName" label="Last name" autoComplete="family-name" />
             <FormField name="email" label="Email" type="email" autoComplete="email" />
             <FormField name="phone" label="Phone (optional)" type="tel" autoComplete="tel" />
           </div>

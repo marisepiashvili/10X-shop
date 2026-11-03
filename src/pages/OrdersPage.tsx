@@ -1,9 +1,14 @@
 import { Link } from "react-router"
 import { readOrders } from "../components/orders/orderStorage"
 import OrderRow from "../components/orders/OrderRow"
+import useNow from "../hooks/useNow"
+
+const STATUS_REFRESH = 30_000
 
 export default function OrdersPage() {
   const orders = readOrders().toReversed()
+  // re-render every 30 s so statuses move on without a reload
+  const now = useNow(STATUS_REFRESH)
 
   return (
     <div className="w-full max-w-280 mx-auto px-4 md:px-10 pt-10 pb-24 flex flex-col gap-9">
@@ -25,7 +30,7 @@ export default function OrdersPage() {
       ) : (
       <><ul className="flex flex-col gap-5.5">
             {orders.map((order, index) => (
-                <OrderRow key={order.id} order={order} index={index}/>
+                <OrderRow key={order.id} order={order} index={index} now={now} />
             ))}
       </ul>
                 <p className="flex flex-wrap items-center gap-3 text-[15px] font-semibold">
