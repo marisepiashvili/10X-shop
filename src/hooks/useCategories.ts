@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import type { Category } from "../components/product/product"
+import type { Category } from "../types/product"
 import { getCategories } from "../components/product/productFetch"
 
 export default function useCategories(){

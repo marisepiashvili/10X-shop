@@ -24,7 +24,7 @@ Status as of 2 November 2026. Update this report before submission.
 | PLAN, README, and Git history | Done | |
 | DEBUG-LOG | Done | 5 entries |
 | Login with username and 6-character password rule | Changed | Uses email and local registration instead of a username; passwords need at least 6 characters |
-| 375px layout | Done | No horizontal scrolling; tap targets are at least 44px, and product cards are clickable as a whole |
+| 375px layout | Done | Burger menu below 768px; no horizontal scrolling; tap targets are at least 44px, and product cards are clickable as a whole |
 | Compatibility matrix | Partial | Chromium checked; Firefox still needs testing |
 | Lighthouse report | Done | Before and after results recorded |
 
@@ -54,6 +54,8 @@ Status as of 2 November 2026. Update this report before submission.
 ### Intentional Deviations
 
 - **Home on `/`, Catalog on `/catalog`:** Home is the entry page instead of the Catalog.
+- **Login with email and registration:** The PRD describes a username login that accepts any non-empty values. The app uses local accounts with an email address and a registration page instead.
+- **Orders link visible to guests:** The PRD shows the link only after login. Guests can see it and are sent to Login when they open it.
 - **Login required to submit a review:** The review form is visible to everyone, and a guest is sent to Login on submit. The written review is restored afterward.
 
 ## Metrics

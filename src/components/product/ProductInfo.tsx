@@ -1,7 +1,8 @@
 import { useState } from "react"
+import { Link } from "react-router"
 import starIcon from "../../assets/icons/star.svg"
 import { formatPrice, getDiscountedPrice } from "../../utils/price"
-import type { Product } from "./product"
+import type { Product } from "../../types/product"
 import QuantityStepper from "./QuantityStepper"
 import StockPill from "./StockPill"
 import useCart from "../../hooks/useCart"
@@ -32,7 +33,12 @@ export default function ProductInfo({ product, rating, reviewCount }: ProductInf
         {product.brand && (
           <span className="px-4 py-1.5 rounded-full bg-card shadow-soft">{product.brand}</span>
         )}
-        <span className="px-4 py-1.5 rounded-full bg-sky capitalize -rotate-2">{product.category}</span>
+        <Link
+          to={`/catalog?category=${encodeURIComponent(product.category)}`}
+          className="px-4 py-1.5 rounded-full bg-sky capitalize -rotate-2 transition hover:rotate-0 hover:-translate-y-0.5"
+        >
+          {product.category}
+        </Link>
       </div>
 
       <h1 className="font-display text-5xl md:text-7xl leading-[0.95]">{product.title}</h1>

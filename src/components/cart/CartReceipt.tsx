@@ -1,8 +1,8 @@
 import { ArrowRight } from "lucide-react"
 import { Link } from "react-router"
 import { formatPrice } from "../../utils/price"
-import type { CartItem } from "./cart"
-import { FREE_SHIPPING_FROM, type CartTotals } from "./cartTotals"
+import type { CartItem, CartTotals } from "../../types/cart"
+import { FREE_SHIPPING_FROM } from "./cartTotals"
 import Receipt from "./Receipt"
 
 type CartReceiptProps = {

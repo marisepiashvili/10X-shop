@@ -1,10 +1,11 @@
 import starIcon from "../../assets/icons/star.svg"
 import DiscountBadge from "./DiscountBadge"
 import StockPill from "./StockPill"
-import type {Product} from "./product"
+import type { Product } from "../../types/product"
 import { Link } from "react-router"
 import useCart from "../../hooks/useCart"
 import useToast from "../../hooks/useToast"
+import { formatPrice, getDiscountedPrice } from "../../utils/price"
 
 
 const imageBgColors = ["bg-pink", "bg-yellow", "bg-mint", "bg-sky"]
@@ -14,7 +15,7 @@ const cardTilts = ["-rotate-[1.5deg]", "rotate-1", "-rotate-[0.5deg]", "rotate-[
 export default function ProductCard({product}: {product: Product}) {
     const bgColor = imageBgColors[product.id % imageBgColors.length]
     const tilt = cardTilts[product.id % cardTilts.length]
-    const discountedPrice = product.price - (product.price * product.discountPercentage/100)
+    const discountedPrice = getDiscountedPrice(product.price, product.discountPercentage)
     const discount = Math.round(product.discountPercentage)
     const isOutOfStock = product.stock === 0
     const isLowStock = product.stock > 0 && product.stock <= 5
@@ -55,8 +56,8 @@ export default function ProductCard({product}: {product: Product}) {
         {/* price/rating */}
         <div className="flex flex-wrap justify-between items-center gap-2">
             <div className="flex items-baseline gap-2">
-                <span className="font-display text-2xl">${discountedPrice.toFixed(2)}</span>
-                {discount > 0 && <span className="text-sm line-through">${product.price}</span>}
+                <span className="font-display text-2xl">{formatPrice(discountedPrice)}</span>
+                {discount > 0 && <span className="text-sm line-through">{formatPrice(product.price)}</span>}
             </div>
             <div className="text-sm font-extrabold flex items-center gap-1">
                 <img src={starIcon} alt="" className="w-4 h-4" />

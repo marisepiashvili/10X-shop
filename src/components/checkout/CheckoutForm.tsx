@@ -1,7 +1,8 @@
 import { Form, Formik } from "formik"
 import useAuth from "../../hooks/useAuth"
 import FormField from "../auth/FormField"
-import { checkoutSchema, type ShippingInfo } from "./checkoutSchema"
+import { checkoutSchema } from "./checkoutSchema"
+import type { ShippingInfo } from "../../types/order"
 
 type CheckoutFormProps = {
   totalText: string
@@ -20,6 +21,7 @@ export default function CheckoutForm({ totalText, onSubmit }: CheckoutFormProps)
 
   return (
     <Formik initialValues={initialValues} validationSchema={checkoutSchema} onSubmit={onSubmit}>
+      {({ isSubmitting }) => (
       <Form
         noValidate
         className="flex-[999_1_560px] min-w-0 p-6 md:p-8 flex flex-col gap-6 bg-card rounded-card shadow-card"
@@ -46,11 +48,13 @@ export default function CheckoutForm({ totalText, onSubmit }: CheckoutFormProps)
 
         <button
           type="submit"
-          className="h-15 rounded-full bg-orange text-white border-4 border-sticker text-lg font-extrabold shadow-sticker transition hover:-translate-y-0.5"
+          disabled={isSubmitting}
+          className="h-15 rounded-full bg-orange text-white border-4 border-sticker text-lg font-extrabold shadow-sticker transition enabled:hover:-translate-y-0.5 disabled:opacity-60 disabled:cursor-not-allowed"
         >
           Place order · {totalText}
         </button>
       </Form>
+      )}
     </Formik>
   )
 }

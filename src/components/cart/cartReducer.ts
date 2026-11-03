@@ -1,7 +1,7 @@
-import { readStorage } from "../../utils/guards"
-import { isCartState, type CartAction, type CartState } from "./cart"
+import { isCartState, readStorage } from "../../utils/guards"
+import { STORAGE_KEYS } from "../../utils/storageKeys"
+import type { CartAction, CartState } from "../../types/cart"
 
-export const CART_KEY = "shop_cart"
 
 export const initialCartState: CartState = { items: [], promoCode: null }
 
@@ -48,9 +48,14 @@ export function cartReducer(state: CartState, action: CartAction): CartState {
       return { ...state, promoCode: action.code }
     case "removePromo":
       return { ...state, promoCode: null }
+    default: {
+      // a new action type that is not handled above makes this line a type error
+      const unhandled: never = action
+      throw new Error(`Unhandled cart action: ${JSON.stringify(unhandled)}`)
+    }
   }
 }
 
 export function loadCart(): CartState {
-  return readStorage(CART_KEY, isCartState, initialCartState)
+  return readStorage(STORAGE_KEYS.cart, isCartState, initialCartState)
 }

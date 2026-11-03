@@ -1,4 +1,4 @@
-import type { ShippingInfo } from "../checkout/checkoutSchema"
+import type { ShippingInfo } from "../../types/order"
 
 export default function ShipToNote({ shipping }: { shipping: ShippingInfo }) {
   return (

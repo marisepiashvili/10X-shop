@@ -1,14 +1,15 @@
 import { useEffect, useReducer } from "react"
-import type { CartProduct } from "./cart"
+import type { CartProduct } from "../../types/cart"
 import { CartContext } from "./CartContext"
-import { CART_KEY, cartReducer, loadCart } from "./cartReducer"
+import { cartReducer, loadCart } from "./cartReducer"
+import { STORAGE_KEYS } from "../../utils/storageKeys"
 import { getCartTotals } from "./cartTotals"
 
 export default function CartProvider({ children }: { children: React.ReactNode }) {
   const [state, dispatch] = useReducer(cartReducer, undefined, loadCart)
 
   useEffect(() => {
-    localStorage.setItem(CART_KEY, JSON.stringify(state))
+    localStorage.setItem(STORAGE_KEYS.cart, JSON.stringify(state))
   }, [state])
 
   const value = {

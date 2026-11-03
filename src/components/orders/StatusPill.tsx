@@ -1,4 +1,5 @@
-import { STATUS_COLORS, type OrderStatus } from "./orderStatus";
+import { STATUS_COLORS } from "./orderStatus"
+import type { OrderStatus } from "../../types/order"
 
 
 

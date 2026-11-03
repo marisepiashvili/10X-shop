@@ -79,9 +79,9 @@ export default function CatalogPage() {
     if (loading) {
         content = <ProductGridSkeleton count={PAGE_SIZE} />
     } else if (error) {
-        content = <MessagePanel variant="error" title="Could not load products" note={error} onRetry={retry} />
+        content = <MessagePanel variant="error" title="Could not load products" note={error} action={{ label: "Retry", onClick: retry }} />
     } else if (products.length === 0) {
-        content = <MessagePanel variant="empty" title="No products found" note="try another word" />
+        content = <MessagePanel variant="empty" title="No products found." note="try another word" action={{ label: "Clear filters", onClick: handleReset }} />
     } else {
         content = (
             <>

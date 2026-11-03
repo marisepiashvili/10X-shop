@@ -1,5 +1,5 @@
 import { Link } from "react-router"
-import type { AuthUser } from "../auth/authStorage"
+import type { AuthUser } from "../../types/user"
 
 function getInitials(name: string) {
   return name

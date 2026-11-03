@@ -1,5 +1,5 @@
 import useReviews from "../../hooks/useReviews"
-import type { Product } from "./product"
+import type { Product } from "../../types/product"
 import ProductGallery from "./ProductGallery"
 import ProductInfo from "./ProductInfo"
 import ProductTabs from "./ProductTabs"

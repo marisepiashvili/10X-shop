@@ -3,22 +3,20 @@ import { useLocation, useNavigate } from "react-router"
 import useAuth from "../../hooks/useAuth"
 import useToast from "../../hooks/useToast"
 import { isNumber, isRecord, isString, readStorage } from "../../utils/guards"
-import type { Product } from "./product"
+import { STORAGE_KEYS } from "../../utils/storageKeys"
+import type { Product, StoredReview } from "../../types/product"
 import ReviewCard from "./ReviewCard"
 import ReviewForm from "./ReviewForm"
-import type { StoredReview } from "./reviewStorage"
 
 type Tab = "description" | "reviews"
 type ReviewDraft = { productId: number, rating: number, comment: string }
-
-const DRAFT_KEY = "shop_review_draft"
 
 function isReviewDraft(value: unknown): value is ReviewDraft | null {
   return value === null || (isRecord(value) && isNumber(value.productId) && isNumber(value.rating) && isString(value.comment))
 }
 
 function loadDraft(productId: number): ReviewDraft | null {
-  const draft = readStorage(DRAFT_KEY, isReviewDraft, null, sessionStorage)
+  const draft = readStorage(STORAGE_KEYS.reviewDraft, isReviewDraft, null, sessionStorage)
   return draft?.productId === productId ? draft : null
 }
 
@@ -46,11 +44,11 @@ export default function ProductTabs({ product, reviews, onAddReview }: ProductTa
     if (!user) {
       // keep what they wrote so the form is filled in again after login
       const newDraft: ReviewDraft = { productId: product.id, rating, comment }
-      sessionStorage.setItem(DRAFT_KEY, JSON.stringify(newDraft))
+      sessionStorage.setItem(STORAGE_KEYS.reviewDraft, JSON.stringify(newDraft))
       navigate("/login", { state: { from: `${pathname}#reviews` } })
       return
     }
-    sessionStorage.removeItem(DRAFT_KEY)
+    sessionStorage.removeItem(STORAGE_KEYS.reviewDraft)
     setDraft(null)
     onAddReview({
       id: crypto.randomUUID(),

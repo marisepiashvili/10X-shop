@@ -2,10 +2,10 @@ type MessagePanelProps = {
   variant: "error" | "empty"
   title: string
   note?: string
-  onRetry?: () => void
+  action?: { label: string; onClick: () => void }
 }
 
-export default function MessagePanel({ variant, title, note, onRetry }: MessagePanelProps) {
+export default function MessagePanel({ variant, title, note, action }: MessagePanelProps) {
   const isError = variant === "error"
 
   return (
@@ -15,13 +15,13 @@ export default function MessagePanel({ variant, title, note, onRetry }: MessageP
     >
       <p className="font-display text-[26px] leading-tight">{title}</p>
       {note && <p className={isError ? "font-semibold" : "font-note text-2xl"}>{note}</p>}
-      {onRetry && (
+      {action && (
         <button
           type="button"
-          onClick={onRetry}
+          onClick={action.onClick}
           className="mt-1 h-12 px-7 rounded-full bg-coal text-white text-[17px] font-extrabold transition hover:bg-blue"
         >
-          Retry
+          {action.label}
         </button>
       )}
     </div>

@@ -5,6 +5,8 @@ import CartItemRow from "../components/cart/CartItemRow"
 import CartReceipt from "../components/cart/CartReceipt"
 import { PROMO_CODE } from "../components/cart/cartTotals"
 import PromoCodeForm from "../components/cart/PromoCodeForm"
+import ConfirmDialog from "../components/ui/ConfirmDialog"
+import DashedButton from "../components/ui/DashedButton"
 import useCart from "../hooks/useCart"
 import useToast from "../hooks/useToast"
 
@@ -13,6 +15,7 @@ export default function CartPage() {
   const { showToast } = useToast()
   const [promoInput, setPromoInput] = useState("")
   const [promoError, setPromoError] = useState("")
+  const [confirmClear, setConfirmClear] = useState(false)
 
   const isEmpty = items.length === 0
 
@@ -67,13 +70,9 @@ export default function CartPage() {
                 />
               ))}
             </ul>
-            <button
-              type="button"
-              onClick={clearCart}
-              className="self-start h-11.5 px-5.5 rounded-full border-2 border-dashed border-ink text-[15px] font-extrabold transition hover:bg-card"
-            >
+            <DashedButton onClick={() => setConfirmClear(true)} className="self-start enabled:hover:bg-card">
               Clear cart
-            </button>
+            </DashedButton>
             <PromoCodeForm
               value={promoInput}
               error={promoError}
@@ -87,6 +86,19 @@ export default function CartPage() {
           <CartReceipt items={items} promoCode={promoCode} totals={totals} />
         </div>
       )}
+
+      <ConfirmDialog
+        open={confirmClear}
+        title="Clear the cart?"
+        message="This cannot be undone."
+        confirmLabel="Clear cart"
+        onCancel={() => setConfirmClear(false)}
+        onConfirm={() => {
+          clearCart()
+          setConfirmClear(false)
+          showToast("Cart cleared")
+        }}
+      />
     </div>
   )
 }

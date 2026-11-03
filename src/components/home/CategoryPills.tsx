@@ -1,5 +1,5 @@
 import { Link } from "react-router"
-import type { Category } from "../product/product"
+import type { Category } from "../../types/product"
 
 const pillColors = ["bg-pink", "bg-yellow", "bg-mint", "bg-orange", "bg-sky"]
 const pillTilts = ["-rotate-3", "rotate-2", "-rotate-1", "rotate-3", "-rotate-2", "rotate-1"]

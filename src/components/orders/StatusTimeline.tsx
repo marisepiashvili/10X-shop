@@ -1,6 +1,6 @@
 import { Check } from "lucide-react"
-import type { Order } from "./order"
-import { ORDER_STEPS, STATUS_COLORS, getOrderStatus, type OrderStatus } from "./orderStatus"
+import type { Order, OrderStatus } from "../../types/order"
+import { ORDER_STEPS, STATUS_COLORS, getOrderStatus } from "./orderStatus"
 
 const CURRENT_NOTES: Record<OrderStatus, string> = {
   Processing: "packing it up!",

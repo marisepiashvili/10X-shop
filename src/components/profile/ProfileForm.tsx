@@ -1,7 +1,7 @@
 import { Form, Formik, type FormikHelpers } from "formik"
 import useAuth from "../../hooks/useAuth"
 import { profileSchema, type ProfileFormValues } from "../auth/authSchemas"
-import type { AuthUser } from "../auth/authStorage"
+import type { AuthUser } from "../../types/user"
 import FormField from "../auth/FormField"
 
 export default function ProfileForm({ user }: { user: AuthUser }) {

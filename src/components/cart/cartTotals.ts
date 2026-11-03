@@ -1,5 +1,5 @@
 import { getDiscountedPrice } from "../../utils/price"
-import type { CartItem, CartState } from "./cart"
+import type { CartItem, CartState, CartTotals } from "../../types/cart"
 
 export const PROMO_CODE = "10X10"
 export const PROMO_PERCENT = 10
@@ -10,7 +10,7 @@ export function getUnitPrice(item: CartItem) {
   return getDiscountedPrice(item.price, item.discountPercentage)
 }
 
-export function getCartTotals({ items, promoCode }: CartState) {
+export function getCartTotals({ items, promoCode }: CartState): CartTotals {
   const itemCount = items.reduce((sum, item) => sum + item.quantity, 0)
   const subtotal = items.reduce((sum, item) => sum + getUnitPrice(item) * item.quantity, 0)
   const discount = promoCode ? (subtotal * PROMO_PERCENT) / 100 : 0
@@ -20,5 +20,4 @@ export function getCartTotals({ items, promoCode }: CartState) {
   return { itemCount, subtotal, discount, shipping, total: afterDiscount + shipping }
 }
 
-export type CartTotals = ReturnType<typeof getCartTotals>
 

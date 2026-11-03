@@ -1,7 +1,7 @@
 import { ArrowRight, Search } from "lucide-react"
 import { Link } from "react-router"
 import { formatPrice, getDiscountedPrice } from "../../utils/price"
-import type { Product } from "../product/product"
+import type { Product } from "../../types/product"
 
 // left card, raised middle card (arch), right card
 const fanStyles = [

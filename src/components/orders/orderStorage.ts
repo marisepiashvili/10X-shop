@@ -1,14 +1,13 @@
-import { isArrayOf, readStorage } from "../../utils/guards"
-import { isOrder, type Order } from "./order"
-
-const ORDERS_KEY = "shop_orders"
+import { isArrayOf, isOrder, readStorage } from "../../utils/guards"
+import { STORAGE_KEYS } from "../../utils/storageKeys"
+import type { Order } from "../../types/order"
 
 function isOrderList(value: unknown): value is Order[] {
   return isArrayOf(value, isOrder)
 }
 
 export function readOrders(): Order[] {
-  return readStorage(ORDERS_KEY, isOrderList, [])
+  return readStorage(STORAGE_KEYS.orders, isOrderList, [])
 }
 
 export function saveOrder(order: Omit<Order, "id" | "createdAt">): Order {
@@ -18,7 +17,7 @@ export function saveOrder(order: Omit<Order, "id" | "createdAt">): Order {
     id: `10X-${String(orders.length + 1).padStart(5, "0")}`,
     createdAt: new Date().toISOString(),
   }
-  localStorage.setItem(ORDERS_KEY, JSON.stringify([...orders, newOrder]))
+  localStorage.setItem(STORAGE_KEYS.orders, JSON.stringify([...orders, newOrder]))
   return newOrder
 }
 
@@ -27,5 +26,5 @@ export function getOrderById(id: string) {
 }
 
 export function clearOrders() {
-  localStorage.removeItem(ORDERS_KEY)
+  localStorage.removeItem(STORAGE_KEYS.orders)
 }

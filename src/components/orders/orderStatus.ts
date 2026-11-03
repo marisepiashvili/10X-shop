@@ -1,6 +1,4 @@
-import type { Order } from "./order";
-
-export type OrderStatus = "Processing" | "Shipped" | "Delivered"
+import type { Order, OrderStatus } from "../../types/order"
 
 export const ORDER_STEPS: OrderStatus[] = ["Processing", "Shipped", "Delivered"]
 

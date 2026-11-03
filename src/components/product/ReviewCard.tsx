@@ -1,4 +1,4 @@
-import type { Review } from "./product"
+import type { Review } from "../../types/product"
 import StarRating from "./StarRating"
 
 const cardColors = ["bg-card", "bg-mint", "bg-sky"]

@@ -16,7 +16,7 @@
 - Local login with a protected checkout that returns to the original page after login
 - Checkout form with validation and an order confirmation
 - Loading skeletons, error states with Retry, empty states, a 404 page, and an Error Boundary
-- Responsive layout built with Tailwind CSS v4
+- Responsive layout built with Tailwind CSS v4, with a burger menu on mobile
 
 ### FULL
 

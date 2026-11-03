@@ -2,7 +2,7 @@ import { Trash } from "lucide-react"
 import { Link } from "react-router"
 import { formatPrice } from "../../utils/price"
 import QuantityStepper from "../product/QuantityStepper"
-import type { CartItem } from "./cart"
+import type { CartItem } from "../../types/cart"
 import { getUnitPrice } from "./cartTotals"
 
 const imageBgColors = ["bg-pink", "bg-sky", "bg-yellow", "bg-mint"]

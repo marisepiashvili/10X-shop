@@ -1,6 +1,6 @@
 import { formatPrice } from "../../utils/price"
-import type { CartItem } from "./cart"
-import { FREE_SHIPPING_FROM, PROMO_PERCENT, getUnitPrice, type CartTotals } from "./cartTotals"
+import type { CartItem, CartTotals } from "../../types/cart"
+import { FREE_SHIPPING_FROM, PROMO_PERCENT, getUnitPrice } from "./cartTotals"
 
 type ReceiptProps = {
   title: string

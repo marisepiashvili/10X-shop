@@ -1,16 +1,17 @@
 import { useEffect, useState } from "react"
 import { AuthContext } from "./AuthContext"
-import { CURRENT_USER_KEY, loadCurrentUser, loginUser, type AuthUser } from "./authStorage"
-import { updateUser } from "./authStorage"
+import { loadCurrentUser, loginUser, updateUser } from "./authStorage"
+import { STORAGE_KEYS } from "../../utils/storageKeys"
+import type { AuthUser } from "../../types/user"
 
 export default function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<AuthUser | null>(loadCurrentUser)
 
   useEffect(() => {
     if (user) {
-      localStorage.setItem(CURRENT_USER_KEY, JSON.stringify(user))
+      localStorage.setItem(STORAGE_KEYS.currentUser, JSON.stringify(user))
     } else {
-      localStorage.removeItem(CURRENT_USER_KEY)
+      localStorage.removeItem(STORAGE_KEYS.currentUser)
     }
   }, [user])
 

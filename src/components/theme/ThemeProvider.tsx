@@ -1,7 +1,6 @@
 import { useState } from "react"
+import { STORAGE_KEYS } from "../../utils/storageKeys"
 import { ThemeContext } from "./ThemeContext"
-
-const THEME_KEY = "shop_theme"
 
 export default function ThemeProvider({ children }: { children: React.ReactNode }) {
   // index.html sets the class before the first paint, so it is the starting value
@@ -11,7 +10,7 @@ export default function ThemeProvider({ children }: { children: React.ReactNode 
     const next = !isDark
     setIsDark(next)
     document.documentElement.classList.toggle("dark", next)
-    localStorage.setItem(THEME_KEY, next ? "dark" : "light")
+    localStorage.setItem(STORAGE_KEYS.theme, next ? "dark" : "light")
   }
 
   return <ThemeContext value={{ isDark, toggleTheme }}>{children}</ThemeContext>

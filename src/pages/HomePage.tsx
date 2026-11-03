@@ -23,7 +23,7 @@ export default function HomePage() {
   if (loading) {
     dealsContent = <ProductGridSkeleton count={DEALS_COUNT} />
   } else if (error) {
-    dealsContent = <MessagePanel variant="error" title="Could not load deals" note={error} onRetry={retry} />
+    dealsContent = <MessagePanel variant="error" title="Could not load deals" note={error} action={{ label: "Retry", onClick: retry }} />
   } else {
     dealsContent = <ProductGrid products={deals} />
   }

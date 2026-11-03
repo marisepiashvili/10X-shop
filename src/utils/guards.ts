@@ -1,3 +1,8 @@
+import type { CartItem, CartState, CartTotals } from "../types/cart"
+import type { Order, ShippingInfo } from "../types/order"
+import type { StoredReview } from "../types/product"
+import type { AuthUser, StoredUser } from "../types/user"
+
 // JSON from storage has no type, so these check its shape before the app trusts it
 
 export function isRecord(value: unknown): value is Record<string, unknown> {
@@ -35,4 +40,44 @@ export function readStorage<T>(
   } catch {
     return fallback
   }
+}
+
+export function isCartItem(value: unknown): value is CartItem {
+  return isRecord(value) && isNumber(value.id) && isString(value.title) && isString(value.thumbnail)
+    && isNumber(value.price) && isNumber(value.discountPercentage) && isNumber(value.stock) && isNumber(value.quantity)
+}
+
+export function isCartState(value: unknown): value is CartState {
+  return isRecord(value) && isArrayOf(value.items, isCartItem)
+    && (value.promoCode === null || isString(value.promoCode))
+}
+
+function isCartTotals(value: unknown): value is CartTotals {
+  return isRecord(value) && isNumber(value.itemCount) && isNumber(value.subtotal)
+    && isNumber(value.discount) && isNumber(value.shipping) && isNumber(value.total)
+}
+
+function isShippingInfo(value: unknown): value is ShippingInfo {
+  return isRecord(value) && isString(value.fullName) && isString(value.email)
+    && isString(value.address) && isString(value.city)
+}
+
+export function isOrder(value: unknown): value is Order {
+  return isRecord(value) && isString(value.id) && isString(value.createdAt)
+    && isArrayOf(value.items, isCartItem)
+    && (value.promoCode === null || isString(value.promoCode))
+    && isCartTotals(value.totals) && isShippingInfo(value.shipping)
+}
+
+export function isAuthUser(value: unknown): value is AuthUser {
+  return isRecord(value) && isString(value.name) && isString(value.email) && isOptionalString(value.phone)
+}
+
+export function isStoredUser(value: unknown): value is StoredUser {
+  return isRecord(value) && isString(value.password) && isAuthUser(value)
+}
+
+export function isStoredReview(value: unknown): value is StoredReview {
+  return isRecord(value) && isString(value.id) && isNumber(value.rating) && isString(value.comment)
+    && isString(value.date) && isString(value.reviewerName) && isString(value.reviewerEmail)
 }

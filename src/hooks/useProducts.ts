@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import type { Product, ProductQuery } from "../components/product/product"
+import type { Product, ProductQuery } from "../types/product"
 import getProducts from "../components/product/productFetch"
 
 export default function useProducts({ search, category, sort, page }: ProductQuery) {

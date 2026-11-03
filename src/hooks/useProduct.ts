@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import type { Product } from "../components/product/product"
+import type { Product } from "../types/product"
 import { isApiError } from "../api/ApiError"
 import { getProductById } from "../components/product/productFetch"
 

@@ -1,6 +1,6 @@
 import { Link } from "react-router"
 import { formatPrice } from "../../utils/price"
-import type { CartItem } from "../cart/cart"
+import type { CartItem } from "../../types/cart"
 import { getUnitPrice } from "../cart/cartTotals"
 
 const imageBgColors = ["bg-pink", "bg-sky", "bg-yellow", "bg-mint"]

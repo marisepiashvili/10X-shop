@@ -2,13 +2,13 @@ import { ArrowLeft } from "lucide-react"
 import { Link, useNavigate, useParams } from "react-router"
 import Receipt from "../components/cart/Receipt"
 import { getOrderById } from "../components/orders/orderStorage"
-import MessagePanel from "../components/ui/MessagePanel"
 import StatusTimeline from "../components/orders/StatusTimeline"
 import OrderItemsTable from "../components/orders/OrderItemsTable"
 import ShipToNote from "../components/orders/ShipToNote"
 import useCart from "../hooks/useCart"
 import useNow from "../hooks/useNow"
 import useToast from "../hooks/useToast"
+import NotFoundPage from "./NotFoundPage"
 
 const STATUS_REFRESH = 30_000
 
@@ -21,14 +21,8 @@ export default function OrderDetailPage() {
   const { showToast } = useToast()
   const navigate = useNavigate()
 
-  if (!order) {
-    return (
-      <div className="w-full px-4 py-20 flex flex-col items-center gap-6">
-        <MessagePanel variant="empty" title="Order not found" note="check your orders" />
-        <Link to="/orders" className="font-extrabold underline hover:text-accent">All orders</Link>
-      </div>
-    )
-  }
+  if (!order) return <NotFoundPage />
+
 
   const date = new Date(order.createdAt).toLocaleDateString("en-US")
   const items = order.items

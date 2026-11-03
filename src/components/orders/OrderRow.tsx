@@ -1,7 +1,7 @@
 import { ChevronRight } from "lucide-react";
 import { Link } from "react-router";
 import { formatPrice } from "../../utils/price";
-import type { Order } from "./order";
+import type { Order } from "../../types/order"
 import { getOrderStatus } from "./orderStatus"
 import StatusPill from "./StatusPill"
 

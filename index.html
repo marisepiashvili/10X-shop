@@ -10,9 +10,9 @@
     <title>10X Shop</title>
     <script>
       // runs before first paint so a dark page never flashes light
+      // light is the default; dark only after the user picks it
       try {
-        const saved = localStorage.getItem("shop_theme")
-        const isDark = saved ? saved === "dark" : matchMedia("(prefers-color-scheme: dark)").matches
+        const isDark = localStorage.getItem("shop_theme") === "dark"
         document.documentElement.classList.toggle("dark", isDark)
       } catch {
         // storage unavailable: keep the light theme

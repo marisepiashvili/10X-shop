@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react"
-import type { Product } from "../components/product/product"
-import { loadReviews, saveReview, type StoredReview } from "../components/product/reviewStorage"
+import type { Product, StoredReview } from "../types/product"
+import { loadReviews, saveReview } from "../components/product/reviewStorage"
 
 export default function useReviews(product: Product) {
   const [localReviews, setLocalReviews] = useState(() => loadReviews(product.id))

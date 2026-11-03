@@ -1,3 +1,5 @@
+import { startTransition } from "react"
+import { useNavigate } from "react-router"
 import useAuth from "../../hooks/useAuth"
 import useCart from "../../hooks/useCart"
 import { clearOrders } from "../orders/orderStorage"
@@ -6,6 +8,15 @@ import { clearReviews } from "../product/reviewStorage"
 export default function LocalDataCard({ onCleared }: { onCleared: () => void }) {
   const { logout } = useAuth()
   const { clearCart } = useCart()
+  const navigate = useNavigate()
+
+  function handleLogout() {
+    // one transition for both, so a protected page never renders logged out and sends you to /login
+    startTransition(() => {
+      navigate("/")
+      logout()
+    })
+  }
 
   function handleClear() {
     if (!window.confirm("Delete your cart, orders and reviews from this browser?")) return
@@ -31,7 +42,7 @@ export default function LocalDataCard({ onCleared }: { onCleared: () => void }) 
         </button>
         <button
           type="button"
-          onClick={logout}
+          onClick={handleLogout}
           className="h-12 px-7 rounded-full border-2 border-dashed border-ink text-[17px] font-extrabold transition hover:bg-paper"
         >
           Log out

@@ -1,5 +1,5 @@
 import { api } from "../../api/ApiClient";
-import type { Category, Product, ProductQuery, ProductsResponse } from "./product";
+import type { Category, Product, ProductQuery, ProductsResponse } from "../../types/product"
 
 
 export const PAGE_SIZE = 12
