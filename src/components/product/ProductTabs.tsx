@@ -2,12 +2,12 @@ import { useEffect, useRef, useState } from "react"
 import { useLocation, useNavigate } from "react-router"
 import useAuth from "../../hooks/useAuth"
 import useToast from "../../hooks/useToast"
-import type { Product, Review } from "./product"
+import type { Product } from "./product"
 import ReviewCard from "./ReviewCard"
 import ReviewForm from "./ReviewForm"
+import type { StoredReview } from "./reviewStorage"
 
 type Tab = "description" | "reviews"
-type ReviewWithId = Review & { id: string }
 type ReviewDraft = { productId: number, rating: number, comment: string }
 
 const DRAFT_KEY = "shop_review_draft"
@@ -22,7 +22,13 @@ function loadDraft(productId: number): ReviewDraft | null {
   }
 }
 
-export default function ProductTabs({ product }: { product: Product }) {
+type ProductTabsProps = {
+  product: Product
+  reviews: StoredReview[]
+  onAddReview: (review: StoredReview) => void
+}
+
+export default function ProductTabs({ product, reviews, onAddReview }: ProductTabsProps) {
   const { user } = useAuth()
   const { showToast } = useToast()
   const { pathname, hash } = useLocation()
@@ -31,9 +37,6 @@ export default function ProductTabs({ product }: { product: Product }) {
   const openReviews = hash === "#reviews"
   const [activeTab, setActiveTab] = useState<Tab>(openReviews ? "reviews" : "description")
   const [draft, setDraft] = useState(() => loadDraft(product.id))
-  const [reviews, setReviews] = useState<ReviewWithId[]>(
-    product.reviews.map((review, index) => ({ ...review, id: `api-${index}` }))
-  )
 
   useEffect(() => {
     if (openReviews) sectionRef.current?.scrollIntoView({ block: "start" })
@@ -49,15 +52,14 @@ export default function ProductTabs({ product }: { product: Product }) {
     }
     sessionStorage.removeItem(DRAFT_KEY)
     setDraft(null)
-    const newReview: ReviewWithId = {
+    onAddReview({
       id: crypto.randomUUID(),
       rating,
       comment,
       date: new Date().toISOString(),
-      reviewerName: "You",
-      reviewerEmail: "",
-    }
-    setReviews([newReview, ...reviews])
+      reviewerName: user.name,
+      reviewerEmail: user.email,
+    })
     showToast("Review added ✓")
   }
 

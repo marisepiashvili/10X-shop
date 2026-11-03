@@ -21,7 +21,7 @@
 ### FULL
 
 - Debounced search by product title, category filter, sorting, and pagination, all kept in the URL
-- Product gallery, reviews, and related products
+- Product gallery, related products, and reviews saved in the browser with a live average rating
 - Promo code `10X10` and free shipping from $100, using `useReducer` with typed actions
 - Order history with simulated statuses and an order detail page
 - Profile editing and clearing local data

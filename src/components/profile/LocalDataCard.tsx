@@ -1,15 +1,17 @@
 import useAuth from "../../hooks/useAuth"
 import useCart from "../../hooks/useCart"
 import { clearOrders } from "../orders/orderStorage"
+import { clearReviews } from "../product/reviewStorage"
 
 export default function LocalDataCard({ onCleared }: { onCleared: () => void }) {
   const { logout } = useAuth()
   const { clearCart } = useCart()
 
   function handleClear() {
-    if (!window.confirm("Delete your cart and orders from this browser?")) return
+    if (!window.confirm("Delete your cart, orders and reviews from this browser?")) return
     clearCart()
     clearOrders()
+    clearReviews()
     onCleared()
   }
 
@@ -17,7 +19,7 @@ export default function LocalDataCard({ onCleared }: { onCleared: () => void }) 
     <section className="p-7 flex flex-col gap-3.5 bg-card rounded-[30px] shadow-card -rotate-[0.6deg]">
       <h2 className="font-display text-2xl">Local data</h2>
       <p className="text-[15px] leading-normal">
-        Clearing removes your cart and orders from this browser. You stay logged in.
+        Clearing removes your cart, orders and reviews from this browser. You stay logged in.
       </p>
       <div className="flex flex-wrap gap-2.5">
         <button

@@ -1,8 +1,6 @@
 import { Link, useParams } from "react-router"
 import chevronLeftIcon from "../assets/icons/chevron-left.svg"
-import ProductGallery from "../components/product/ProductGallery"
-import ProductInfo from "../components/product/ProductInfo"
-import ProductTabs from "../components/product/ProductTabs"
+import ProductDetails from "../components/product/ProductDetails"
 import RelatedProducts from "../components/product/RelatedProducts"
 import LoadingState from "../components/ui/LoadingState"
 import MessagePanel from "../components/ui/MessagePanel"
@@ -24,15 +22,7 @@ export default function ProductPage() {
   } else {
     content = (
       <>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-start">
-          <ProductGallery
-            images={product.images}
-            title={product.title}
-            discount={Math.round(product.discountPercentage)}
-          />
-          <ProductInfo product={product} />
-        </div>
-        <ProductTabs product={product} />
+        <ProductDetails product={product} />
         <RelatedProducts category={product.category} currentId={product.id} />
       </>
     )

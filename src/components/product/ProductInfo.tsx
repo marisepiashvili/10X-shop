@@ -8,13 +8,18 @@ import useCart from "../../hooks/useCart"
 import useToast from "../../hooks/useToast"
 
 
-export default function ProductInfo({ product }: { product: Product }) {
+type ProductInfoProps = {
+  product: Product
+  rating: number
+  reviewCount: number
+}
+
+export default function ProductInfo({ product, rating, reviewCount }: ProductInfoProps) {
   const [quantity, setQuantity] = useState(1)
   const { addItem } = useCart()
   const { showToast } = useToast()
   const discountedPrice = getDiscountedPrice(product.price, product.discountPercentage)
   const isOutOfStock = product.stock === 0
-  const reviewCount = product.reviews.length
 
   function handleAdd() {
     if (addItem(product, quantity)) showToast("Added to cart ✓")
@@ -34,7 +39,7 @@ export default function ProductInfo({ product }: { product: Product }) {
 
       <div className="flex items-center gap-2 font-semibold">
         <img src={starIcon} alt="" className="w-5 h-5" />
-        <strong>{product.rating.toFixed(1)}</strong>
+        <strong>{rating.toFixed(1)}</strong>
         <span aria-hidden="true">·</span>
         <span>{reviewCount} {reviewCount === 1 ? "review" : "reviews"}</span>
       </div>

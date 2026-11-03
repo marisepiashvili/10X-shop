@@ -38,7 +38,7 @@ Status as of 2 November 2026. Update this report before submission.
 | Dark mode and `@theme` tokens | Done | |
 | Sorting | Partial | No `Name A→Z`; adds a discount sort |
 | Pagination | Partial | No `Showing X–Y of Z` text |
-| Reviews | Partial | Not saved after refresh; average rating does not change |
+| Reviews | Done | Saved in `shop_reviews`; average rating and count update; field error messages not shown |
 | Orders | Partial | No live status refresh or Reorder |
 | Profile | Partial | No first/last name split or theme switch |
 | Formik and Yup | Partial | Uses `<Formik>` instead of `useFormik` |
