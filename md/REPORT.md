@@ -45,7 +45,8 @@ Status as of 2 November 2026. Update this report before submission.
 | URL state | Done | `q`, `category`, `sort` and `page` live in the URL; refresh, Back/Forward and shared links keep them |
 | Toast | Done | Add to cart, stock limit, remove from cart, and review added |
 | Skeleton, Retry | Done | Skeletons on Home, Catalog, and Product; Retry on load errors |
-| `ApiClient`, `ApiError`, OOP classes, type guards | Not done | |
+| `ApiClient`, `ApiError`, type guards | Done | Generic `get<T>`, 404 detected by status code, stored data validated before use |
+| `Cart`, `Order`, `StorageService<T>` classes | Not done | The reducer and storage functions already cover this logic |
 | Lazy routes | Done | Home and Catalog load up front; other pages load on demand |
 | Lighthouse targets | Done | All medians met on the live site |
 | Issues, Projects, PRs, progress notes, demo video | Not done | No merge commits in the local history |

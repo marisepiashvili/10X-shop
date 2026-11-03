@@ -10,14 +10,14 @@ export default function ProductPage() {
   const { id } = useParams()
   const productId = Number(id)
   const isValidId = Number.isInteger(productId) && productId > 0
-  const { product, loading, error, retry } = useProduct(isValidId ? productId : null)
+  const { product, loading, error, notFound, retry } = useProduct(isValidId ? productId : null)
 
   let content: React.ReactNode
   if (!isValidId) {
     content = <MessagePanel variant="empty" title="Product not found" note="check the link" />
   } else if (loading) {
     content = <ProductDetailsSkeleton />
-  } else if (error === "Product not found" || (!error && !product)) {
+  } else if (notFound || (!error && !product)) {
     content = <MessagePanel variant="empty" title="Product not found" note="check the link" />
   } else if (error || !product) {
     content = <MessagePanel variant="error" title="Could not load product" note={error ?? "Something went wrong"} onRetry={retry} />

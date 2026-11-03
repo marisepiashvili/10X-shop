@@ -1,14 +1,14 @@
-import type { Order } from "./order"
+import { isArrayOf, readStorage } from "../../utils/guards"
+import { isOrder, type Order } from "./order"
 
 const ORDERS_KEY = "shop_orders"
 
+function isOrderList(value: unknown): value is Order[] {
+  return isArrayOf(value, isOrder)
+}
+
 export function readOrders(): Order[] {
-  try {
-    const raw = localStorage.getItem(ORDERS_KEY)
-    return raw ? (JSON.parse(raw) as Order[]) : []
-  } catch {
-    return []
-  }
+  return readStorage(ORDERS_KEY, isOrderList, [])
 }
 
 export function saveOrder(order: Omit<Order, "id" | "createdAt">): Order {

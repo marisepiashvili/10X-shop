@@ -40,12 +40,13 @@ React 19, TypeScript (strict), Vite, React Router, Tailwind CSS v4, Formik, Yup,
 src/
   assets/       fonts and icons
   components/   auth, cart, catalog, checkout, home, layout, orders, product, profile, ui
-  hooks/        useAuth, useCart, useCategories, useDebounce, useProduct, useProducts, useTheme
+  api/          ApiClient and ApiError
+  hooks/        useAuth, useCart, useCategories, useDebounce, useNow, useProduct, useProducts, useReviews, useTheme, useToast
   pages/        one component per route
-  utils/        price formatting
+  utils/        price formatting and type guards
 ```
 
-Pages combine reusable components and read shared state from `AuthProvider` and `CartProvider`. A user action calls a handler, which updates React state, and React renders the result. Product data is fetched in `useEffect` through `useProducts` and `useProduct`, which cancel outdated requests with `AbortController`. The cart, users, orders, and theme are saved to `localStorage`.
+Pages combine reusable components and read shared state from `AuthProvider` and `CartProvider`. A user action calls a handler, which updates React state, and React renders the result. Product data is fetched in `useEffect` through `useProducts` and `useProduct`, which call a typed `ApiClient` and cancel outdated requests with `AbortController`. Data read from storage is checked with type guards before use. The cart, users, orders, and theme are saved to `localStorage`.
 
 ## How to Run
 

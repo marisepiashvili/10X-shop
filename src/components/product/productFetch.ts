@@ -1,8 +1,8 @@
+import { api } from "../../api/ApiClient";
 import type { Category, Product, ProductQuery, ProductsResponse } from "./product";
 
 
 export const PAGE_SIZE = 12
-const BASE_URL = "https://dummyjson.com/products"
 
 const sortParams: Record<string, { sortBy: string, order: "asc" | "desc" }> = {
     "price-asc": { sortBy: "price", order: "asc" },
@@ -12,7 +12,7 @@ const sortParams: Record<string, { sortBy: string, order: "asc" | "desc" }> = {
     "title-asc": { sortBy: "title", order: "asc" },
 }
 
-function buildProductsUrl(query: ProductQuery) {
+function buildProductsPath(query: ProductQuery): string {
     const params = new URLSearchParams({
         limit: String(PAGE_SIZE),
         skip: String((query.page - 1) * PAGE_SIZE),
@@ -30,20 +30,16 @@ function buildProductsUrl(query: ProductQuery) {
         params.set("limit", "0")
         params.set("skip", "0")
 
-        return `${BASE_URL}/search?${params.toString()}`
+        return `/products/search?${params.toString()}`
     }
     if (query.category !== "all") {
-        return `${BASE_URL}/category/${query.category}?${params.toString()}`
+        return `/products/category/${query.category}?${params.toString()}`
     }
-    return `${BASE_URL}?${params.toString()}`
+    return `/products?${params.toString()}`
 }
 
-async function getProducts(query: ProductQuery, signal?: AbortSignal) {
-    const response = await fetch(buildProductsUrl(query), { signal })
-    if (!response.ok) {
-        throw new Error(`Failed to fetch products: ${response.status}`)
-    }
-    const data: ProductsResponse = await response.json()
+async function getProducts(query: ProductQuery, signal?: AbortSignal): Promise<ProductsResponse> {
+    const data = await api.get<ProductsResponse>(buildProductsPath(query), signal)
 
     const search = query.search.trim().toLowerCase()
     if (!search) return data
@@ -59,26 +55,12 @@ async function getProducts(query: ProductQuery, signal?: AbortSignal) {
     }
 }
 
-export async function getProductById(id: number, signal?: AbortSignal) {
-    const response = await fetch(`${BASE_URL}/${id}`, { signal })
-    if (response.status === 404) {
-        throw new Error("Product not found")
-    }
-    if (!response.ok) {
-        throw new Error(`Failed to fetch product: ${response.status}`)
-    }
-    const data: Product = await response.json()
-    return data
+export function getProductById(id: number, signal?: AbortSignal): Promise<Product> {
+    return api.get<Product>(`/products/${id}`, signal)
 }
 
-
-export async function getCategories() {
-    const response = await fetch(`${BASE_URL}/categories`)
-    if (!response.ok) {
-        throw new Error(`Failed to fetch categories: ${response.status}`)
-    }
-    const data: Category[] = await response.json()
-    return data
+export function getCategories(): Promise<Category[]> {
+    return api.get<Category[]>("/products/categories")
 }
 
 export default getProducts

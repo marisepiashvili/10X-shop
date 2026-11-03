@@ -1,4 +1,5 @@
-import type { CartAction, CartState } from "./cart"
+import { readStorage } from "../../utils/guards"
+import { isCartState, type CartAction, type CartState } from "./cart"
 
 export const CART_KEY = "shop_cart"
 
@@ -51,10 +52,5 @@ export function cartReducer(state: CartState, action: CartAction): CartState {
 }
 
 export function loadCart(): CartState {
-  try {
-    const raw = localStorage.getItem(CART_KEY)
-    return raw ? (JSON.parse(raw) as CartState) : initialCartState
-  } catch {
-    return initialCartState
-  }
+  return readStorage(CART_KEY, isCartState, initialCartState)
 }

@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react"
 import { useLocation, useNavigate } from "react-router"
 import useAuth from "../../hooks/useAuth"
 import useToast from "../../hooks/useToast"
+import { isNumber, isRecord, isString, readStorage } from "../../utils/guards"
 import type { Product } from "./product"
 import ReviewCard from "./ReviewCard"
 import ReviewForm from "./ReviewForm"
@@ -12,14 +13,13 @@ type ReviewDraft = { productId: number, rating: number, comment: string }
 
 const DRAFT_KEY = "shop_review_draft"
 
+function isReviewDraft(value: unknown): value is ReviewDraft | null {
+  return value === null || (isRecord(value) && isNumber(value.productId) && isNumber(value.rating) && isString(value.comment))
+}
+
 function loadDraft(productId: number): ReviewDraft | null {
-  try {
-    const raw = sessionStorage.getItem(DRAFT_KEY)
-    const draft = raw ? (JSON.parse(raw) as ReviewDraft) : null
-    return draft?.productId === productId ? draft : null
-  } catch {
-    return null
-  }
+  const draft = readStorage(DRAFT_KEY, isReviewDraft, null, sessionStorage)
+  return draft?.productId === productId ? draft : null
 }
 
 type ProductTabsProps = {

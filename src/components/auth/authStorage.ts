@@ -1,3 +1,5 @@
+import { isArrayOf, isOptionalString, isRecord, isString, readStorage } from "../../utils/guards"
+
 const USER_KEY = "shop_users"
 export const CURRENT_USER_KEY = "shop_user"
 
@@ -11,13 +13,24 @@ export type StoredUser = {
 
 export type AuthUser = Omit<StoredUser, "password">
 
+function isAuthUser(value: unknown): value is AuthUser {
+    return isRecord(value) && isString(value.name) && isString(value.email) && isOptionalString(value.phone)
+}
+
+function isStoredUser(value: unknown): value is StoredUser {
+    return isRecord(value) && isString(value.password) && isAuthUser(value)
+}
+
+function isNullableAuthUser(value: unknown): value is AuthUser | null {
+    return value === null || isAuthUser(value)
+}
+
+function isStoredUserList(value: unknown): value is StoredUser[] {
+    return isArrayOf(value, isStoredUser)
+}
+
 function readUsers(): StoredUser[]{
-    try{
-        const raw = localStorage.getItem(USER_KEY)
-        return raw ? (JSON.parse(raw) as StoredUser[]) : []
-    }catch{ 
-        return []
-    }
+    return readStorage(USER_KEY, isStoredUserList, [])
 }
 
 export function registerUser(user: StoredUser): AuthUser{
@@ -38,12 +51,7 @@ export function loginUser(email: string, password: string): AuthUser {
 }
 
 export function loadCurrentUser(): AuthUser | null {
-    try {
-       const raw = localStorage.getItem(CURRENT_USER_KEY) 
-       return raw ? (JSON.parse(raw) as AuthUser) : null
-    } catch{
-        return null
-    }
+    return readStorage(CURRENT_USER_KEY, isNullableAuthUser, null)
 }
 
 export function updateUser(currentEmail: string, changes: AuthUser): AuthUser {
