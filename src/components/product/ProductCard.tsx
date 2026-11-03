@@ -9,12 +9,9 @@ import { formatPrice, getDiscountedPrice } from "../../utils/price"
 
 
 const imageBgColors = ["bg-pink", "bg-yellow", "bg-mint", "bg-sky"]
-const cardTilts = ["-rotate-[1.5deg]", "rotate-1", "-rotate-[0.5deg]", "rotate-[1.5deg]", "rotate-[0.5deg]", "-rotate-1"]
-
 
 export default function ProductCard({product}: {product: Product}) {
     const bgColor = imageBgColors[product.id % imageBgColors.length]
-    const tilt = cardTilts[product.id % cardTilts.length]
     const discountedPrice = getDiscountedPrice(product.price, product.discountPercentage)
     const discount = Math.round(product.discountPercentage)
     const isOutOfStock = product.stock === 0
@@ -28,7 +25,7 @@ export default function ProductCard({product}: {product: Product}) {
     }
 
   return (
-    <article className={`group relative h-full flex flex-col p-3 bg-card rounded-card shadow-card transition ${tilt} motion-safe:hover:rotate-0`}>
+    <article className={`group relative h-full flex flex-col p-3 bg-card rounded-card shadow-card transition duration-300 motion-safe:hover:-translate-y-1 motion-safe:hover:-rotate-1`}>
         {/* image */}
      <Link to={`/products/${product.id}`} className={`block aspect-square rounded-[20px] ${bgColor}`}>
         <img className="w-full h-full object-contain p-4 transition duration-300 motion-safe:group-hover:scale-108 motion-safe:group-hover:-rotate-3"
