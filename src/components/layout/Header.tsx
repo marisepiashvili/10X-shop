@@ -4,6 +4,7 @@ import { Link, NavLink, useLocation, useNavigate } from "react-router"
 import moonIcon from "../../assets/icons/moon.svg"
 import sunIcon from "../../assets/icons/sun.svg"
 import NavPill from "./NavPill"
+import DashedButton from "../ui/DashedButton"
 import useCart from "../../hooks/useCart"
 import useAuth from "../../hooks/useAuth"
 import useTheme from "../../hooks/useTheme"
@@ -80,13 +81,9 @@ export default function Header() {
   )
 
   const authControl = user ? (
-    <button type="button" onClick={handleLogout} className="flex items-center h-12 px-3 text-[15px] font-semibold underline hover:text-accent">
-      Log out
-    </button>
+    <DashedButton onClick={handleLogout} className="hover:bg-card">Log out</DashedButton>
   ) : (
-    <Link to="/login" onClick={closeMenu} className="flex items-center h-12 px-3 text-[15px] font-semibold underline hover:text-accent">
-      Log in
-    </Link>
+    <DashedButton to="/login" onClick={closeMenu} className="hover:bg-card">Log in</DashedButton>
   )
 
   return (
