@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CatalogToolbar from "../components/catalog/CatalogToolbar";
 import Pagination from "../components/catalog/Pagination";
 import ProductGrid from "../components/product/ProductGrid";
@@ -9,47 +9,67 @@ import useDebounce from "../hooks/useDebounce";
 import useProducts from "../hooks/useProducts";
 import { useSearchParams } from "react-router";
 
+// a null value removes the parameter, so default filters keep the URL clean
+type ParamChanges = Record<string, string | null>
 
 export default function CatalogPage() {
-   const [searchParams, setSearchParams] = useSearchParams()
-   const [search, setSearch] = useState(searchParams.get("search") ?? "")
-   const [category, setCategory] = useState(searchParams.get("category") ?? "all")
+    const [searchParams, setSearchParams] = useSearchParams()
+    const q = searchParams.get("q") ?? ""
+    const category = searchParams.get("category") ?? "all"
+    const sort = searchParams.get("sort") ?? "default"
+    const page = Math.max(1, Math.floor(Number(searchParams.get("page"))) || 1)
 
-    const [sort, setSort] = useState("default")
-    const [page, setPage] = useState(1)
-
+    // the input updates on every key; the URL follows once typing pauses
+    const [search, setSearch] = useState(q)
+    const [prevQ, setPrevQ] = useState(q)
+    if (q !== prevQ) {
+        // q changed from outside the input (Back/Forward, category, reset)
+        setPrevQ(q)
+        setSearch(q)
+    }
     const debouncedSearch = useDebounce(search, 400)
-    const { products, total, loading, error } = useProducts({ search: debouncedSearch, category, sort, page })
+
+    const { products, total, loading, error } = useProducts({ search: q, category, sort, page })
     const totalPages = Math.ceil(total / PAGE_SIZE)
 
-    function handleSearchChange(value: string) {
-        setSearch(value)
-        setCategory("all")
-        setPage(1)
+    function updateParams(changes: ParamChanges) {
+        setSearchParams((prev) => {
+            const next = new URLSearchParams(prev)
+            for (const [key, value] of Object.entries(changes)) {
+                if (value) next.set(key, value)
+                else next.delete(key)
+            }
+            return next
+        })
     }
 
+    useEffect(() => {
+        // skip while typing, and when the URL already has this search
+        if (debouncedSearch !== search || debouncedSearch === q) return
+        setSearchParams((prev) => {
+            const next = new URLSearchParams(prev)
+            if (debouncedSearch.trim()) next.set("q", debouncedSearch)
+            else next.delete("q")
+            next.delete("category")
+            next.delete("page")
+            return next
+        })
+    }, [debouncedSearch, search, q, setSearchParams])
+
     function handleCategoryChange(value: string) {
-        setCategory(value)
-        setSearch("")
-        setPage(1)
+        updateParams({ category: value === "all" ? null : value, q: null, page: null })
     }
 
     function handleSortChange(value: string) {
-        setSort(value)
-        setPage(1)
+        updateParams({ sort: value === "default" ? null : value, page: null })
     }
 
     function handleReset() {
-    setSearch("")
-    setCategory("all")
-    setSort("default")
-    setPage(1)
-    setSearchParams({}, { replace: true })
-}
-
+        setSearchParams({})
+    }
 
     function handlePageChange(newPage: number) {
-        setPage(newPage)
+        updateParams({ page: newPage === 1 ? null : String(newPage) })
         window.scrollTo({ top: 0, behavior: "smooth" })
     }
 
@@ -96,7 +116,7 @@ export default function CatalogPage() {
         search={search}
         category={category}
         sort={sort}
-        onSearchChange={handleSearchChange}
+        onSearchChange={setSearch}
         onCategoryChange={handleCategoryChange}
         onSortChange={handleSortChange}
         onReset={handleReset}

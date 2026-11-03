@@ -26,7 +26,7 @@ Status as of 2 November 2026. Update this report before submission.
 | Login with username and 6-character password rule | Changed | Uses email and local registration; the login form has no password-length rule |
 | 375px layout | Partial | No horizontal scrolling on the 8 pages checked; some targets are under 44px |
 | Compatibility matrix | Partial | Chromium checked; Firefox still needs testing |
-| Lighthouse report | Partial | Before results recorded; after results still needed |
+| Lighthouse report | Done | Before and after results recorded |
 
 ### FULL
 
@@ -42,11 +42,11 @@ Status as of 2 November 2026. Update this report before submission.
 | Orders | Partial | No live status refresh or Reorder |
 | Profile | Partial | No first/last name split or theme switch |
 | Formik and Yup | Partial | Uses `<Formik>` instead of `useFormik` |
-| URL state | Not done | Search and category are read from the URL on load only |
+| URL state | Done | `q`, `category`, `sort` and `page` live in the URL; refresh, Back/Forward and shared links keep them |
 | Toast, Skeleton, Retry | Not done | |
 | `ApiClient`, `ApiError`, OOP classes, type guards | Not done | |
 | Lazy routes | Done | Home and Catalog load up front; other pages load on demand |
-| Lighthouse targets | Partial | Medians met on a local production build; confirm on the live site |
+| Lighthouse targets | Done | All medians met on the live site |
 | Issues, Projects, PRs, progress notes, demo video | Not done | No merge commits in the local history |
 
 ### Intentional Deviations
@@ -62,7 +62,7 @@ Status as of 2 November 2026. Update this report before submission.
 | Days with commits | 10 |
 | Merged PRs | <!-- TODO --> |
 | Closed Issues | <!-- TODO --> |
-| Main JavaScript bundle | 259.03 kB (81.74 kB gzip), was 450.47 kB (141.20 kB gzip) |
+| Main JavaScript bundle | 259 kB (about 82 kB gzip), was 450 kB (141 kB gzip) |
 | CSS bundle | 49 kB (about 10 kB gzip) |
 
 ### Lighthouse
@@ -81,13 +81,13 @@ Performance varied between runs (Home 77–96, Catalog 89–98, Product 79–86)
 
 **After**
 
-Measured on a local production build on 2 November 2026 with the Mobile preset, 3 runs per page. The ranges below show the lowest and highest values. These are not directly comparable with the live results above. Re-run Lighthouse on the live site after deploying.
+Run on the live site on 2 November 2026 with the Mobile preset, 3 runs per page. The table shows the median. Reports are in `docs/lighthouse/`.
 
 | Page | Performance | Accessibility | Best Practices | CLS |
 |---|---|---|---|---|
-| Home `/` | 99 | 95 | 100 | 0.027 |
-| Catalog `/catalog` | 99 | 96 | 100 | 0.035 |
-| Product `/products/1` | 89–92 | 97 | 100 | 0 |
+| Home `/` | 98 | 95 | 100 | 0 |
+| Catalog `/catalog` | 95 | 96 | 100 | 0 |
+| Product `/products/1` | 89 | 97 | 100 | 0 |
 
 Accessibility stays below 100 because white text on the brand orange `#FF7A1A` has 2.6:1 contrast. This is a deliberate design choice.
 
