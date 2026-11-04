@@ -61,6 +61,17 @@ export default function ProductTabs({ product, reviews, onAddReview }: ProductTa
     showToast("Review added ✓")
   }
 
+  // the description itself is shown under the price (PRD P3.1), so this tab lists the specs instead of repeating it
+  const details: { label: string; value?: string }[] = [
+    { label: "Brand", value: product.brand },
+    { label: "Category", value: product.category },
+    { label: "SKU", value: product.sku },
+    { label: "In stock", value: String(product.stock) },
+    { label: "Warranty", value: product.warrantyInformation },
+    { label: "Shipping", value: product.shippingInformation },
+    { label: "Returns", value: product.returnPolicy },
+  ]
+
   const tabs: { id: Tab, label: string }[] = [
     { id: "description", label: "Description" },
     { id: "reviews", label: `Reviews (${reviews.length})` },
@@ -90,21 +101,14 @@ export default function ProductTabs({ product, reviews, onAddReview }: ProductTa
 
       <div id={`panel-${activeTab}`} role="tabpanel" aria-labelledby={`tab-${activeTab}`}>
         {activeTab === "description" ? (
-          <div className="bg-card rounded-card shadow-card p-6 md:p-9 grid grid-cols-1 md:grid-cols-2 gap-8">
-            <p className="text-[17px] leading-relaxed">{product.description}</p>
-            <dl className="grid grid-cols-[max-content_1fr] gap-x-8 gap-y-3 self-start">
-              {product.brand && (
-                <>
-                  <dt>Brand</dt>
-                  <dd className="font-extrabold">{product.brand}</dd>
-                </>
-              )}
-              <dt>Category</dt>
-              <dd className="font-extrabold capitalize">{product.category}</dd>
-              <dt>Stock</dt>
-              <dd className="font-extrabold">{product.stock}</dd>
-            </dl>
-          </div>
+          <dl className="bg-card rounded-card shadow-card px-6 py-3 md:px-9 md:py-5 grid grid-cols-1 md:grid-cols-2 md:gap-x-12">
+            {details.filter((detail) => detail.value).map((detail) => (
+              <div key={detail.label} className="flex justify-between gap-6 py-3 border-b border-dashed border-muted">
+                <dt>{detail.label}</dt>
+                <dd className="font-extrabold text-right first-letter:uppercase">{detail.value}</dd>
+              </div>
+            ))}
+          </dl>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-[1fr_320px] gap-10 items-start">
             <div className="flex flex-col gap-5">

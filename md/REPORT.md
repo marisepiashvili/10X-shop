@@ -24,7 +24,7 @@ Status as of 4 November 2026. Update this report before submission.
 | PLAN, README, and Git history | Done | |
 | DEBUG-LOG | Done | 6 entries |
 | Login with username and 6-character password rule | Changed | Username and password with the PRD messages (`Username is required`, `Password is required`, 6-character minimum); accounts come from a local registration instead of accepting any values |
-| 375px layout | Done | Burger menu below 768px; no horizontal scrolling; tap targets are at least 44px, and product cards are clickable as a whole |
+| 375px layout | Done | Burger menu below 768px; no horizontal scrolling; tap targets are at least 44px, and product cards are clickable as a whole. On phones the catalog filters fold behind a Filters button and the grid has 2 columns (see Intentional Deviations) |
 | Compatibility matrix | Partial | Chromium checked; Firefox still needs testing |
 | Lighthouse report | Done | Before and after results recorded |
 
@@ -59,6 +59,8 @@ Status as of 4 November 2026. Update this report before submission.
 
 - **Home on `/`, Catalog on `/catalog`:** Home is the entry page instead of the Catalog.
 - **Login against local accounts:** The PRD describes a username login that accepts any non-empty values and stores no credentials. The app logs in with a username and password, but checks them against accounts created on the Register page and kept in `shop_users` in this browser.
+- **2-column product grid on phones:** The PRD asks for 1 column below 480px. Cards were shrunk so 2 fit at 375px (about 165px each), which shows twice as many products per screen; there is still no horizontal scrolling and buttons stay 44px tall.
+- **Description tab lists specs:** The PRD puts the description both in the info block and in a Description tab. The text stays under the price; the tab shows brand, category, SKU, stock, warranty, shipping and return policy instead of repeating it.
 - **Login required to submit a review:** The review form is visible to everyone, and a guest is sent to Login on submit. The written review is restored afterward.
 
 ## Metrics

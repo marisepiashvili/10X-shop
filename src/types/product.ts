@@ -22,6 +22,11 @@ export interface Product {
   description: string
   images: string[]
   reviews: Review[]
+  // detail fields from /products/{id}; optional because the list endpoints may leave them out
+  sku?: string
+  warrantyInformation?: string
+  shippingInformation?: string
+  returnPolicy?: string
 }
 
 export interface ProductsResponse {
