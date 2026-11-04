@@ -1,6 +1,7 @@
 import { Check } from "lucide-react"
 import type { Order, OrderStatus } from "../../types/order"
 import { ORDER_STEPS, STATUS_COLORS, getOrderStatus } from "./orderStatus"
+import { formatDateTime } from "../../utils/date"
 
 const CURRENT_NOTES: Record<OrderStatus, string> = {
   Processing: "packing it up!",
@@ -15,7 +16,7 @@ type StatusTimelineProps = {
 
 export default function StatusTimeline({ order, now }: StatusTimelineProps) {
   const currentIndex = ORDER_STEPS.indexOf(getOrderStatus(order, now))
-  const placedAt = new Date(order.createdAt).toLocaleString("en-US", { dateStyle: "short", timeStyle: "short" })
+  const placedAt = formatDateTime(order.createdAt)
 
   return (
     <section aria-label="Order status" className="bg-card rounded-card shadow-card px-5 md:px-8 py-7">

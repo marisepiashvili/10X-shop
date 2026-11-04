@@ -42,7 +42,7 @@ export default function Receipt({ title, subtitle, footer, items, promoCode, tot
           </div>
           {promoCode && (
             <div className="flex justify-between font-bold text-accent">
-              <dt>CODE {promoCode} −{PROMO_PERCENT}%</dt>
+              <dt>Discount ({promoCode} −{PROMO_PERCENT}%)</dt>
               <dd>−{totals.discount.toFixed(2)}</dd>
             </div>
           )}

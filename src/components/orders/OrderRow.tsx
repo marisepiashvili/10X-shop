@@ -1,6 +1,7 @@
 import { ChevronRight } from "lucide-react";
 import { Link } from "react-router";
 import { formatPrice } from "../../utils/price";
+import { formatDate } from "../../utils/date";
 import type { Order } from "../../types/order"
 import { getOrderStatus } from "./orderStatus"
 import StatusPill from "./StatusPill"
@@ -18,7 +19,7 @@ type OrderRowProps = {
 
 
 export default function OrderRow({order, index, now} : OrderRowProps) {
-    const date = new Date(order.createdAt).toLocaleDateString("en-Us")
+    const date = formatDate(order.createdAt)
     const count = order.totals.itemCount
   return (
         <li className={`drop-shadow-[0_10px_18px_rgba(17,17,17,0.16)] ${rowTilts[index % rowTilts.length]}`}>

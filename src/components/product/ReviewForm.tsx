@@ -13,19 +13,26 @@ type ReviewFormProps = {
 export default function ReviewForm({ onSubmit, initialRating = 0, initialComment = "" }: ReviewFormProps) {
   const [rating, setRating] = useState(initialRating)
   const [comment, setComment] = useState(initialComment)
+  // errors appear after the first submit and then follow the input live
+  const [showErrors, setShowErrors] = useState(false)
 
-  const isValid = rating > 0 && comment.trim().length >= MIN_COMMENT_LENGTH
+  const ratingError = rating === 0 ? "Please select a rating" : ""
+  const commentError = comment.trim().length < MIN_COMMENT_LENGTH ? `Comment must be at least ${MIN_COMMENT_LENGTH} characters` : ""
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
-    if (!isValid) return
+    if (ratingError || commentError) {
+      setShowErrors(true)
+      return
+    }
     onSubmit(rating, comment.trim())
     setRating(0)
     setComment("")
+    setShowErrors(false)
   }
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-4.5 px-6.5 pt-7.5 pb-6.5 bg-card rounded-card shadow-card">
+    <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-4.5 px-6.5 pt-7.5 pb-6.5 bg-card rounded-card shadow-card">
       <h3 className="font-display text-[26px] leading-tight">Write a review</h3>
 
       <fieldset className="flex flex-col gap-2">
@@ -44,6 +51,9 @@ export default function ReviewForm({ onSubmit, initialRating = 0, initialComment
             </button>
           ))}
         </div>
+        {showErrors && ratingError && (
+          <p id="review-rating-error" className="text-sm font-bold text-danger pl-2.5">{ratingError}</p>
+        )}
       </fieldset>
 
       <div className="flex flex-col gap-1.5">
@@ -54,15 +64,20 @@ export default function ReviewForm({ onSubmit, initialRating = 0, initialComment
           value={comment}
           onChange={(e) => setComment(e.target.value)}
           placeholder="What did you like or dislike?"
-          className="border-2 border-ink rounded-3xl bg-card p-4 resize-none placeholder:text-muted-ink"
+          aria-invalid={showErrors && Boolean(commentError)}
+          aria-describedby={showErrors && commentError ? "review-comment-error" : undefined}
+          className={`rounded-3xl bg-card p-4 resize-none placeholder:text-muted-ink ${showErrors && commentError ? "border-[3px] border-danger" : "border-2 border-ink"}`}
         />
-        <p className="text-xs text-muted-ink">At least {MIN_COMMENT_LENGTH} characters.</p>
+        {showErrors && commentError ? (
+          <p id="review-comment-error" className="text-sm font-bold text-danger pl-2.5">{commentError}</p>
+        ) : (
+          <p className="text-xs text-muted-ink">At least {MIN_COMMENT_LENGTH} characters.</p>
+        )}
       </div>
 
       <button
         type="submit"
-        disabled={!isValid}
-        className="h-12 rounded-full bg-coal text-white text-[17px] font-extrabold transition enabled:hover:bg-blue disabled:bg-muted disabled:text-muted-ink disabled:cursor-not-allowed"
+        className="h-12 rounded-full bg-coal text-white text-[17px] font-extrabold transition hover:bg-blue"
       >
         Submit review
       </button>

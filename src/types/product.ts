@@ -31,10 +31,13 @@ export interface ProductsResponse {
   limit: number
 }
 
+// "default" keeps the API order; "discount-desc" is used by Home, not offered in the Catalog select
+export type SortOption = "default" | "price-asc" | "price-desc" | "rating-desc" | "title-asc" | "discount-desc"
+
 export interface ProductQuery {
   search: string
   category: string
-  sort: string
+  sort: SortOption
   page: number
 }
 

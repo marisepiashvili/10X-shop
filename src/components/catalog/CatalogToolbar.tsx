@@ -4,10 +4,11 @@ import SearchInput from "./SearchInput"
 import type { Option } from "./SelectField"
 import SelectField from "./SelectField"
 import DashedButton from "../ui/DashedButton"
+import type { SortOption } from "../../types/product"
 
 const allCategoriesOption: Option = { value: "all", label: "All categories" }
 
-const sortOptions: Option[] = [
+const sortOptions: { value: SortOption; label: string }[] = [
     { value: "default", label: "Default" },
     { value: "price-asc", label: "Price: low to high" },
     { value: "price-desc", label: "Price: high to low" },
@@ -18,7 +19,7 @@ const sortOptions: Option[] = [
 type CatalogToolbarProps = {
     search: string
     category: string
-    sort: string
+    sort: SortOption
     onSearchChange: (value: string) => void
     onCategoryChange: (value: string) => void
     onSortChange: (value: string) => void

@@ -2,6 +2,7 @@ import { Link, useParams } from "react-router"
 import Receipt from "../components/cart/Receipt"
 import { getOrderById } from "../components/orders/orderStorage"
 import MessagePanel from "../components/ui/MessagePanel"
+import { formatDate } from "../utils/date"
 
 export default function ConfirmationPage() {
   const { orderId } = useParams()
@@ -16,7 +17,7 @@ export default function ConfirmationPage() {
   }
 
   const { fullName, address, city } = order.shipping
-  const date = new Date(order.createdAt).toLocaleDateString("en-US")
+  const date = formatDate(order.createdAt)
 
   return (
     <div className="flex-1 bg-blue text-white dark:text-ink">

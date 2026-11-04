@@ -31,6 +31,8 @@ export default function ProductCard({product}: {product: Product}) {
         <img className="w-full h-full object-contain p-4 transition duration-300 motion-safe:group-hover:scale-108 motion-safe:group-hover:-rotate-3"
          src={product.thumbnail}
          alt={product.title}
+         width={300}
+         height={300}
          loading="lazy" />
       </Link>
       <DiscountBadge discount={discount}/>

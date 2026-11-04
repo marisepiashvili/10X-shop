@@ -5,7 +5,7 @@
 **Live demo:** https://10-x-shop.vercel.app/
 **Repository:** https://github.com/marisepiashvili/10X-shop
 
-Status as of 2 November 2026. Update this report before submission.
+Status as of 4 November 2026. Update this report before submission.
 
 ## Planned vs Delivered
 
@@ -22,8 +22,8 @@ Status as of 2 November 2026. Update this report before submission.
 | Error Boundary | Done | |
 | Deployment with SPA rewrite | Done | Vercel |
 | PLAN, README, and Git history | Done | |
-| DEBUG-LOG | Done | 5 entries |
-| Login with username and 6-character password rule | Changed | Uses email and local registration instead of a username; passwords need at least 6 characters |
+| DEBUG-LOG | Done | 6 entries |
+| Login with username and 6-character password rule | Changed | Username and password with the PRD messages (`Username is required`, `Password is required`, 6-character minimum); accounts come from a local registration instead of accepting any values |
 | 375px layout | Done | Burger menu below 768px; no horizontal scrolling; tap targets are at least 44px, and product cards are clickable as a whole |
 | Compatibility matrix | Partial | Chromium checked; Firefox still needs testing |
 | Lighthouse report | Done | Before and after results recorded |
@@ -38,36 +38,39 @@ Status as of 2 November 2026. Update this report before submission.
 | Dark mode and `@theme` tokens | Done | |
 | Sorting | Done | The five options from the PRD, including `Name A→Z` |
 | Pagination | Done | Includes `Showing X–Y of Z` |
-| Reviews | Done | Saved in `shop_reviews`; average rating and count update; field error messages not shown |
+| Reviews | Done | Saved in `shop_reviews`; average rating and count update; `Please select a rating` and `Comment must be at least 10 characters` shown on submit |
 | Orders | Done | Statuses refresh every 30 seconds without a reload; Reorder adds the items back to the cart |
-| Profile | Done | First and last name fields and a theme switch that shares state with the header |
-| Formik and Yup | Partial | Uses `<Formik>` instead of `useFormik` |
+| Profile | Done | First and last name fields; the header link shows the first name, so a change is visible there; theme switch shares state with the header |
+| Formik and Yup | Done | Login uses `useFormik` with `FormikProvider`; Register, password reset, Checkout and Profile use `<Formik>` |
+| Sign up and password reset | Done | Register page; local password reset at `/forgot-password` checks username and email |
 | URL state | Done | `q`, `category`, `sort` and `page` live in the URL; refresh, Back/Forward and shared links keep them |
 | Toast | Done | Add to cart, stock limit, remove from cart, and review added |
 | Skeleton, Retry | Done | Skeletons on Home, Catalog, and Product; Retry on load errors |
 | `ApiClient`, `ApiError`, type guards | Done | Generic `get<T>`, 404 detected by status code, stored data validated before use |
+| `AsyncState<T>`, `SortOption` unions | Done | `useProducts` and `useProduct` return `AsyncState<T>`; pages switch on `status`; `?sort=` is checked with `isSortOption` |
+| `formatDate()` | Done | One date formatter in `utils/date.ts` instead of seven `toLocaleDateString` calls |
 | `Cart`, `Order`, `StorageService<T>` classes | Not done | The reducer and storage functions already cover this logic |
 | Lazy routes | Done | Home and Catalog load up front; other pages load on demand |
 | Lighthouse targets | Done | All medians met on the live site |
-| Issues, Projects, PRs, progress notes, demo video | Not done | No merge commits in the local history |
+| Progress notes | Done | `docs/progress/week-1.md` to `week-3.md`, reconstructed from the Git history |
+| Issues, Projects, PRs, demo video | Not done | No merge commits in the local history |
 
 ### Intentional Deviations
 
 - **Home on `/`, Catalog on `/catalog`:** Home is the entry page instead of the Catalog.
-- **Login with email and registration:** The PRD describes a username login that accepts any non-empty values. The app uses local accounts with an email address and a registration page instead.
-- **Orders link visible to guests:** The PRD shows the link only after login. Guests can see it and are sent to Login when they open it.
+- **Login against local accounts:** The PRD describes a username login that accepts any non-empty values and stores no credentials. The app logs in with a username and password, but checks them against accounts created on the Register page and kept in `shop_users` in this browser.
 - **Login required to submit a review:** The review form is visible to everyone, and a guest is sent to Login on submit. The written review is restored afterward.
 
 ## Metrics
 
 | Metric | Value |
 |---|---|
-| Commits | 43 |
-| Days with commits | 10 |
+| Commits | 52 (before the 4 November PRD-fix commit) |
+| Days with commits | 12 |
 | Merged PRs | <!-- TODO --> |
 | Closed Issues | <!-- TODO --> |
-| Main JavaScript bundle | 259 kB (about 82 kB gzip), was 450 kB (141 kB gzip) |
-| CSS bundle | 49 kB (about 10 kB gzip) |
+| Main JavaScript bundle | 271 kB (about 85 kB gzip), was 450 kB (141 kB gzip) |
+| CSS bundle | 52 kB (about 10 kB gzip) |
 
 ### Lighthouse
 

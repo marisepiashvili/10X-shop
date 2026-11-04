@@ -1,6 +1,7 @@
 import { ArrowRight } from "lucide-react"
 import { Link } from "react-router"
 import { formatPrice } from "../../utils/price"
+import { formatDate } from "../../utils/date"
 import type { CartItem, CartTotals } from "../../types/cart"
 import { FREE_SHIPPING_FROM } from "./cartTotals"
 import Receipt from "./Receipt"
@@ -12,7 +13,7 @@ type CartReceiptProps = {
 }
 
 export default function CartReceipt({ items, promoCode, totals }: CartReceiptProps) {
-  const today = new Date().toLocaleDateString("en-US")
+  const today = formatDate(new Date().toISOString())
 
   return (
     <aside aria-label="Order summary" className="flex-[1_1_360px] max-w-105 flex flex-col gap-6.5 pt-2.5">

@@ -7,6 +7,7 @@ import type { ShippingInfo } from "../types/order"
 import { saveOrder } from "../components/orders/orderStorage"
 import useCart from "../hooks/useCart"
 import { formatPrice } from "../utils/price"
+import { formatDate } from "../utils/date"
 
 export default function CheckoutPage() {
   const { items, promoCode, totals, clearCart } = useCart()
@@ -35,7 +36,7 @@ export default function CheckoutPage() {
     clearCart()
   }
 
-  const today = new Date().toLocaleDateString("en-US")
+  const today = formatDate(new Date().toISOString())
 
   return (
     <div className="w-full max-w-330 mx-auto px-4 md:px-10 pt-6 pb-24 flex flex-col gap-8">

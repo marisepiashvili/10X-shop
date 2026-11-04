@@ -9,6 +9,7 @@ import useCart from "../hooks/useCart"
 import useNow from "../hooks/useNow"
 import useToast from "../hooks/useToast"
 import NotFoundPage from "./NotFoundPage"
+import { formatDate } from "../utils/date"
 
 const STATUS_REFRESH = 30_000
 
@@ -24,7 +25,7 @@ export default function OrderDetailPage() {
   if (!order) return <NotFoundPage />
 
 
-  const date = new Date(order.createdAt).toLocaleDateString("en-US")
+  const date = formatDate(order.createdAt)
   const items = order.items
 
   function handleReorder() {

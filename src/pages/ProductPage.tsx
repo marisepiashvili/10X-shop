@@ -11,11 +11,12 @@ export default function ProductPage() {
   const { id } = useParams()
   const productId = Number(id)
   const isValidId = Number.isInteger(productId) && productId > 0
-  const { product, loading, error, notFound, retry } = useProduct(isValidId ? productId : null)
+  const { state, retry } = useProduct(isValidId ? productId : null)
   const location = useLocation()
   const navigate = useNavigate()
 
-  if (!isValidId || notFound) return <NotFoundPage />
+  const isNotFound = state.status === "error" && state.httpStatus === 404
+  if (!isValidId || isNotFound) return <NotFoundPage />
 
   function handleBack(event: React.MouseEvent<HTMLAnchorElement>) {
     // go back to the catalog with its filters; a direct visit has no history, so the link is used
@@ -25,17 +26,18 @@ export default function ProductPage() {
   }
 
   let content: React.ReactNode
-  if (loading) {
-    content = <ProductDetailsSkeleton />
-  } else if (error || !product) {
-    content = <MessagePanel variant="error" title="Could not load product" note={error ?? "Something went wrong"} action={{ label: "Retry", onClick: retry }} />
-  } else {
+  if (state.status === "success") {
+    const product = state.data
     content = (
       <>
         <ProductDetails product={product} />
         <RelatedProducts category={product.category} currentId={product.id} />
       </>
     )
+  } else if (state.status === "error") {
+    content = <MessagePanel variant="error" title="Could not load product" note={state.message} action={{ label: "Retry", onClick: retry }} />
+  } else {
+    content = <ProductDetailsSkeleton />
   }
 
   return (

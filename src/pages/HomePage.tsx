@@ -13,24 +13,26 @@ const HERO_COUNT = 3
 const FEATURED_CATEGORIES = 8
 
 export default function HomePage() {
-  const { products, total, loading, error, retry } = useProducts({ search: "", category: "all", sort: "discount-desc", page: 1 })
+  const { state, retry } = useProducts({ search: "", category: "all", sort: "discount-desc", page: 1 })
   const categories = useCategories()
 
+  const products = state.status === "success" ? state.data.products : []
+  const total = state.status === "success" ? state.data.total : 0
   const deals = products.slice(0, DEALS_COUNT)
   const heroProducts = products.slice(DEALS_COUNT, DEALS_COUNT + HERO_COUNT)
 
   let dealsContent: React.ReactNode
-  if (loading) {
-    dealsContent = <ProductGridSkeleton count={DEALS_COUNT} />
-  } else if (error) {
-    dealsContent = <MessagePanel variant="error" title="Could not load deals" note={error} action={{ label: "Retry", onClick: retry }} />
-  } else {
+  if (state.status === "success") {
     dealsContent = <ProductGrid products={deals} />
+  } else if (state.status === "error") {
+    dealsContent = <MessagePanel variant="error" title="Could not load deals" note={state.message} action={{ label: "Retry", onClick: retry }} />
+  } else {
+    dealsContent = <ProductGridSkeleton count={DEALS_COUNT} />
   }
 
   return (
     <>
-      <HeroSection total={total} products={heroProducts} loading={loading} />
+      <HeroSection total={total} products={heroProducts} loading={state.status === "loading"} />
 
       <div className="w-full max-w-330 mx-auto px-4 md:px-10 pt-18 pb-24 flex flex-col gap-20">
         {categories.length > 0 && (

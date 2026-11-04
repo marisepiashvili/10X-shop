@@ -1,12 +1,10 @@
 import { useEffect, useState } from "react"
-import type { Product, ProductQuery } from "../types/product"
+import type { AsyncState } from "../types/api"
+import type { ProductQuery, ProductsResponse } from "../types/product"
 import getProducts from "../components/product/productFetch"
 
 export default function useProducts({ search, category, sort, page }: ProductQuery) {
-    const [products, setProducts] = useState<Product[]>([])
-    const [total, setTotal] = useState(0)
-    const [loading, setLoading] = useState(true)
-    const [error, setError] = useState<string | null>(null)
+    const [state, setState] = useState<AsyncState<ProductsResponse>>({ status: "loading" })
     // bumping this re-runs the request (Retry button)
     const [attempt, setAttempt] = useState(0)
 
@@ -14,17 +12,14 @@ export default function useProducts({ search, category, sort, page }: ProductQue
         const controller = new AbortController()
 
         async function loadProducts() {
-            setLoading(true)
-            setError(null)
+            setState({ status: "loading" })
             try {
                 const data = await getProducts({ search, category, sort, page }, controller.signal)
-                setProducts(data.products)
-                setTotal(data.total)
+                setState({ status: "success", data })
             } catch (err) {
+                // a newer request replaced this one: its result must not overwrite the new state
                 if (controller.signal.aborted) return
-                setError(err instanceof Error ? err.message : "Something went wrong")
-            } finally {
-                if (!controller.signal.aborted) setLoading(false)
+                setState({ status: "error", message: err instanceof Error ? err.message : "Something went wrong" })
             }
         }
         loadProducts()
@@ -36,5 +31,5 @@ export default function useProducts({ search, category, sort, page }: ProductQue
         setAttempt((count) => count + 1)
     }
 
-    return { products, total, loading, error, retry }
+    return { state, retry }
 }

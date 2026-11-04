@@ -1,13 +1,12 @@
 import { useEffect, useState } from "react"
+import type { AsyncState } from "../types/api"
 import type { Product } from "../types/product"
 import { isApiError } from "../api/ApiError"
 import { getProductById } from "../components/product/productFetch"
 
+// id === null means the URL id is invalid: nothing is requested and the state stays idle
 export default function useProduct(id: number | null) {
-    const [product, setProduct] = useState<Product | null>(null)
-    const [loading, setLoading] = useState(true)
-    const [error, setError] = useState<string | null>(null)
-    const [notFound, setNotFound] = useState(false)
+    const [state, setState] = useState<AsyncState<Product>>(() => (id === null ? { status: "idle" } : { status: "loading" }))
     // bumping this re-runs the request (Retry button)
     const [attempt, setAttempt] = useState(0)
 
@@ -16,18 +15,17 @@ export default function useProduct(id: number | null) {
         const controller = new AbortController()
 
         async function loadProduct(productId: number) {
-            setLoading(true)
-            setError(null)
-            setNotFound(false)
+            setState({ status: "loading" })
             try {
                 const data = await getProductById(productId, controller.signal)
-                setProduct(data)
+                setState({ status: "success", data })
             } catch (err) {
                 if (controller.signal.aborted) return
-                if (isApiError(err) && err.status === 404) setNotFound(true)
-                else setError(err instanceof Error ? err.message : "Something went wrong")
-            } finally {
-                if (!controller.signal.aborted) setLoading(false)
+                setState({
+                    status: "error",
+                    message: err instanceof Error ? err.message : "Something went wrong",
+                    httpStatus: isApiError(err) ? err.status : undefined,
+                })
             }
         }
         loadProduct(id)
@@ -39,5 +37,5 @@ export default function useProduct(id: number | null) {
         setAttempt((count) => count + 1)
     }
 
-    return { product, loading, error, notFound, retry }
+    return { state, retry }
 }

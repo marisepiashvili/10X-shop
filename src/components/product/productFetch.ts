@@ -1,10 +1,12 @@
 import { api } from "../../api/ApiClient";
-import type { Category, Product, ProductQuery, ProductsResponse } from "../../types/product"
+import type { Category, Product, ProductQuery, ProductsResponse, SortOption } from "../../types/product"
 
 
 export const PAGE_SIZE = 12
 
-const sortParams: Record<string, { sortBy: string, order: "asc" | "desc" }> = {
+// Record<SortOption, …> makes TypeScript check that every sort option has an entry
+const sortParams: Record<SortOption, { sortBy: string, order: "asc" | "desc" } | null> = {
+    "default": null,
     "price-asc": { sortBy: "price", order: "asc" },
     "price-desc": { sortBy: "price", order: "desc" },
     "rating-desc": { sortBy: "rating", order: "desc" },

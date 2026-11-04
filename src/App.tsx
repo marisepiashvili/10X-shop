@@ -9,6 +9,7 @@ import HomePage from "./pages/HomePage"
 const ProductPage = lazy(() => import("./pages/ProductPage"))
 const LoginPage = lazy(() => import("./pages/LoginPage"))
 const RegisterPage = lazy(() => import("./pages/RegisterPage"))
+const ForgotPasswordPage = lazy(() => import("./pages/ForgotPasswordPage"))
 const CartPage = lazy(() => import("./pages/CartPage"))
 const CheckoutPage = lazy(() => import("./pages/CheckoutPage"))
 const ConfirmationPage = lazy(() => import("./pages/ConfirmationPage"))
@@ -26,6 +27,7 @@ function App() {
         <Route path="products/:id" element={<ProductPage/>} />
         <Route path="login" element={<LoginPage />} />
         <Route path="register" element={<RegisterPage />} />
+        <Route path="forgot-password" element={<ForgotPasswordPage />} />
         <Route path="cart" element={<CartPage />} />
         <Route path="confirmation/:orderId" element={<ConfirmationPage />} />
         <Route element={<ProtectedRoute />}>

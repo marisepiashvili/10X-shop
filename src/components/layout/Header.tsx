@@ -1,4 +1,4 @@
-import { Menu, X } from "lucide-react"
+import { Menu, UserRound, X } from "lucide-react"
 import { startTransition, useEffect, useRef, useState } from "react"
 import { Link, NavLink, useLocation, useNavigate } from "react-router"
 import moonIcon from "../../assets/icons/moon.svg"
@@ -8,6 +8,7 @@ import DashedButton from "../ui/DashedButton"
 import useCart from "../../hooks/useCart"
 import useAuth from "../../hooks/useAuth"
 import useTheme from "../../hooks/useTheme"
+import { getFirstName } from "../../utils/name"
 
 export default function Header() {
   const { totals } = useCart()
@@ -80,6 +81,15 @@ export default function Header() {
     </button>
   )
 
+  // the profile link shows the user's first name, so a name change in Profile is visible here too
+  const profileLabel = user && (
+    <>
+      <UserRound size={18} strokeWidth={2.6} aria-hidden="true" />
+      <span className="sr-only">Profile: </span>
+      <span className="max-w-32 truncate">{getFirstName(user.name)}</span>
+    </>
+  )
+
   const authControl = user ? (
     <DashedButton onClick={handleLogout} className="hover:bg-card">Log out</DashedButton>
   ) : (
@@ -102,8 +112,13 @@ export default function Header() {
           <nav aria-label="Main">
             <ul className="flex flex-wrap items-center gap-1.5">
               <NavPill to="/catalog">Catalog</NavPill>
-              <NavPill to="/orders">Orders</NavPill>
-              <NavPill to="/profile">Profile</NavPill>
+              {/* Orders and Profile only make sense once logged in */}
+              {user && (
+                <>
+                  <NavPill to="/orders">Orders</NavPill>
+                  <NavPill to="/profile">{profileLabel}</NavPill>
+                </>
+              )}
               <li>{cartLink}</li>
             </ul>
           </nav>
@@ -133,8 +148,12 @@ export default function Header() {
           <nav aria-label="Main">
             <ul className="flex flex-col gap-1.5">
               <NavPill to="/catalog" onClick={closeMenu}>Catalog</NavPill>
-              <NavPill to="/orders" onClick={closeMenu}>Orders</NavPill>
-              <NavPill to="/profile" onClick={closeMenu}>Profile</NavPill>
+              {user && (
+                <>
+                  <NavPill to="/orders" onClick={closeMenu}>Orders</NavPill>
+                  <NavPill to="/profile" onClick={closeMenu}>{profileLabel}</NavPill>
+                </>
+              )}
             </ul>
           </nav>
           <div className="flex items-center justify-between border-t-2 border-dashed border-ink pt-3">

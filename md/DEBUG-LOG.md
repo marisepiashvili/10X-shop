@@ -46,3 +46,12 @@ Real bugs found while building 10X Shop. Fix links point to the commits in the p
 - **Cause:** Yellow became cream in dark mode, so the disabled button's background nearly matched the block behind it.
 - **Fix:** [32fa84e](https://github.com/marisepiashvili/10X-shop/commit/32fa84e) gives disabled buttons on bright surfaces a darker background.
 - **What I learned:** Check every state of a component after changing a shared color, including disabled ones.
+
+## 6. An unknown `?sort=` value switched on `Reset filters`
+
+- **Symptom:** Opening `/catalog?sort=abc` showed `Default` in the `Sort by` select, but the `Reset filters` button was active although no filter was visible.
+- **Reproduction:** Open `/catalog?sort=abc` on a build before the fix.
+- **Tool:** The TypeScript compiler. After `ProductQuery.sort` was narrowed from `string` to the `SortOption` union, `npm run typecheck` reported `src/pages/CatalogPage.tsx(32,91): error TS2322: Type 'string' is not assignable to type 'SortOption'.` The error pointed straight at the line where the raw URL value entered the app. A Playwright script then confirmed the symptom on the old build (select value `default`, `Reset filters` enabled).
+- **Cause:** `CatalogPage` passed `searchParams.get("sort")` on as a plain string. The select could not show `abc`, so it displayed its first option, while the toolbar compared `"abc" !== "default"` and decided a filter was active.
+- **Fix:** <!-- TODO: add the commit link after committing --> adds the `isSortOption` type guard; unknown values fall back to `default`, and `sortParams` is now a `Record<SortOption, …>` so every option must have an entry.
+- **What I learned:** The URL is user input. A literal union type alone does not protect it; it forces a check at the boundary, and the type guard is that check.

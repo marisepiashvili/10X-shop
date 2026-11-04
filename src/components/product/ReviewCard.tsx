@@ -1,5 +1,6 @@
 import type { Review } from "../../types/product"
 import StarRating from "./StarRating"
+import { formatDate } from "../../utils/date"
 
 const cardColors = ["bg-card", "bg-mint", "bg-sky"]
 const cardTilts = ["-rotate-1", "rotate-[0.5deg]", "-rotate-[0.5deg]"]
@@ -10,7 +11,7 @@ type ReviewCardProps = {
 }
 
 export default function ReviewCard({ review, index }: ReviewCardProps) {
-  const date = new Date(review.date).toLocaleDateString("en-US", { month: "2-digit", day: "2-digit", year: "numeric" })
+  const date = formatDate(review.date)
   const color = cardColors[index % cardColors.length]
   const tilt = cardTilts[index % cardTilts.length]
 

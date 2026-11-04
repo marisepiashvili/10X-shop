@@ -1,6 +1,6 @@
 import type { CartItem, CartState, CartTotals } from "../types/cart"
 import type { Order, ShippingInfo } from "../types/order"
-import type { StoredReview } from "../types/product"
+import type { SortOption, StoredReview } from "../types/product"
 import type { AuthUser, StoredUser } from "../types/user"
 
 // JSON from storage has no type, so these check its shape before the app trusts it
@@ -70,11 +70,27 @@ export function isOrder(value: unknown): value is Order {
 }
 
 export function isAuthUser(value: unknown): value is AuthUser {
-  return isRecord(value) && isString(value.name) && isString(value.email) && isOptionalString(value.phone)
+  return isRecord(value) && isString(value.username) && isString(value.name) && isString(value.email)
+    && isOptionalString(value.phone)
 }
 
 export function isStoredUser(value: unknown): value is StoredUser {
   return isRecord(value) && isString(value.password) && isAuthUser(value)
+}
+
+// a Record must list every SortOption, so adding a new option without updating this is a type error
+const SORT_OPTIONS: Record<SortOption, true> = {
+  "default": true,
+  "price-asc": true,
+  "price-desc": true,
+  "rating-desc": true,
+  "title-asc": true,
+  "discount-desc": true,
+}
+
+// the URL is user input: ?sort=anything must not reach the API or the select unchecked
+export function isSortOption(value: unknown): value is SortOption {
+  return isString(value) && Object.hasOwn(SORT_OPTIONS, value)
 }
 
 export function isStoredReview(value: unknown): value is StoredReview {

@@ -2,19 +2,21 @@ import { Form, Formik, type FormikHelpers } from "formik"
 import { Link, useNavigate, useLocation } from "react-router"
 import AuthShell from "../components/auth/AuthShell"
 import FormField from "../components/auth/FormField"
-import { registerSchema, type RegiterFormValues } from "../components/auth/authSchemas"
-import { registerUser } from "../components/auth/authStorage"
+import { registerSchema, type RegisterFormValues } from "../components/auth/authSchemas"
+import { AccountError, registerUser } from "../components/auth/authStorage"
 
-const initialValues : RegiterFormValues = {name: "", email: "", password: "", confirmPassword: ""}
+const initialValues : RegisterFormValues = {username: "", name: "", email: "", password: "", confirmPassword: ""}
 
 export default function RegisterPage() {
     const navigate = useNavigate()
     const location = useLocation()
     const from = (location.state as {from?: string} | null)?.from ?? "/"
 
-    async function handleSubmit(values:RegiterFormValues, {setFieldError} : FormikHelpers<RegiterFormValues>) {
+    // async so Formik resets isSubmitting after a failed attempt (see LoginPage)
+    async function handleSubmit(values:RegisterFormValues, {setFieldError} : FormikHelpers<RegisterFormValues>) {
         try{
             registerUser({
+                username: values.username.trim(),
                 name: values.name.trim(),
                 email: values.email.trim().toLowerCase(),
                 password: values.password
@@ -22,7 +24,8 @@ export default function RegisterPage() {
 
             navigate("/login", {state: {from}})
         }catch(error){
-            setFieldError("email", error instanceof Error ? error.message : "Registration failed")
+            if (error instanceof AccountError) setFieldError(error.field, error.message)
+            else setFieldError("email", "Registration failed")
         }
 
     }
@@ -38,34 +41,38 @@ export default function RegisterPage() {
         {({isSubmitting}) => (
             <Form noValidate className="flex flex-col gap-4.5">
                     <FormField
-                    name="name" 
-                    label="Name" 
+                    name="username"
+                    label="Username"
+                    autoComplete="username"/>
+                    <FormField
+                    name="name"
+                    label="Name"
                     autoComplete="name"/>
-                    <FormField 
-                    name="email" 
-                    label="Email" 
-                    type="email" 
+                    <FormField
+                    name="email"
+                    label="Email"
+                    type="email"
                     autoComplete="email"/>
-                    <FormField 
-                    name="password" 
-                    label="Password" 
-                    type="password" 
+                    <FormField
+                    name="password"
+                    label="Password"
+                    type="password"
                     autoComplete="new-password"/>
-                    <FormField 
-                    name="confirmPassword" 
-                    label="Confirm password" 
-                    type="password" 
+                    <FormField
+                    name="confirmPassword"
+                    label="Confirm password"
+                    type="password"
                     autoComplete="new-password"/>
 
-                    <button 
+                    <button
                     type="submit"
                     disabled={isSubmitting}
                     className="mt-1 h-15 rounded-full bg-orange text-white border-4 border-sticker text-lg font-extrabold shadow-sticker transition enabled:hover:-translate-y-0.5 disabled:opacity-60 disabled:cursor-not-allowed">
                         Create account</button>
 
-                    <p className="text-sm text-center">Already have an account? <Link 
-                    to="/login" 
-                    state={{from}} 
+                    <p className="text-sm text-center">Already have an account? <Link
+                    to="/login"
+                    state={{from}}
                     className="inline-block px-1.5 -mx-1.5 py-3.5 -my-3.5 font-extrabold underline hover:text-accent">Log in</Link></p>
             </Form>
         )}

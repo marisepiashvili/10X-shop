@@ -8,6 +8,8 @@ import MessagePanel from "../components/ui/MessagePanel";
 import useDebounce from "../hooks/useDebounce";
 import useProducts from "../hooks/useProducts";
 import { useSearchParams } from "react-router";
+import type { SortOption } from "../types/product";
+import { isSortOption } from "../utils/guards";
 
 // a null value removes the parameter, so default filters keep the URL clean
 type ParamChanges = Record<string, string | null>
@@ -16,7 +18,9 @@ export default function CatalogPage() {
     const [searchParams, setSearchParams] = useSearchParams()
     const q = searchParams.get("q") ?? ""
     const category = searchParams.get("category") ?? "all"
-    const sort = searchParams.get("sort") ?? "default"
+    // an unknown ?sort= value (typed by hand, old link) falls back to the default order
+    const sortParam = searchParams.get("sort")
+    const sort: SortOption = isSortOption(sortParam) ? sortParam : "default"
     const page = Math.max(1, Math.floor(Number(searchParams.get("page"))) || 1)
 
     // the input updates on every key; the URL follows once typing pauses
@@ -29,10 +33,8 @@ export default function CatalogPage() {
     }
     const debouncedSearch = useDebounce(search, 400)
 
-    const { products, total, loading, error, retry } = useProducts({ search: q, category, sort, page })
-    const totalPages = Math.ceil(total / PAGE_SIZE)
-    const firstShown = (page - 1) * PAGE_SIZE + 1
-    const lastShown = firstShown + products.length - 1
+    const { state, retry } = useProducts({ search: q, category, sort, page })
+    const total = state.status === "success" ? state.data.total : 0
 
     function updateParams(changes: ParamChanges) {
         setSearchParams((prev) => {
@@ -63,7 +65,7 @@ export default function CatalogPage() {
     }
 
     function handleSortChange(value: string) {
-        updateParams({ sort: value === "default" ? null : value, page: null })
+        updateParams({ sort: isSortOption(value) && value !== "default" ? value : null, page: null })
     }
 
     function handleReset() {
@@ -75,19 +77,23 @@ export default function CatalogPage() {
         window.scrollTo({ top: 0, behavior: "smooth" })
     }
 
+    // switching on status: TypeScript allows state.data only in the success branch
     let content: React.ReactNode
-    if (loading) {
+    if (state.status === "error") {
+        content = <MessagePanel variant="error" title="Could not load products" note={state.message} action={{ label: "Retry", onClick: retry }} />
+    } else if (state.status !== "success") {
         content = <ProductGridSkeleton count={PAGE_SIZE} />
-    } else if (error) {
-        content = <MessagePanel variant="error" title="Could not load products" note={error} action={{ label: "Retry", onClick: retry }} />
-    } else if (products.length === 0) {
+    } else if (state.data.products.length === 0) {
         content = <MessagePanel variant="empty" title="No products found." note="try another word" action={{ label: "Clear filters", onClick: handleReset }} />
     } else {
+        const { products } = state.data
+        const firstShown = (page - 1) * PAGE_SIZE + 1
+        const lastShown = firstShown + products.length - 1
         content = (
             <>
                 <h2 className="sr-only">Products</h2>
                 <ProductGrid products={products} />
-                <Pagination currentPage={page} totalPages={totalPages} onPageChange={handlePageChange} />
+                <Pagination currentPage={page} totalPages={Math.ceil(total / PAGE_SIZE)} onPageChange={handlePageChange} />
                 <p className="text-center text-[15px] font-semibold">
                     Showing {firstShown}–{lastShown} of {total}
                 </p>
@@ -99,9 +105,10 @@ export default function CatalogPage() {
     <div className="w-full max-w-330 mx-auto px-4 md:px-10 pt-10 pb-26 flex flex-col gap-9">
       <section className="flex flex-wrap items-end justify-between gap-8">
         <div className="flex flex-col gap-2">
-          {total > 0 && (
-            <span className="self-start font-note text-3xl text-accent -rotate-3">{total} things to love ✶</span>
-          )}
+          {/* always rendered, only hidden while loading, so the heading does not jump on every page change */}
+          <span aria-hidden={total === 0} className={`self-start font-note text-3xl text-accent -rotate-3 ${total === 0 ? "invisible" : ""}`}>
+            {total} things to love ✶
+          </span>
           <h1 className="font-display text-6xl md:text-[84px] leading-[0.95]">Catalog</h1>
         </div>
 
