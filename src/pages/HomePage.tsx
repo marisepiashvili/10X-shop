@@ -34,17 +34,17 @@ export default function HomePage() {
     <>
       <HeroSection total={total} products={heroProducts} loading={state.status === "loading"} />
 
-      <div className="w-full max-w-330 mx-auto px-4 md:px-10 pt-18 pb-24 flex flex-col gap-20">
+      <div className="w-full max-w-330 mx-auto px-4 md:px-10 pt-14 md:pt-18 pb-24 flex flex-col gap-14 md:gap-20">
         {categories.length > 0 && (
           <section aria-labelledby="home-categories" className="flex flex-col gap-6">
-            <h2 id="home-categories" className="font-display text-4xl md:text-5xl">Pick a vibe</h2>
+            <h2 id="home-categories" className="font-display text-3xl md:text-5xl">Pick a vibe</h2>
             <CategoryPills categories={categories.slice(0, FEATURED_CATEGORIES)} />
           </section>
         )}
 
         <section aria-labelledby="home-deals" className="flex flex-col gap-6">
           <div className="flex flex-wrap items-baseline justify-between gap-4">
-            <h2 id="home-deals" className="font-display text-4xl md:text-5xl">Steals of the day</h2>
+            <h2 id="home-deals" className="font-display text-3xl md:text-5xl">Steals of the day</h2>
             <Link to="/catalog" className="inline-flex items-center min-h-11 text-[17px] font-extrabold hover:text-accent">See all products →</Link>
           </div>
           {dealsContent}

@@ -45,7 +45,7 @@ export default function CheckoutPage() {
           <ArrowLeft size={20} strokeWidth={2.4} /> Back to cart
         </Link>
         <span className="self-start font-note text-3xl text-accent -rotate-3">almost yours!</span>
-        <h1 className="font-display text-6xl md:text-[84px] leading-[0.95]">Checkout</h1>
+        <h1 className="font-display text-5xl md:text-[84px] leading-[0.95]">Checkout</h1>
       </div>
 
       <div className="flex flex-wrap items-start gap-14">

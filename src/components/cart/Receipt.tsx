@@ -1,3 +1,4 @@
+import stampImage from "../../assets/stamp-10.webp"
 import { formatPrice } from "../../utils/price"
 import type { CartItem, CartTotals } from "../../types/cart"
 import { FREE_SHIPPING_FROM, PROMO_PERCENT, getUnitPrice } from "./cartTotals"
@@ -57,12 +58,15 @@ export default function Receipt({ title, subtitle, footer, items, promoCode, tot
         </dl>
 
         {promoCode && (
-          <span
+          // decorative: the discount is already written in the totals above
+          <img
+            src={stampImage}
+            alt=""
             aria-hidden="true"
-            className="absolute right-21 bottom-36 w-21 h-21 grid place-items-center border-[5px] border-double border-danger rounded-full font-display text-xl leading-none text-center text-danger -rotate-12 opacity-85 pointer-events-none"
-          >
-            −{PROMO_PERCENT}%
-          </span>
+            width={96}
+            height={96}
+            className="absolute right-19 bottom-33 w-24 h-24 -rotate-6 opacity-90 mix-blend-multiply pointer-events-none select-none"
+          />
         )}
 
         <span aria-hidden="true" className="block barcode mt-2" />

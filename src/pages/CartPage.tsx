@@ -42,7 +42,7 @@ export default function CartPage() {
             {totals.itemCount} {totals.itemCount === 1 ? "item" : "items"} waiting for you ♥
           </span>
         )}
-        <h1 className="font-display text-6xl md:text-[84px] leading-[0.95]">Your cart</h1>
+        <h1 className="font-display text-5xl md:text-[84px] leading-[0.95]">Your cart</h1>
       </div>
 
       {isEmpty ? (

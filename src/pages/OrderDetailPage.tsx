@@ -48,8 +48,8 @@ export default function OrderDetailPage() {
       <div className="flex flex-wrap items-end justify-between gap-5">
         <div className="flex flex-col gap-2">
           <span className="self-start font-note text-3xl text-accent -rotate-3">placed on {date}</span>
-          <h1 className="font-display text-5xl md:text-7xl leading-[0.95]">
-            Order <span className="font-mono font-bold text-4xl md:text-[56px] tracking-tight">#{order.id}</span>
+          <h1 className="font-display text-[40px] md:text-7xl leading-[0.95]">
+            Order <span className="font-mono font-bold text-2xl md:text-[56px] tracking-tight whitespace-nowrap">#{order.id}</span>
           </h1>
         </div>
         <button

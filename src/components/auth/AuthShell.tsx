@@ -14,7 +14,7 @@ export default function AuthShell({ note, title, text, ticketTitle, children }: 
       <div className="max-w-330 mx-auto px-4 md:px-10 pt-18 pb-22 flex flex-wrap items-center justify-center gap-16">
         <div className="flex-[1_1_420px] max-w-135 flex flex-col gap-5">
           <span className="self-start font-note text-[32px] text-yellow -rotate-3">{note}</span>
-          <h1 className="font-display text-6xl md:text-[104px] leading-[0.92]">{title}</h1>
+          <h1 className="font-display text-5xl md:text-[104px] leading-[0.92]">{title}</h1>
           <p className="text-xl leading-normal max-w-[32ch]">{text}</p>
           <div aria-hidden="true" className="relative h-30 hidden sm:block">
             <span className="absolute left-0 top-4 w-24 h-24 rounded-full bg-orange text-white border-4 border-sticker grid place-items-center font-display text-xl rotate-12 shadow-sticker">−10%</span>

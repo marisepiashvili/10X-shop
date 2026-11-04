@@ -102,23 +102,23 @@ export default function CatalogPage() {
     }
 
   return (
-    <div className="w-full max-w-330 mx-auto px-4 md:px-10 pt-10 pb-26 flex flex-col gap-9">
-      <section className="flex flex-wrap items-end justify-between gap-8">
+    <div className="w-full max-w-330 mx-auto px-4 md:px-10 pt-6 md:pt-10 pb-26 flex flex-col gap-6 md:gap-9">
+      <section className="flex flex-wrap items-end justify-between gap-5 md:gap-8">
         <div className="flex flex-col gap-2">
           {/* always rendered, only hidden while loading, so the heading does not jump on every page change */}
-          <span aria-hidden={total === 0} className={`self-start font-note text-3xl text-accent -rotate-3 ${total === 0 ? "invisible" : ""}`}>
+          <span aria-hidden={total === 0} className={`self-start font-note text-2xl md:text-3xl text-accent -rotate-3 ${total === 0 ? "invisible" : ""}`}>
             {total} things to love ✶
           </span>
-          <h1 className="font-display text-6xl md:text-[84px] leading-[0.95]">Catalog</h1>
+          <h1 className="font-display text-5xl md:text-[84px] leading-[0.95]">Catalog</h1>
         </div>
 
         <div className="flex items-stretch rotate-2 drop-shadow-[0_12px_20px_rgba(17,17,17,0.18)]">
-          <div className="bg-receipt rounded-l-[18px] px-5.5 py-4 flex flex-col gap-1 font-mono text-[13px]">
+          <div className="bg-receipt rounded-l-[18px] px-4 py-3 md:px-5.5 md:py-4 flex flex-col gap-0.5 md:gap-1 font-mono text-[11px] md:text-[13px]">
             <span className="font-bold tracking-[0.14em]">COUPON · ONE PER ORDER</span>
-            <span className="font-sans text-[15px]">10% off your cart. Free shipping from $100.</span>
-            <span className="self-start mt-1 px-2.5 py-0.5 border-2 border-dashed border-ink rounded-lg text-lg font-bold">10X10</span>
+            <span className="font-sans text-[13px] md:text-[15px]">10% off your cart. Free shipping from $100.</span>
+            <span className="self-start mt-1 px-2 md:px-2.5 py-0.5 border-2 border-dashed border-ink rounded-lg text-base md:text-lg font-bold">10X10</span>
           </div>
-          <div className="w-27 grid place-items-center bg-orange text-white border-l-[3px] border-dashed border-paper rounded-r-[18px] font-display text-[28px] leading-none">
+          <div className="w-20 md:w-27 grid place-items-center bg-orange text-white border-l-[3px] border-dashed border-paper rounded-r-[18px] font-display text-[22px] md:text-[28px] leading-none">
             −10%
           </div>
         </div>

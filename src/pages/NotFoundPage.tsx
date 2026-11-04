@@ -11,7 +11,7 @@ export default function NotFoundPage() {
         <span className={`${circleStyles} bg-mint -rotate-4`}>4</span>
         <span className="hidden lg:block absolute -right-52 -top-8 font-note text-[32px] text-accent rotate-8">oops, wrong aisle ↙</span>
       </div>
-      <h1 className="font-display text-5xl md:text-7xl leading-[0.95]">Page not found</h1>
+      <h1 className="font-display text-[40px] md:text-7xl leading-[0.95]">Page not found</h1>
       <p className="text-xl font-semibold">The page you are looking for does not exist.</p>
       <Link
         to="/catalog"

@@ -41,7 +41,7 @@ export default function ProductInfo({ product, rating, reviewCount }: ProductInf
         </Link>
       </div>
 
-      <h1 className="font-display text-5xl md:text-7xl leading-[0.95]">{product.title}</h1>
+      <h1 className="font-display text-[32px] md:text-7xl leading-[1.05] md:leading-[0.95]">{product.title}</h1>
 
       <div className="flex items-center gap-2 font-semibold">
         <img src={starIcon} alt="" className="w-5 h-5" />
@@ -51,8 +51,8 @@ export default function ProductInfo({ product, rating, reviewCount }: ProductInf
       </div>
 
       <div className="flex flex-wrap items-center gap-3.5">
-        <span className="font-display text-[52px] leading-none">{formatPrice(discountedPrice)}</span>
-        <span className="text-[22px] font-semibold line-through">{formatPrice(product.price)}</span>
+        <span className="font-display text-[40px] md:text-[52px] leading-none">{formatPrice(discountedPrice)}</span>
+        <span className="text-lg md:text-[22px] font-semibold line-through">{formatPrice(product.price)}</span>
         <StockPill stock={product.stock} />
       </div>
 
