@@ -1,5 +1,6 @@
 import { Form, Formik, type FormikHelpers } from "formik"
-import { Link, useNavigate, useLocation } from "react-router"
+import PageTitle from "../components/layout/PageTitle"
+import { Link, Navigate, useNavigate, useLocation } from "react-router"
 import { getFromPath } from "../utils/guards"
 import AuthShell from "../components/auth/AuthShell"
 import FormField from "../components/auth/FormField"
@@ -13,7 +14,7 @@ const initialValues : RegisterFormValues = {username: "", name: "", email: "", p
 export default function RegisterPage() {
     const navigate = useNavigate()
     const location = useLocation()
-    const { login } = useAuth()
+    const { user, login } = useAuth()
     const { showToast } = useToast()
     const from = getFromPath(location.state)
 
@@ -39,6 +40,9 @@ export default function RegisterPage() {
 
     }
 
+  // already logged in (Back button, old bookmark): there is nothing to do here
+  if (user) return <Navigate to={from} replace />
+
   return (
    <AuthShell
     note="new here? ✶"
@@ -46,6 +50,7 @@ export default function RegisterPage() {
     text="Create an account in a few seconds and check out faster."
     ticketTitle="NEW MEMBER"
    >
+    <PageTitle title="Sign up" />
     <Formik initialValues={initialValues} validationSchema={registerSchema} onSubmit={handleSubmit}>
         {({isSubmitting}) => (
             <Form noValidate className="flex flex-col gap-4.5">

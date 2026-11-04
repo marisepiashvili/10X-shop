@@ -1,5 +1,5 @@
 import type { CartItem, CartState, CartTotals } from "../types/cart"
-import type { Order, ShippingInfo } from "../types/order"
+import type { OrderData, ShippingInfo } from "../types/order"
 import type { SortOption, StoredReview } from "../types/product"
 import type { AuthUser, StoredUser } from "../types/user"
 
@@ -25,23 +25,6 @@ export function isArrayOf<T>(value: unknown, isItem: (item: unknown) => item is 
   return Array.isArray(value) && value.every(isItem)
 }
 
-// reads and parses a storage key, returning the fallback when the value is missing, broken or the wrong shape
-export function readStorage<T>(
-  key: string,
-  isValid: (value: unknown) => value is T,
-  fallback: T,
-  storage: Storage = localStorage
-): T {
-  try {
-    const raw = storage.getItem(key)
-    if (!raw) return fallback
-    const parsed: unknown = JSON.parse(raw)
-    return isValid(parsed) ? parsed : fallback
-  } catch {
-    return fallback
-  }
-}
-
 export function isCartItem(value: unknown): value is CartItem {
   return isRecord(value) && isNumber(value.id) && isString(value.title) && isString(value.thumbnail)
     && isNumber(value.price) && isNumber(value.discountPercentage) && isNumber(value.stock) && isNumber(value.quantity)
@@ -62,7 +45,7 @@ function isShippingInfo(value: unknown): value is ShippingInfo {
     && isString(value.address) && isString(value.city)
 }
 
-export function isOrder(value: unknown): value is Order {
+export function isOrderData(value: unknown): value is OrderData {
   return isRecord(value) && isString(value.id) && isString(value.createdAt)
     && isArrayOf(value.items, isCartItem)
     && (value.promoCode === null || isString(value.promoCode))

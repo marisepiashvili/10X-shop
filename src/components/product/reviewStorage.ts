@@ -1,5 +1,6 @@
 import type { StoredReview } from "../../types/product"
-import { isArrayOf, isRecord, isStoredReview, readStorage } from "../../utils/guards"
+import { isArrayOf, isRecord, isStoredReview } from "../../utils/guards"
+import { StorageService } from "../../models/StorageService"
 import { STORAGE_KEYS } from "../../utils/storageKeys"
 
 // product id -> reviews written in this browser, newest first
@@ -9,8 +10,10 @@ function isReviewStore(value: unknown): value is ReviewStore {
   return isRecord(value) && Object.values(value).every((reviews) => isArrayOf(reviews, isStoredReview))
 }
 
+const reviewsStorage = new StorageService<ReviewStore>(STORAGE_KEYS.reviews, isReviewStore)
+
 function readStore(): ReviewStore {
-  return readStorage(STORAGE_KEYS.reviews, isReviewStore, {})
+  return reviewsStorage.get() ?? {}
 }
 
 export function loadReviews(productId: number): StoredReview[] {
@@ -20,10 +23,10 @@ export function loadReviews(productId: number): StoredReview[] {
 export function saveReview(productId: number, review: StoredReview): StoredReview[] {
   const store = readStore()
   const reviews = [review, ...(store[productId] ?? [])]
-  localStorage.setItem(STORAGE_KEYS.reviews, JSON.stringify({ ...store, [productId]: reviews }))
+  reviewsStorage.set({ ...store, [productId]: reviews })
   return reviews
 }
 
 export function clearReviews() {
-  localStorage.removeItem(STORAGE_KEYS.reviews)
+  reviewsStorage.remove()
 }

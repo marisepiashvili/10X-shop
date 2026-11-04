@@ -1,5 +1,6 @@
 import { FormikProvider, useFormik, type FormikHelpers } from "formik"
-import { Link, useLocation, useNavigate } from "react-router"
+import PageTitle from "../components/layout/PageTitle"
+import { Link, Navigate, useLocation, useNavigate } from "react-router"
 import { getFromPath } from "../utils/guards"
 import AuthShell from "../components/auth/AuthShell"
 import FormField from "../components/auth/FormField"
@@ -11,7 +12,7 @@ const initialValues : LoginFormValues = {username: "", password:""}
 
 export default function LoginPage (){
     const navigate = useNavigate()
-    const {login} = useAuth()
+    const { user, login } = useAuth()
     const location = useLocation()
     const from = getFromPath(location.state)
     const isFromCheckout = from === "/checkout"
@@ -34,6 +35,9 @@ export default function LoginPage (){
         onSubmit: handleSubmit,
     })
 
+    // already logged in (Back button, old bookmark): there is nothing to do here
+    if (user) return <Navigate to={from} replace />
+
     return(
         <AuthShell
             note="welcome back ✶"
@@ -42,6 +46,7 @@ export default function LoginPage (){
 
             ticketTitle="MEMBER PASS"
         >
+            <PageTitle title="Log in" />
             <FormikProvider value={formik}>
                 <form noValidate onSubmit={formik.handleSubmit} className="flex flex-col gap-4.5">
                     <FormField name="username" label="Username" autoComplete="username"/>

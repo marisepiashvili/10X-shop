@@ -1,10 +1,12 @@
 import { ArrowLeft } from "lucide-react"
+import PageTitle from "../components/layout/PageTitle"
 import { useState } from "react"
 import { Link, Navigate } from "react-router"
 import Receipt from "../components/cart/Receipt"
 import CheckoutForm from "../components/checkout/CheckoutForm"
 import type { ShippingInfo } from "../types/order"
-import { saveOrder } from "../components/orders/orderStorage"
+import { placeOrder } from "../components/orders/orderStorage"
+import { Cart } from "../models/Cart"
 import useCart from "../hooks/useCart"
 import { formatPrice } from "../utils/price"
 import { formatDate } from "../utils/date"
@@ -21,16 +23,11 @@ export default function CheckoutPage() {
   }
 
   function handlePlaceOrder(values: ShippingInfo) {
-    const order = saveOrder({
-      items,
-      promoCode,
-      totals,
-      shipping: {
-        fullName: values.fullName.trim(),
-        email: values.email.trim().toLowerCase(),
-        address: values.address.trim(),
-        city: values.city.trim(),
-      },
+    const order = placeOrder(new Cart(items, promoCode), {
+      fullName: values.fullName.trim(),
+      email: values.email.trim().toLowerCase(),
+      address: values.address.trim(),
+      city: values.city.trim(),
     })
     setPlacedOrderId(order.id)
     clearCart()
@@ -40,6 +37,7 @@ export default function CheckoutPage() {
 
   return (
     <div className="w-full max-w-330 mx-auto px-4 md:px-10 pt-6 pb-24 flex flex-col gap-8">
+      <PageTitle title="Checkout" />
       <div className="flex flex-col gap-2">
         <Link to="/cart" className="self-start flex items-center gap-2 h-11 font-extrabold hover:text-accent">
           <ArrowLeft size={20} strokeWidth={2.4} /> Back to cart

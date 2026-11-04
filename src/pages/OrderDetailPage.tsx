@@ -1,4 +1,5 @@
 import { ArrowLeft } from "lucide-react"
+import PageTitle from "../components/layout/PageTitle"
 import { Link, useNavigate, useParams } from "react-router"
 import Receipt from "../components/cart/Receipt"
 import { getOrderById } from "../components/orders/orderStorage"
@@ -41,6 +42,7 @@ export default function OrderDetailPage() {
 
   return (
     <div className="w-full max-w-330 mx-auto px-4 md:px-10 pt-6 pb-24 flex flex-col gap-10">
+      <PageTitle title={`Order #${order.id}`} />
       <Link to="/orders" className="self-start flex items-center gap-2 h-11 font-extrabold hover:text-accent">
         <ArrowLeft size={20} strokeWidth={2.4} /> All orders
       </Link>

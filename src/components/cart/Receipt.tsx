@@ -1,7 +1,7 @@
 import stampImage from "../../assets/stamp-10.webp"
 import { formatPrice } from "../../utils/price"
 import type { CartItem, CartTotals } from "../../types/cart"
-import { FREE_SHIPPING_FROM, PROMO_PERCENT, getUnitPrice } from "./cartTotals"
+import { Cart } from "../../models/Cart"
 
 type ReceiptProps = {
   title: string
@@ -29,7 +29,7 @@ export default function Receipt({ title, subtitle, footer, items, promoCode, tot
           {items.map((item) => (
             <li key={item.id} className="flex justify-between gap-3">
               <span className="truncate uppercase">{item.title} ×{item.quantity}</span>
-              <span>{(getUnitPrice(item) * item.quantity).toFixed(2)}</span>
+              <span>{(Cart.unitPrice(item) * item.quantity).toFixed(2)}</span>
             </li>
           ))}
         </ul>
@@ -43,12 +43,12 @@ export default function Receipt({ title, subtitle, footer, items, promoCode, tot
           </div>
           {promoCode && (
             <div className="flex justify-between font-bold text-accent">
-              <dt>Discount ({promoCode} −{PROMO_PERCENT}%)</dt>
+              <dt>Discount ({promoCode} −{Cart.PROMO_PERCENT}%)</dt>
               <dd>−{totals.discount.toFixed(2)}</dd>
             </div>
           )}
           <div className="flex justify-between">
-            <dt>SHIPPING (≥${FREE_SHIPPING_FROM})</dt>
+            <dt>SHIPPING (≥${Cart.FREE_SHIPPING_FROM})</dt>
             <dd>{totals.shipping === 0 ? "FREE" : totals.shipping.toFixed(2)}</dd>
           </div>
           <div className="flex justify-between pt-1 text-[22px] font-bold">

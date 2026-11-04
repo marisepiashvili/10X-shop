@@ -1,4 +1,5 @@
 import { Form, Formik, type FormikHelpers } from "formik"
+import PageTitle from "../components/layout/PageTitle"
 import { Link, useLocation, useNavigate } from "react-router"
 import { getFromPath } from "../utils/guards"
 import AuthShell from "../components/auth/AuthShell"
@@ -34,6 +35,7 @@ export default function ForgotPasswordPage() {
             text="Confirm your username and email, then pick a new password."
             ticketTitle="NEW PASS"
         >
+            <PageTitle title="Reset password" />
             <Formik initialValues={initialValues} validationSchema={resetPasswordSchema} onSubmit={handleSubmit}>
                 {({ isSubmitting }) => (
                     <Form noValidate className="flex flex-col gap-4.5">

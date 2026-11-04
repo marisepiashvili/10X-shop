@@ -1,4 +1,4 @@
-import { PROMO_PERCENT } from "./cartTotals"
+import { Cart } from "../../models/Cart"
 
 type PromoCodeFormProps = {
   value: string
@@ -43,7 +43,7 @@ export default function PromoCodeForm({ value, error, appliedCode, onChange, onA
       {error && <p id="promo-error" role="alert" className="text-sm font-bold text-danger pl-2.5">{error}</p>}
       {appliedCode && (
         <p className="text-sm font-bold">
-          {appliedCode} applied — {PROMO_PERCENT}% off.{" "}
+          {appliedCode} applied — {Cart.PROMO_PERCENT}% off.{" "}
           <button type="button" onClick={onRemove} className="font-extrabold underline hover:text-accent">Remove</button>
         </p>
       )}

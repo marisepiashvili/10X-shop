@@ -9,7 +9,8 @@ export interface ShippingInfo {
 
 export type OrderStatus = "Processing" | "Shipped" | "Delivered"
 
-export interface Order {
+// an order as it is saved in localStorage; models/Order.ts adds the behaviour
+export interface OrderData {
   id: string
   createdAt: string
   items: CartItem[]

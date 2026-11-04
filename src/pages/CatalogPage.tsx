@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import PageTitle from "../components/layout/PageTitle"
 import CatalogToolbar from "../components/catalog/CatalogToolbar";
 import Pagination from "../components/catalog/Pagination";
 import ProductGrid from "../components/product/ProductGrid";
@@ -103,6 +104,7 @@ export default function CatalogPage() {
 
   return (
     <div className="w-full max-w-330 mx-auto px-4 md:px-10 pt-6 md:pt-10 pb-26 flex flex-col gap-6 md:gap-9">
+      <PageTitle title="Catalog" />
       <section className="flex flex-wrap items-end justify-between gap-5 md:gap-8">
         <div className="flex flex-col gap-2">
           {/* always rendered, only hidden while loading, so the heading does not jump on every page change */}

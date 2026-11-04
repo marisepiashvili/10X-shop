@@ -1,4 +1,5 @@
 import { Link, useParams } from "react-router"
+import PageTitle from "../components/layout/PageTitle"
 import Receipt from "../components/cart/Receipt"
 import { getOrderById } from "../components/orders/orderStorage"
 import MessagePanel from "../components/ui/MessagePanel"
@@ -21,6 +22,7 @@ export default function ConfirmationPage() {
 
   return (
     <div className="flex-1 bg-blue text-white dark:text-ink">
+      <PageTitle title="Order placed" />
       <div className="max-w-330 mx-auto px-4 md:px-10 pt-18 pb-24 flex flex-wrap items-center justify-center gap-16">
         <div className="flex-[1_1_440px] max-w-140 flex flex-col gap-5.5">
           <span className="self-start font-note text-[34px] text-yellow -rotate-3">woohoo! ✶</span>

@@ -1,7 +1,7 @@
 import { Link } from "react-router"
 import { formatPrice } from "../../utils/price"
 import type { CartItem } from "../../types/cart"
-import { getUnitPrice } from "../cart/cartTotals"
+import { Cart } from "../../models/Cart"
 
 const imageBgColors = ["bg-pink", "bg-sky", "bg-yellow", "bg-mint"]
 
@@ -19,7 +19,7 @@ export default function OrderItemsTable({ items }: { items: CartItem[] }) {
         </thead>
         <tbody>
           {items.map((item) => {
-            const unitPrice = getUnitPrice(item)
+            const unitPrice = Cart.unitPrice(item)
             return (
               <tr key={item.id}>
                 <td className="px-2 sm:px-3 py-2">

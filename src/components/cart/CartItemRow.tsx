@@ -3,7 +3,7 @@ import { Link } from "react-router"
 import { formatPrice } from "../../utils/price"
 import QuantityStepper from "../product/QuantityStepper"
 import type { CartItem } from "../../types/cart"
-import { getUnitPrice } from "./cartTotals"
+import { Cart } from "../../models/Cart"
 
 const imageBgColors = ["bg-pink", "bg-sky", "bg-yellow", "bg-mint"]
 const rowTilts = ["-rotate-[0.6deg]", "rotate-[0.5deg]", "-rotate-[0.3deg]"]
@@ -15,7 +15,7 @@ type CartItemRowProps = {
 }
 
 export default function CartItemRow({ item, onQuantityChange, onRemove }: CartItemRowProps) {
-  const unitPrice = getUnitPrice(item)
+  const unitPrice = Cart.unitPrice(item)
   const bgColor = imageBgColors[item.id % imageBgColors.length]
   const tilt = rowTilts[item.id % rowTilts.length]
 

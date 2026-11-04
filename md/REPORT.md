@@ -43,13 +43,14 @@ Status as of 4 November 2026. Update this report before submission.
 | Profile | Done | First and last name fields; the header link shows the first name, so a change is visible there; theme switch shares state with the header |
 | Formik and Yup | Done | Login uses `useFormik` with `FormikProvider`; Register, password reset, Checkout and Profile use `<Formik>` |
 | Sign up and password reset | Done | Register page; local password reset at `/forgot-password` checks username and email |
+| Page titles, login redirect | Done (extra) | Every page sets its own `<title>` (React 19), e.g. `Catalog · 10X Shop` or the product name; a logged-in user opening `/login` or `/register` is sent on |
 | URL state | Done | `q`, `category`, `sort` and `page` live in the URL; refresh, Back/Forward and shared links keep them |
 | Toast | Done | Add to cart, stock limit, remove from cart, and review added |
 | Skeleton, Retry | Done | Skeletons on Home, Catalog, and Product; Retry on load errors |
 | `ApiClient`, `ApiError`, type guards | Done | Generic `get<T>`, 404 detected by status code, stored data validated before use |
 | `AsyncState<T>`, `SortOption` unions | Done | `useProducts` and `useProduct` return `AsyncState<T>`; pages switch on `status`; `?sort=` is checked with `isSortOption` |
 | `formatDate()` | Done | One date formatter in `utils/date.ts` instead of seven `toLocaleDateString` calls |
-| `Cart`, `Order`, `StorageService<T>` classes | Not done | The reducer and storage functions already cover this logic |
+| `Cart`, `Order`, `StorageService<T>` classes | Done | `src/models/`. `Cart implements ICart` does every total and is used by `CartProvider`, the receipts and checkout; `Order.create()` snapshots the cart, `getStatus()` drives the status pill and timeline, `toJSON()` feeds storage; `StorageService<T>` is the only way the app reads or writes storage (except the theme string, which `index.html` reads before React) |
 | Lazy routes | Done | Home and Catalog load up front; other pages load on demand |
 | Lighthouse targets | Done | All medians met on the live site |
 | Progress notes | Done | `docs/progress/week-1.md` to `week-3.md`, reconstructed from the Git history |
@@ -97,6 +98,18 @@ Run on the live site on 2 November 2026 with the Mobile preset, 3 runs per page.
 | Home `/` | 98 | 95 | 100 | 0 |
 | Catalog `/catalog` | 95 | 96 | 100 | 0 |
 | Product `/products/1` | 89 | 97 | 100 | 0 |
+
+**After the mobile layout changes**
+
+Run on the live site on 4 November 2026 with Lighthouse 13.6 and the Mobile preset, 3 runs per page. The table shows the median. Reports are `docs/lighthouse/mobile-layout-*.html`.
+
+| Page | Performance | Accessibility | Best Practices | CLS |
+|---|---|---|---|---|
+| Home `/` | 96 | 96 | 100 | 0 |
+| Catalog `/catalog` | 98 | 96 | 100 | 0 |
+| Product `/products/1` | 88 | 96 | 100 | 0 |
+
+The 2-column grid and smaller layout did not slow the pages down; Catalog went from 95 to 98. The only accessibility finding is colour contrast of white text on the orange brand colour (logo, coupon, discount badge, Add to cart), which was already there before. A first run with Lighthouse 12.8 gave 83–88 for Performance; it is not used here because the earlier results came from version 13.6.
 
 Accessibility stays below 100 because white text on the brand orange `#FF7A1A` has 2.6:1 contrast. This is a deliberate design choice.
 

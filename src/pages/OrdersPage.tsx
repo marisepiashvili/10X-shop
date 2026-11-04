@@ -1,4 +1,5 @@
 import { Link } from "react-router"
+import PageTitle from "../components/layout/PageTitle"
 import { readOrders } from "../components/orders/orderStorage"
 import OrderRow from "../components/orders/OrderRow"
 import useNow from "../hooks/useNow"
@@ -12,6 +13,7 @@ export default function OrdersPage() {
 
   return (
     <div className="w-full max-w-280 mx-auto px-4 md:px-10 pt-10 pb-24 flex flex-col gap-9">
+      <PageTitle title="Orders" />
       <div className="flex flex-col gap-2">
         {orders.length > 0 && (
           <span className="self-start font-note text-3xl text-accent -rotate-3">{orders.length} so far — keep 'em coming</span>

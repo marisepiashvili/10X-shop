@@ -1,24 +1,26 @@
-import { isArrayOf, isOrder, readStorage } from "../../utils/guards"
+import { isArrayOf, isOrderData } from "../../utils/guards"
 import { STORAGE_KEYS } from "../../utils/storageKeys"
-import type { Order } from "../../types/order"
+import { StorageService } from "../../models/StorageService"
+import { Order } from "../../models/Order"
+import type { Cart } from "../../models/Cart"
+import type { OrderData, ShippingInfo } from "../../types/order"
 
-function isOrderList(value: unknown): value is Order[] {
-  return isArrayOf(value, isOrder)
+function isOrderDataList(value: unknown): value is OrderData[] {
+  return isArrayOf(value, isOrderData)
 }
+
+const ordersStorage = new StorageService<OrderData[]>(STORAGE_KEYS.orders, isOrderDataList)
 
 export function readOrders(): Order[] {
-  return readStorage(STORAGE_KEYS.orders, isOrderList, [])
+  return (ordersStorage.get() ?? []).map((data) => new Order(data))
 }
 
-export function saveOrder(order: Omit<Order, "id" | "createdAt">): Order {
+export function placeOrder(cart: Cart, shipping: ShippingInfo): Order {
   const orders = readOrders()
-  const newOrder: Order = {
-    ...order,
-    id: `10X-${String(orders.length + 1).padStart(5, "0")}`,
-    createdAt: new Date().toISOString(),
-  }
-  localStorage.setItem(STORAGE_KEYS.orders, JSON.stringify([...orders, newOrder]))
-  return newOrder
+  const order = Order.create(cart, shipping, `10X-${String(orders.length + 1).padStart(5, "0")}`)
+  // each Order turns itself into plain data through toJSON()
+  ordersStorage.set([...orders, order])
+  return order
 }
 
 export function getOrderById(id: string) {
@@ -26,5 +28,5 @@ export function getOrderById(id: string) {
 }
 
 export function clearOrders() {
-  localStorage.removeItem(STORAGE_KEYS.orders)
+  ordersStorage.remove()
 }

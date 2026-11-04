@@ -2,7 +2,8 @@ import { useEffect, useRef, useState } from "react"
 import { useLocation, useNavigate } from "react-router"
 import useAuth from "../../hooks/useAuth"
 import useToast from "../../hooks/useToast"
-import { isNumber, isRecord, isString, readStorage } from "../../utils/guards"
+import { isNumber, isRecord, isString } from "../../utils/guards"
+import { StorageService } from "../../models/StorageService"
 import { STORAGE_KEYS } from "../../utils/storageKeys"
 import type { Product, StoredReview } from "../../types/product"
 import ReviewCard from "./ReviewCard"
@@ -11,12 +12,15 @@ import ReviewForm from "./ReviewForm"
 type Tab = "details" | "reviews"
 type ReviewDraft = { productId: number, rating: number, comment: string }
 
-function isReviewDraft(value: unknown): value is ReviewDraft | null {
-  return value === null || (isRecord(value) && isNumber(value.productId) && isNumber(value.rating) && isString(value.comment))
+function isReviewDraft(value: unknown): value is ReviewDraft {
+  return isRecord(value) && isNumber(value.productId) && isNumber(value.rating) && isString(value.comment)
 }
 
+// sessionStorage: the draft only has to survive the trip to the login page and back
+const draftStorage = new StorageService<ReviewDraft>(STORAGE_KEYS.reviewDraft, isReviewDraft, sessionStorage)
+
 function loadDraft(productId: number): ReviewDraft | null {
-  const draft = readStorage(STORAGE_KEYS.reviewDraft, isReviewDraft, null, sessionStorage)
+  const draft = draftStorage.get()
   return draft?.productId === productId ? draft : null
 }
 
@@ -44,11 +48,11 @@ export default function ProductTabs({ product, reviews, onAddReview }: ProductTa
     if (!user) {
       // keep what they wrote so the form is filled in again after login
       const newDraft: ReviewDraft = { productId: product.id, rating, comment }
-      sessionStorage.setItem(STORAGE_KEYS.reviewDraft, JSON.stringify(newDraft))
+      draftStorage.set(newDraft)
       navigate("/login", { state: { from: `${pathname}#reviews` } })
       return
     }
-    sessionStorage.removeItem(STORAGE_KEYS.reviewDraft)
+    draftStorage.remove()
     setDraft(null)
     onAddReview({
       id: crypto.randomUUID(),

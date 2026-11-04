@@ -1,6 +1,7 @@
 import { Check } from "lucide-react"
-import type { Order, OrderStatus } from "../../types/order"
-import { ORDER_STEPS, STATUS_COLORS, getOrderStatus } from "./orderStatus"
+import type { Order } from "../../models/Order"
+import type { OrderStatus } from "../../types/order"
+import { ORDER_STEPS, STATUS_COLORS } from "./orderStatus"
 import { formatDateTime } from "../../utils/date"
 
 const CURRENT_NOTES: Record<OrderStatus, string> = {
@@ -15,7 +16,7 @@ type StatusTimelineProps = {
 }
 
 export default function StatusTimeline({ order, now }: StatusTimelineProps) {
-  const currentIndex = ORDER_STEPS.indexOf(getOrderStatus(order, now))
+  const currentIndex = ORDER_STEPS.indexOf(order.getStatus(now))
   const placedAt = formatDateTime(order.createdAt)
 
   return (

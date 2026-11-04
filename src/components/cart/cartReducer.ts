@@ -1,9 +1,12 @@
-import { isCartState, readStorage } from "../../utils/guards"
+import { isCartState } from "../../utils/guards"
+import { StorageService } from "../../models/StorageService"
 import { STORAGE_KEYS } from "../../utils/storageKeys"
 import type { CartAction, CartState } from "../../types/cart"
 
 
 export const initialCartState: CartState = { items: [], promoCode: null }
+
+export const cartStorage = new StorageService<CartState>(STORAGE_KEYS.cart, isCartState)
 
 function clamp(quantity: number, stock: number) {
   return Math.min(Math.max(quantity, 1), stock)
@@ -57,5 +60,5 @@ export function cartReducer(state: CartState, action: CartAction): CartState {
 }
 
 export function loadCart(): CartState {
-  return readStorage(STORAGE_KEYS.cart, isCartState, initialCartState)
+  return cartStorage.get() ?? initialCartState
 }

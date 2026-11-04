@@ -41,12 +41,13 @@ src/
   assets/       fonts and icons
   components/   auth, cart, catalog, checkout, home, layout, orders, product, profile, ui
   api/          ApiClient and ApiError
+  models/       Cart, Order and StorageService<T> classes
   hooks/        useAuth, useCart, useCategories, useDebounce, useNow, useProduct, useProducts, useReviews, useTheme, useToast
   pages/        one component per route
   utils/        price formatting and type guards
 ```
 
-Pages combine reusable components and read shared state from `AuthProvider` and `CartProvider`. A user action calls a handler, which updates React state, and React renders the result. Product data is fetched in `useEffect` through `useProducts` and `useProduct`, which call a typed `ApiClient` and cancel outdated requests with `AbortController`. Data read from storage is checked with type guards before use. The cart, users, orders, and theme are saved to `localStorage`.
+Pages combine reusable components and read shared state from `AuthProvider` and `CartProvider`. A user action calls a handler, which updates React state, and React renders the result. Product data is fetched in `useEffect` through `useProducts` and `useProduct`, which call a typed `ApiClient` and cancel outdated requests with `AbortController`. Data read from storage goes through `StorageService<T>`, which checks it with a type guard before use. Cart totals come from the `Cart` class and order status from `Order.getStatus()`. The cart, users, orders, and theme are saved to `localStorage`.
 
 ## How to Run
 

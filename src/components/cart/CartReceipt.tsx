@@ -3,7 +3,7 @@ import { Link } from "react-router"
 import { formatPrice } from "../../utils/price"
 import { formatDate } from "../../utils/date"
 import type { CartItem, CartTotals } from "../../types/cart"
-import { FREE_SHIPPING_FROM } from "./cartTotals"
+import { Cart } from "../../models/Cart"
 import Receipt from "./Receipt"
 
 type CartReceiptProps = {
@@ -20,7 +20,7 @@ export default function CartReceipt({ items, promoCode, totals }: CartReceiptPro
       <Receipt
         title="10X SHOP"
         subtitle={`ORDER SUMMARY · ${today}`}
-        footer={`FREE SHIPPING FROM ${formatPrice(FREE_SHIPPING_FROM)}`}
+        footer={`FREE SHIPPING FROM ${formatPrice(Cart.FREE_SHIPPING_FROM)}`}
         items={items}
         promoCode={promoCode}
         totals={totals}

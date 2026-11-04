@@ -10,6 +10,7 @@ export default function ThemeProvider({ children }: { children: React.ReactNode 
     const next = !isDark
     setIsDark(next)
     document.documentElement.classList.toggle("dark", next)
+    // a plain "dark"/"light" string, not StorageService's JSON: index.html reads it before React loads
     localStorage.setItem(STORAGE_KEYS.theme, next ? "dark" : "light")
   }
 

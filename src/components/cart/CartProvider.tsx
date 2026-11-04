@@ -1,21 +1,20 @@
 import { useEffect, useReducer } from "react"
 import type { CartProduct } from "../../types/cart"
 import { CartContext } from "./CartContext"
-import { cartReducer, loadCart } from "./cartReducer"
-import { STORAGE_KEYS } from "../../utils/storageKeys"
-import { getCartTotals } from "./cartTotals"
+import { cartReducer, cartStorage, loadCart } from "./cartReducer"
+import { Cart } from "../../models/Cart"
 
 export default function CartProvider({ children }: { children: React.ReactNode }) {
   const [state, dispatch] = useReducer(cartReducer, undefined, loadCart)
 
   useEffect(() => {
-    localStorage.setItem(STORAGE_KEYS.cart, JSON.stringify(state))
+    cartStorage.set(state)
   }, [state])
 
   const value = {
     items: state.items,
     promoCode: state.promoCode,
-    totals: getCartTotals(state),
+    totals: new Cart(state.items, state.promoCode).totals(),
     addItem: (product: CartProduct, quantity: number) => {
       const inCart = state.items.find((item) => item.id === product.id)?.quantity ?? 0
       if (inCart + quantity > product.stock) return false

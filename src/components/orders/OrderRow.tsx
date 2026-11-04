@@ -2,8 +2,7 @@ import { ChevronRight } from "lucide-react";
 import { Link } from "react-router";
 import { formatPrice } from "../../utils/price";
 import { formatDate } from "../../utils/date";
-import type { Order } from "../../types/order"
-import { getOrderStatus } from "./orderStatus"
+import type { Order } from "../../models/Order"
 import StatusPill from "./StatusPill"
 
 
@@ -33,7 +32,7 @@ export default function OrderRow({order, index, now} : OrderRowProps) {
             <span className="text-[19px] font-extrabold">{date}</span>
             <span className="text-[15px] font-semibold">{count} {count === 1 ? "item" : "items"}</span>
           </div>
-          <StatusPill status={getOrderStatus(order, now)} />
+          <StatusPill status={order.getStatus(now)} />
           <span className="sm:min-w-32 sm:text-right font-display text-[26px]">{formatPrice(order.totals.total)}</span>
           <span className="hidden sm:grid w-11 h-11 rounded-full bg-coal text-white place-items-center transition group-hover:bg-blue">
             <ChevronRight size={20} strokeWidth={2.4} />

@@ -1,5 +1,6 @@
 import type { AuthUser, ProfileChanges, StoredUser } from "../../types/user"
-import { isArrayOf, isAuthUser, isStoredUser, readStorage } from "../../utils/guards"
+import { isArrayOf, isAuthUser, isStoredUser } from "../../utils/guards"
+import { StorageService } from "../../models/StorageService"
 import { STORAGE_KEYS } from "../../utils/storageKeys"
 
 // an account problem tied to one form field, so the form can show it next to that field
@@ -13,20 +14,19 @@ export class AccountError extends Error {
     }
 }
 
-function isNullableAuthUser(value: unknown): value is AuthUser | null {
-    return value === null || isAuthUser(value)
-}
-
 function isStoredUserList(value: unknown): value is StoredUser[] {
     return isArrayOf(value, isStoredUser)
 }
 
+const usersStorage = new StorageService<StoredUser[]>(STORAGE_KEYS.users, isStoredUserList)
+export const currentUserStorage = new StorageService<AuthUser>(STORAGE_KEYS.currentUser, isAuthUser)
+
 function readUsers(): StoredUser[]{
-    return readStorage(STORAGE_KEYS.users, isStoredUserList, [])
+    return usersStorage.get() ?? []
 }
 
 function saveUsers(users: StoredUser[]) {
-    localStorage.setItem(STORAGE_KEYS.users, JSON.stringify(users))
+    usersStorage.set(users)
 }
 
 function toAuthUser({ username, name, email, phone }: StoredUser): AuthUser {
@@ -54,7 +54,7 @@ export function loginUser(username: string, password: string): AuthUser {
 }
 
 export function loadCurrentUser(): AuthUser | null {
-    return readStorage(STORAGE_KEYS.currentUser, isNullableAuthUser, null)
+    return currentUserStorage.get()
 }
 
 export function updateUser(username: string, changes: ProfileChanges): AuthUser {

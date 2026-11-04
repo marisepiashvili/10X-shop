@@ -1,4 +1,5 @@
 import { Link, useLocation, useNavigate, useParams } from "react-router"
+import PageTitle from "../components/layout/PageTitle"
 import chevronLeftIcon from "../assets/icons/chevron-left.svg"
 import ProductDetails from "../components/product/ProductDetails"
 import RelatedProducts from "../components/product/RelatedProducts"
@@ -42,6 +43,7 @@ export default function ProductPage() {
 
   return (
     <div className="w-full max-w-330 mx-auto px-4 md:px-10 pt-6 pb-26 flex flex-col gap-14">
+      <PageTitle title={state.status === "success" ? state.data.title : "Product"} />
       <Link to="/catalog" onClick={handleBack} className="flex items-center gap-2 h-11 w-fit font-extrabold hover:text-accent">
         <img src={chevronLeftIcon} alt="" className="w-5 h-5 dark:invert" />
         Back to catalog

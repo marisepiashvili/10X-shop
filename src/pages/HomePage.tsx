@@ -1,4 +1,5 @@
 import { Link } from "react-router"
+import PageTitle from "../components/layout/PageTitle"
 import CategoryPills from "../components/home/CategoryPills"
 import HeroSection from "../components/home/HeroSection"
 import PromoMarquee from "../components/home/PromoMarquee"
@@ -32,6 +33,7 @@ export default function HomePage() {
 
   return (
     <>
+      <PageTitle />
       <HeroSection total={total} products={heroProducts} loading={state.status === "loading"} />
 
       <div className="w-full max-w-330 mx-auto px-4 md:px-10 pt-14 md:pt-18 pb-24 flex flex-col gap-14 md:gap-20">
