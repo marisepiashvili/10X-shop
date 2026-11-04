@@ -1,5 +1,6 @@
 import { FormikProvider, useFormik, type FormikHelpers } from "formik"
 import { Link, useLocation, useNavigate } from "react-router"
+import { getFromPath } from "../utils/guards"
 import AuthShell from "../components/auth/AuthShell"
 import FormField from "../components/auth/FormField"
 import { loginSchema, type LoginFormValues } from "../components/auth/authSchemas"
@@ -12,7 +13,7 @@ export default function LoginPage (){
     const navigate = useNavigate()
     const {login} = useAuth()
     const location = useLocation()
-    const from = (location.state as { from?: string } | null)?.from ?? "/"
+    const from = getFromPath(location.state)
     const isFromCheckout = from === "/checkout"
 
     // async on purpose: Formik resets isSubmitting only when onSubmit returns a Promise,

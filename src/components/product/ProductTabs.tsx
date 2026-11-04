@@ -8,7 +8,7 @@ import type { Product, StoredReview } from "../../types/product"
 import ReviewCard from "./ReviewCard"
 import ReviewForm from "./ReviewForm"
 
-type Tab = "description" | "reviews"
+type Tab = "details" | "reviews"
 type ReviewDraft = { productId: number, rating: number, comment: string }
 
 function isReviewDraft(value: unknown): value is ReviewDraft | null {
@@ -33,7 +33,7 @@ export default function ProductTabs({ product, reviews, onAddReview }: ProductTa
   const navigate = useNavigate()
   const sectionRef = useRef<HTMLElement>(null)
   const openReviews = hash === "#reviews"
-  const [activeTab, setActiveTab] = useState<Tab>(openReviews ? "reviews" : "description")
+  const [activeTab, setActiveTab] = useState<Tab>(openReviews ? "reviews" : "details")
   const [draft, setDraft] = useState(() => loadDraft(product.id))
 
   useEffect(() => {
@@ -61,7 +61,8 @@ export default function ProductTabs({ product, reviews, onAddReview }: ProductTa
     showToast("Review added ✓")
   }
 
-  // the description itself is shown under the price (PRD P3.1), so this tab lists the specs instead of repeating it
+  // the description itself is shown under the price (PRD P3.1), so this tab lists the specs instead of repeating it;
+  // that is also why it is called Details, not Description
   const details: { label: string; value?: string }[] = [
     { label: "Brand", value: product.brand },
     { label: "Category", value: product.category },
@@ -73,7 +74,7 @@ export default function ProductTabs({ product, reviews, onAddReview }: ProductTa
   ]
 
   const tabs: { id: Tab, label: string }[] = [
-    { id: "description", label: "Description" },
+    { id: "details", label: "Details" },
     { id: "reviews", label: `Reviews (${reviews.length})` },
   ]
 
@@ -100,7 +101,7 @@ export default function ProductTabs({ product, reviews, onAddReview }: ProductTa
       </div>
 
       <div id={`panel-${activeTab}`} role="tabpanel" aria-labelledby={`tab-${activeTab}`}>
-        {activeTab === "description" ? (
+        {activeTab === "details" ? (
           <dl className="bg-card rounded-card shadow-card px-6 py-3 md:px-9 md:py-5 grid grid-cols-1 md:grid-cols-2 md:gap-x-12">
             {details.filter((detail) => detail.value).map((detail) => (
               <div key={detail.label} className="flex justify-between gap-6 py-3 border-b border-dashed border-muted">

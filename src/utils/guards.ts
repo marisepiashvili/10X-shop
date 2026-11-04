@@ -97,3 +97,8 @@ export function isStoredReview(value: unknown): value is StoredReview {
   return isRecord(value) && isString(value.id) && isNumber(value.rating) && isString(value.comment)
     && isString(value.date) && isString(value.reviewerName) && isString(value.reviewerEmail)
 }
+
+// location.state can hold anything (old links, other pages), so check it before using it
+export function getFromPath(state: unknown): string {
+  return isRecord(state) && isString(state.from) ? state.from : "/"
+}

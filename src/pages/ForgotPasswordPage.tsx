@@ -1,5 +1,6 @@
 import { Form, Formik, type FormikHelpers } from "formik"
 import { Link, useLocation, useNavigate } from "react-router"
+import { getFromPath } from "../utils/guards"
 import AuthShell from "../components/auth/AuthShell"
 import FormField from "../components/auth/FormField"
 import { resetPasswordSchema, type ResetPasswordFormValues } from "../components/auth/authSchemas"
@@ -12,7 +13,7 @@ export default function ForgotPasswordPage() {
     const navigate = useNavigate()
     const location = useLocation()
     const { showToast } = useToast()
-    const from = (location.state as { from?: string } | null)?.from ?? "/"
+    const from = getFromPath(location.state)
 
     // async so Formik resets isSubmitting after a failed attempt (see LoginPage)
     async function handleSubmit(values: ResetPasswordFormValues, { setFieldError }: FormikHelpers<ResetPasswordFormValues>) {
