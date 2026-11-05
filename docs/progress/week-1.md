@@ -1,6 +1,6 @@
 # Week 1 — 17–23 October 2026
 
-> Reconstructed on 4 November 2026 from the Git history. Hours and blockers still need to be filled in.
+> Reconstructed on 4 November 2026 from the Git history. Blockers still need to be filled in.
 
 ## Done
 
@@ -24,4 +24,6 @@
 
 ## Hours
 
-<!-- TODO: hours spent this week -->
+About 10 hours: 18 Oct ≈ 1 h, 19 Oct ≈ 6.5 h, 22 Oct ≈ 3 h.
+
+Hours are estimated from commit times (see Hours by Epic in REPORT.md); they are a lower bound.

@@ -1,21 +1,22 @@
 # Week 3 — 31 October – 6 November 2026
 
-> Written on 4 November 2026 from the Git history and DEBUG-LOG.md. Hours still need to be filled in; update before submission.
+> Written on 4 November 2026 from the Git history and DEBUG-LOG.md, updated on 5 November.
 
 ## Done
 
 - **2 Nov:** dark mode with a saved preference; Error Boundary around routed pages; SPA rewrite for Vercel; lazy-loaded routes and Lighthouse fixes; reset filters button; search limited to product titles; login required for orders and reviews; checkout prefilled from the logged-in user; return path kept through registration.
 - **3 Nov:** filters, sort and page kept in the URL; toast notifications; reviews saved with a live average rating; skeletons, paging info and live order status; `ApiClient`, `ApiError` and storage type guards.
-- **4 Nov:** mobile burger menu and confirm dialog; PRD detail fixes; username login, password reset page, `useFormik`, `AsyncState<T>`, `SortOption`, `formatDate`, review form errors; Orders and Profile links only for logged-in users.
+- **4 Nov:** mobile burger menu and confirm dialog; PRD detail fixes; username login, password reset page, `useFormik`, `AsyncState<T>`, `SortOption`, `formatDate`, review form errors; Orders and Profile links only for logged-in users; compact mobile layout with a 2-column product grid; Details tab with product specs; `Cart`, `Order` and `StorageService<T>` classes; page titles; new Lighthouse run.
+- **5 Nov:** Firefox and Safari checked on desktop and mobile, with screenshots in `docs/compat/`.
 
 ## Compared with the plan
 
-- On track: all CORE items done by 2 Nov except the Firefox compatibility check.
-- Not done yet: Firefox testing and compatibility screenshots, GitHub Issues/Projects and PRs, demo video.
+- On track: all CORE items done by 2 Nov; the Firefox check followed on 5 Nov, together with Safari.
+- Not done yet: GitHub Issues/Projects and PRs, demo video.
 
 ## Next
 
-- Firefox check and screenshots, final README and REPORT, submission on 6 Nov.
+- Final README and REPORT, submission on 6 Nov.
 
 ## Blockers
 
@@ -25,4 +26,6 @@
 
 ## Hours
 
-<!-- TODO: hours spent this week -->
+About 17 hours: 2 Nov ≈ 6 h, 3 Nov ≈ 3.5 h, 4 Nov ≈ 6 h, 5 Nov ≈ 1 h.
+
+Hours are estimated from commit times (see Hours by Epic in REPORT.md); they are a lower bound. The Firefox and Safari screenshots on 5 Nov took longer than the single commit shows.

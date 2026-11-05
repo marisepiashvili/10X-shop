@@ -122,7 +122,24 @@ Accessibility stays below 100 because white text on the brand orange `#FF7A1A` h
 
 ### Hours by Epic
 
-<!-- TODO: add your real hours for Auth, Catalog, Product, Cart, Checkout, Orders, Profile, Quality, and Docs -->
+Planned hours come from `PLAN.md`. The actual hours are an estimate from the Git history, because time was not tracked while working. Commits less than 3 hours apart count as one work session; each session gets 1 hour before its first commit plus the time between its commits. Each commit's time is split between epics by the files it changed.
+
+| Epic | Planned (h) | Estimated from Git (h) |
+|---|---|---|
+| Setup | 5.5 | 1.5 |
+| Layout & Routing | 3.5 | 9 |
+| Auth | 4 | 3.5 |
+| Catalog | 11 | 8.5 |
+| Product | 5.5 | 3 |
+| Cart | 8 | 3.5 |
+| Checkout | 5 | 1 |
+| Orders & Profile | 6 | 3.5 |
+| Quality | 12.5 | 3 |
+| Docs | 6.5 | 1.5 |
+| Shared utilities | – | 1 |
+| **Total** | **67.5** | **≈ 39** |
+
+The estimate is a lower bound: 16 sessions over 13 days. Work that leaves few commits is undercounted, such as reading documentation, debugging, Lighthouse runs, browser testing, screenshots and writing these documents, so Quality and Docs took longer than shown. Layout & Routing is high because the redesign on 25 October changed the layout and shared styles of every page.
 
 ## Three Hardest Problems
 
@@ -132,7 +149,13 @@ Accessibility stays below 100 because white text on the brand orange `#FF7A1A` h
 
 ## What I Would Do Differently
 
-<!-- TODO: write this in your own words -->
+<!-- Draft written from the project history; reread it and change anything that does not match your experience -->
+
+- **Use Issues and pull requests from the first day.** I committed straight to `main`, so the Issues, PRs and progress notes had to be reconstructed from the Git history at the end. Opening an Issue and a branch for each task would have kept the plan and the history connected.
+- **Write the progress note at the end of each week.** The notes for weeks 1 and 2 were written afterwards from commit messages, and the hours and blockers were hard to remember.
+- **Check each page at 375px as soon as it is built.** I tested mobile late, so on 4 November I had to shrink headings, cards, tables and inputs on almost every page at once. A quick check after each page would have caught this earlier.
+- **Plan color roles before adding dark mode.** Colors such as `white` had several jobs, and splitting them later took longer than naming the roles at the start.
+- **Compare each page with the PRD before calling it done.** A later review found gaps such as a missing type guard and an `as` cast where the PRD asks for a guard. A short checklist per page would have found them earlier.
 
 ## AI Usage Summary
 

@@ -74,5 +74,7 @@ Promo code: `10X10`
 
 ## Credits
 
-<!-- TODO: list who helped you -->
-Product data: [DummyJSON](https://dummyjson.com).
+- **AI assistant:** [Claude](https://claude.ai) by Anthropic, for step-by-step guidance, code review, browser testing and first drafts of the documents. What it was used for is described in the AI Usage Summary in [REPORT.md](md/REPORT.md).
+- **Product data:** [DummyJSON](https://dummyjson.com).
+- **Fonts:** [Bowlby One](https://fonts.google.com/specimen/Bowlby+One), [Caveat](https://fonts.google.com/specimen/Caveat), [Figtree](https://fonts.google.com/specimen/Figtree) and [IBM Plex Mono](https://fonts.google.com/specimen/IBM+Plex+Mono) from Google Fonts.
+- **Icons:** [Lucide](https://lucide.dev).
