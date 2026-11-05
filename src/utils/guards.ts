@@ -85,3 +85,8 @@ export function isStoredReview(value: unknown): value is StoredReview {
 export function getFromPath(state: unknown): string {
   return isRecord(state) && isString(state.from) ? state.from : "/"
 }
+
+// router state is unknown: the "order placed" banner shows only when the Confirmation page sent justPlaced: true
+export function isJustPlaced(state: unknown): boolean {
+  return isRecord(state) && state.justPlaced === true
+}

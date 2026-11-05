@@ -39,7 +39,7 @@ Status as of 4 November 2026. Update this report before submission.
 | Sorting | Done | The five options from the PRD, including `Name A→Z` |
 | Pagination | Done | Includes `Showing X–Y of Z` |
 | Reviews | Done | Saved in `shop_reviews`; average rating and count update; `Please select a rating` and `Comment must be at least 10 characters` shown on submit |
-| Orders | Done | Statuses refresh every 30 seconds without a reload; Reorder adds the items back to the cart |
+| Orders | Done | Statuses refresh every 30 seconds without a reload; Processing is gray, Shipped blue, Delivered green; `View my order` on the confirmation page opens the order with a green "order placed" banner; Reorder adds the items back to the cart |
 | Profile | Done | First and last name fields; the header link shows the first name, so a change is visible there; theme switch shares state with the header |
 | Formik and Yup | Done | Login uses `useFormik` with `FormikProvider`; Register, password reset, Checkout and Profile use `<Formik>` |
 | Sign up and password reset | Done | Register page; local password reset at `/forgot-password` checks username and email |
@@ -50,6 +50,8 @@ Status as of 4 November 2026. Update this report before submission.
 | `ApiClient`, `ApiError`, type guards | Done | Generic `get<T>`, 404 detected by status code, stored data validated before use |
 | `AsyncState<T>`, `SortOption` unions | Done | `useProducts` and `useProduct` return `AsyncState<T>`; pages switch on `status`; `?sort=` is checked with `isSortOption` |
 | `formatDate()` | Done | One date formatter in `utils/date.ts` instead of seven `toLocaleDateString` calls |
+| `buildProductsUrl()` | Done | Pure function in `utils/url.ts` that turns the catalog query into the DummyJSON path |
+| Keyboard path | Done | Checked on 5 November 2026: Tab reaches a product card, Enter opens it, Tab reaches `Add to cart`, and the Checkout form is filled and sent with the keyboard only; focus stays visible |
 | `Cart`, `Order`, `StorageService<T>` classes | Done | `src/models/`. `Cart implements ICart` does every total and is used by `CartProvider`, the receipts and checkout; `Order.create()` snapshots the cart, `getStatus()` drives the status pill and timeline, `toJSON()` feeds storage; `StorageService<T>` is the only way the app reads or writes storage (except the theme string, which `index.html` reads before React) |
 | Lazy routes | Done | Home and Catalog load up front; other pages load on demand |
 | Lighthouse targets | Done | All medians met on the live site |
@@ -68,7 +70,7 @@ Status as of 4 November 2026. Update this report before submission.
 
 | Metric | Value |
 |---|---|
-| Commits | 60 (on 5 November 2026) |
+| Commits | 61 (on 5 November 2026) |
 | Days with commits | 13 |
 | Merged PRs | 0 (all work was committed straight to `main`) |
 | Closed Issues | 0 (no GitHub Issues were created) |

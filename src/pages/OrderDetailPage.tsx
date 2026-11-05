@@ -1,6 +1,6 @@
-import { ArrowLeft } from "lucide-react"
+import { ArrowLeft, Check } from "lucide-react"
 import PageTitle from "../components/layout/PageTitle"
-import { Link, useNavigate, useParams } from "react-router"
+import { Link, useLocation, useNavigate, useParams } from "react-router"
 import Receipt from "../components/cart/Receipt"
 import { getOrderById } from "../components/orders/orderStorage"
 import StatusTimeline from "../components/orders/StatusTimeline"
@@ -11,6 +11,7 @@ import useNow from "../hooks/useNow"
 import useToast from "../hooks/useToast"
 import NotFoundPage from "./NotFoundPage"
 import { formatDate } from "../utils/date"
+import { isJustPlaced } from "../utils/guards"
 
 const STATUS_REFRESH = 30_000
 
@@ -22,6 +23,7 @@ export default function OrderDetailPage() {
   const { addItem } = useCart()
   const { showToast } = useToast()
   const navigate = useNavigate()
+  const justPlaced = isJustPlaced(useLocation().state)
 
   if (!order) return <NotFoundPage />
 
@@ -46,6 +48,13 @@ export default function OrderDetailPage() {
       <Link to="/orders" className="self-start flex items-center gap-2 h-11 font-extrabold hover:text-accent">
         <ArrowLeft size={20} strokeWidth={2.4} /> All orders
       </Link>
+
+      {justPlaced && (
+        <p role="status" className="flex items-center gap-3 px-5 py-4 rounded-card bg-mint text-ink font-extrabold">
+          <Check size={22} strokeWidth={2.8} aria-hidden="true" />
+          Your order has been placed. Its status updates here by itself.
+        </p>
+      )}
 
       <div className="flex flex-wrap items-end justify-between gap-5">
         <div className="flex flex-col gap-2">

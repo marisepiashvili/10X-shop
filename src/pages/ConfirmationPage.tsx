@@ -39,10 +39,11 @@ export default function ConfirmationPage() {
               Continue shopping
             </Link>
             <Link
-              to="/orders"
+              to={`/orders/${order.id}`}
+              state={{ justPlaced: true }}
               className="flex items-center h-15 px-6 rounded-full bg-card text-ink font-extrabold shadow-soft transition hover:-translate-y-0.5"
             >
-              View my orders
+              View my order
             </Link>
           </div>
         </div>

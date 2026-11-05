@@ -3,7 +3,7 @@ import PageTitle from "../components/layout/PageTitle"
 import CatalogToolbar from "../components/catalog/CatalogToolbar";
 import Pagination from "../components/catalog/Pagination";
 import ProductGrid from "../components/product/ProductGrid";
-import { PAGE_SIZE } from "../components/product/productFetch";
+import { PAGE_SIZE } from "../utils/url";
 import ProductGridSkeleton from "../components/product/ProductGridSkeleton";
 import MessagePanel from "../components/ui/MessagePanel";
 import useDebounce from "../hooks/useDebounce";
