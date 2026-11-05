@@ -68,12 +68,12 @@ Status as of 4 November 2026. Update this report before submission.
 
 | Metric | Value |
 |---|---|
-| Commits | 52 (before the 4 November PRD-fix commit) |
-| Days with commits | 12 |
-| Merged PRs | <!-- TODO --> |
-| Closed Issues | <!-- TODO --> |
-| Main JavaScript bundle | 271 kB (about 85 kB gzip), was 450 kB (141 kB gzip) |
-| CSS bundle | 52 kB (about 10 kB gzip) |
+| Commits | 60 (on 5 November 2026) |
+| Days with commits | 13 |
+| Merged PRs | 0 (all work was committed straight to `main`) |
+| Closed Issues | 0 (no GitHub Issues were created) |
+| Main JavaScript bundle | 274 kB (about 87 kB gzip), was 450 kB (141 kB gzip) |
+| CSS bundle | 57 kB (about 11 kB gzip) |
 
 ### Lighthouse
 
@@ -159,8 +159,12 @@ The estimate is a lower bound: 16 sessions over 13 days. Work that leaves few co
 
 ## AI Usage Summary
 
-<!-- TODO: review and complete this section in your own words -->
+<!-- Draft written from the project history; reread it and change anything that does not match your experience -->
 
-- **Used for:** step-by-step guidance on features and fixes, dark mode and review-flow changes I asked it to make directly, browser testing, and first drafts of the project documents.
-- **Rejected:** a separate login card in place of the review form, and several dark mode color proposals.
-- **Why:** <!-- TODO -->
+I used Claude (Anthropic) as an assistant during the whole project.
+
+- **Used for:** step-by-step explanations that I then coded myself; later, changes I asked it to make directly (dark mode, the review flow, the compact mobile layout, the Details tab, the `Cart`, `Order` and `StorageService` classes); browser test scripts, Lighthouse runs and checks against the PRD; first drafts of PLAN, REPORT, DEBUG-LOG and the progress notes.
+- **Rejected:** a separate login card in place of the review form, several dark mode color proposals, a horizontally scrolling category row on phones, and hiding some categories on phones.
+- **Why:** the review form should stay visible to everyone; the rejected colors did not match the sticker style; on phones I wanted no scrolling and all 8 categories reachable, so they were made smaller and wrap onto 3 rows instead.
+- **How I checked it:** every change had to pass `typecheck`, `lint` and `build`; I tested the pages myself in Chrome, Firefox and Safari and reread the documents before committing.
+- **What I learned:** AI is fast at drafts and checks, but the decisions about design and scope had to be mine, and I had to understand each change well enough to explain it.
