@@ -1,28 +1,15 @@
 import { useEffect, useRef, useState } from "react"
-import { useLocation, useNavigate } from "react-router"
+import { useLocation } from "react-router"
 import useAuth from "../../hooks/useAuth"
 import useToast from "../../hooks/useToast"
-import { isNumber, isRecord, isString } from "../../utils/guards"
-import { StorageService } from "../../models/StorageService"
-import { STORAGE_KEYS } from "../../utils/storageKeys"
 import type { Product, StoredReview } from "../../types/product"
 import ReviewCard from "./ReviewCard"
 import ReviewForm from "./ReviewForm"
 
 type Tab = "details" | "reviews"
-type ReviewDraft = { productId: number, rating: number, comment: string }
 
-function isReviewDraft(value: unknown): value is ReviewDraft {
-  return isRecord(value) && isNumber(value.productId) && isNumber(value.rating) && isString(value.comment)
-}
-
-// sessionStorage: the draft only has to survive the trip to the login page and back
-const draftStorage = new StorageService<ReviewDraft>(STORAGE_KEYS.reviewDraft, isReviewDraft, sessionStorage)
-
-function loadDraft(productId: number): ReviewDraft | null {
-  const draft = draftStorage.get()
-  return draft?.productId === productId ? draft : null
-}
+// PRD P3.4: a logged-in user signs with their name, anyone else posts as "Guest"
+const GUEST_NAME = "Guest"
 
 type ProductTabsProps = {
   product: Product
@@ -33,34 +20,23 @@ type ProductTabsProps = {
 export default function ProductTabs({ product, reviews, onAddReview }: ProductTabsProps) {
   const { user } = useAuth()
   const { showToast } = useToast()
-  const { pathname, hash } = useLocation()
-  const navigate = useNavigate()
+  const { hash } = useLocation()
   const sectionRef = useRef<HTMLElement>(null)
   const openReviews = hash === "#reviews"
   const [activeTab, setActiveTab] = useState<Tab>(openReviews ? "reviews" : "details")
-  const [draft, setDraft] = useState(() => loadDraft(product.id))
 
   useEffect(() => {
     if (openReviews) sectionRef.current?.scrollIntoView({ block: "start" })
   }, [openReviews])
 
   function handleAddReview(rating: number, comment: string) {
-    if (!user) {
-      // keep what they wrote so the form is filled in again after login
-      const newDraft: ReviewDraft = { productId: product.id, rating, comment }
-      draftStorage.set(newDraft)
-      navigate("/login", { state: { from: `${pathname}#reviews` } })
-      return
-    }
-    draftStorage.remove()
-    setDraft(null)
     onAddReview({
       id: crypto.randomUUID(),
       rating,
       comment,
       date: new Date().toISOString(),
-      reviewerName: user.name,
-      reviewerEmail: user.email,
+      reviewerName: user?.name ?? GUEST_NAME,
+      reviewerEmail: user?.email ?? "",
     })
     showToast("Review added ✓")
   }
@@ -125,7 +101,7 @@ export default function ProductTabs({ product, reviews, onAddReview }: ProductTa
                 ))
               )}
             </div>
-            <ReviewForm onSubmit={handleAddReview} initialRating={draft?.rating} initialComment={draft?.comment} />
+            <ReviewForm onSubmit={handleAddReview} authorName={user?.name ?? GUEST_NAME} />
           </div>
         )}
       </div>

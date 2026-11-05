@@ -38,7 +38,7 @@ Status as of 4 November 2026. Update this report before submission.
 | Dark mode and `@theme` tokens | Done | |
 | Sorting | Done | The five options from the PRD, including `Name A→Z` |
 | Pagination | Done | Includes `Showing X–Y of Z` |
-| Reviews | Done | Saved in `shop_reviews`; average rating and count update; `Please select a rating` and `Comment must be at least 10 characters` shown on submit |
+| Reviews | Done | Anyone can post: a logged-in user signs with their name, a guest as `Guest`; saved in `shop_reviews`; average rating and count update; `Please select a rating` and `Comment must be at least 10 characters` shown on submit |
 | Orders | Done | Statuses refresh every 30 seconds without a reload; Processing is gray, Shipped blue, Delivered green; `View my order` on the confirmation page opens the order with a green "order placed" banner; Reorder adds the items back to the cart |
 | Profile | Done | First and last name fields; the header link shows the first name, so a change is visible there; theme switch shares state with the header |
 | Formik and Yup | Done | Login uses `useFormik` with `FormikProvider`; Register, password reset, Checkout and Profile use `<Formik>` |
@@ -64,13 +64,12 @@ Status as of 4 November 2026. Update this report before submission.
 - **Login against local accounts:** The PRD describes a username login that accepts any non-empty values and stores no credentials. The app logs in with a username and password, but checks them against accounts created on the Register page and kept in `shop_users` in this browser.
 - **2-column product grid on phones:** The PRD asks for 1 column below 480px. Cards were shrunk so 2 fit at 375px (about 165px each), which shows twice as many products per screen; there is still no horizontal scrolling and buttons stay 44px tall.
 - **Details tab instead of Description:** The PRD puts the description both in the info block and in a Description tab. The text stays under the price; the tab is named Details and shows brand, category, SKU, stock, warranty, shipping and return policy instead of repeating it.
-- **Login required to submit a review:** The review form is visible to everyone, and a guest is sent to Login on submit. The written review is restored afterward.
 
 ## Metrics
 
 | Metric | Value |
 |---|---|
-| Commits | 61 (on 5 November 2026) |
+| Commits | 62 (on 5 November 2026) |
 | Days with commits | 13 |
 | Merged PRs | 0 (all work was committed straight to `main`) |
 | Closed Issues | 0 (no GitHub Issues were created) |

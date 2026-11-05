@@ -6,13 +6,12 @@ const MIN_COMMENT_LENGTH = 10
 
 type ReviewFormProps = {
   onSubmit: (rating: number, comment: string) => void
-  initialRating?: number
-  initialComment?: string
+  authorName: string
 }
 
-export default function ReviewForm({ onSubmit, initialRating = 0, initialComment = "" }: ReviewFormProps) {
-  const [rating, setRating] = useState(initialRating)
-  const [comment, setComment] = useState(initialComment)
+export default function ReviewForm({ onSubmit, authorName }: ReviewFormProps) {
+  const [rating, setRating] = useState(0)
+  const [comment, setComment] = useState("")
   // errors appear after the first submit and then follow the input live
   const [showErrors, setShowErrors] = useState(false)
 
@@ -33,7 +32,10 @@ export default function ReviewForm({ onSubmit, initialRating = 0, initialComment
 
   return (
     <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-4.5 px-6.5 pt-7.5 pb-6.5 bg-card rounded-card shadow-card">
-      <h3 className="font-display text-[26px] leading-tight">Write a review</h3>
+      <div className="flex flex-col gap-1">
+        <h3 className="font-display text-[26px] leading-tight">Write a review</h3>
+        <p className="text-sm text-muted-ink">Posting as <span className="font-extrabold text-ink">{authorName}</span></p>
+      </div>
 
       <fieldset className="flex flex-col gap-2">
         <legend className="text-sm font-extrabold mb-2">Rating</legend>
