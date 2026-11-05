@@ -25,7 +25,7 @@ Status as of 4 November 2026. Update this report before submission.
 | DEBUG-LOG | Done | 6 entries |
 | Login with username and 6-character password rule | Changed | Username and password with the PRD messages (`Username is required`, `Password is required`, 6-character minimum); accounts come from a local registration instead of accepting any values |
 | 375px layout | Done | Burger menu below 768px; no horizontal scrolling; tap targets are at least 44px, and product cards are clickable as a whole. On phones the catalog filters fold behind a Filters button and the grid has 2 columns (see Intentional Deviations) |
-| Compatibility matrix | Partial | Chromium checked; Firefox still needs testing |
+| Compatibility matrix | Done | Chromium, Firefox and Safari checked; Firefox and Safari screenshots in `docs/compat/` |
 | Lighthouse report | Done | Before and after results recorded |
 
 ### FULL
