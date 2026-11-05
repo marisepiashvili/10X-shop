@@ -56,7 +56,8 @@ Status as of 4 November 2026. Update this report before submission.
 | Lazy routes | Done | Home and Catalog load up front; other pages load on demand |
 | Lighthouse targets | Done | All medians met on the live site |
 | Progress notes | Done | `docs/progress/week-1.md` to `week-3.md`, reconstructed from the Git history |
-| Issues, Projects, PRs, demo video | Not done | No merge commits in the local history |
+| Demo video | Done | [Google Drive](https://drive.google.com/file/d/1PDI6DdEZRduLiZ9BvWPBND0F4MDNAJay/view): screen recording of the full shopping flow |
+| Issues, Projects, PRs | Not done | No merge commits in the local history |
 
 ### Intentional Deviations
 
@@ -69,8 +70,8 @@ Status as of 4 November 2026. Update this report before submission.
 
 | Metric | Value |
 |---|---|
-| Commits | 62 (on 5 November 2026) |
-| Days with commits | 13 |
+| Commits | 63 (on 6 November 2026) |
+| Days with commits | 14 |
 | Merged PRs | 0 (all work was committed straight to `main`) |
 | Closed Issues | 0 (no GitHub Issues were created) |
 | Main JavaScript bundle | 274 kB (about 87 kB gzip), was 450 kB (141 kB gzip) |

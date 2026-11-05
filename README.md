@@ -6,6 +6,8 @@
 
 **Live demo:** https://10-x-shop.vercel.app/
 
+**Demo video:** [full shopping flow on Google Drive](https://drive.google.com/file/d/1PDI6DdEZRduLiZ9BvWPBND0F4MDNAJay/view)
+
 ## Features
 
 ### CORE
