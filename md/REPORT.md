@@ -38,8 +38,8 @@ Status as of 4 November 2026. Update this report before submission.
 | Dark mode and `@theme` tokens | Done | |
 | Sorting | Done | The five options from the PRD, including `Name A→Z` |
 | Pagination | Done | Includes `Showing X–Y of Z` |
-| Reviews | Done | Anyone can post: a logged-in user signs with their name, a guest as `Guest`; saved in `shop_reviews`; average rating and count update; `Please select a rating` and `Comment must be at least 10 characters` shown on submit |
-| Orders | Done | Statuses refresh every 30 seconds without a reload; Processing is gray, Shipped blue, Delivered green; `View my order` on the confirmation page opens the order with a green "order placed" banner; Reorder adds the items back to the cart |
+| Reviews | Done | Saved in `shop_reviews`; average rating and count update; `Please select a rating` and `Comment must be at least 10 characters` shown on submit |
+| Orders | Done | Statuses refresh every 30 seconds without a reload; Reorder adds the items back to the cart |
 | Profile | Done | First and last name fields; the header link shows the first name, so a change is visible there; theme switch shares state with the header |
 | Formik and Yup | Done | Login uses `useFormik` with `FormikProvider`; Register, password reset, Checkout and Profile use `<Formik>` |
 | Sign up and password reset | Done | Register page; local password reset at `/forgot-password` checks username and email |
@@ -50,14 +50,11 @@ Status as of 4 November 2026. Update this report before submission.
 | `ApiClient`, `ApiError`, type guards | Done | Generic `get<T>`, 404 detected by status code, stored data validated before use |
 | `AsyncState<T>`, `SortOption` unions | Done | `useProducts` and `useProduct` return `AsyncState<T>`; pages switch on `status`; `?sort=` is checked with `isSortOption` |
 | `formatDate()` | Done | One date formatter in `utils/date.ts` instead of seven `toLocaleDateString` calls |
-| `buildProductsUrl()` | Done | Pure function in `utils/url.ts` that turns the catalog query into the DummyJSON path |
-| Keyboard path | Done | Checked on 5 November 2026: Tab reaches a product card, Enter opens it, Tab reaches `Add to cart`, and the Checkout form is filled and sent with the keyboard only; focus stays visible |
 | `Cart`, `Order`, `StorageService<T>` classes | Done | `src/models/`. `Cart implements ICart` does every total and is used by `CartProvider`, the receipts and checkout; `Order.create()` snapshots the cart, `getStatus()` drives the status pill and timeline, `toJSON()` feeds storage; `StorageService<T>` is the only way the app reads or writes storage (except the theme string, which `index.html` reads before React) |
 | Lazy routes | Done | Home and Catalog load up front; other pages load on demand |
 | Lighthouse targets | Done | All medians met on the live site |
 | Progress notes | Done | `docs/progress/week-1.md` to `week-3.md`, reconstructed from the Git history |
-| Demo video | Done | [Google Drive](https://drive.google.com/file/d/1PDI6DdEZRduLiZ9BvWPBND0F4MDNAJay/view): screen recording of the full shopping flow |
-| Issues, Projects, PRs | Not done | No merge commits in the local history |
+| Issues, Projects, PRs, demo video | Not done | No merge commits in the local history |
 
 ### Intentional Deviations
 
@@ -65,13 +62,14 @@ Status as of 4 November 2026. Update this report before submission.
 - **Login against local accounts:** The PRD describes a username login that accepts any non-empty values and stores no credentials. The app logs in with a username and password, but checks them against accounts created on the Register page and kept in `shop_users` in this browser.
 - **2-column product grid on phones:** The PRD asks for 1 column below 480px. Cards were shrunk so 2 fit at 375px (about 165px each), which shows twice as many products per screen; there is still no horizontal scrolling and buttons stay 44px tall.
 - **Details tab instead of Description:** The PRD puts the description both in the info block and in a Description tab. The text stays under the price; the tab is named Details and shows brand, category, SKU, stock, warranty, shipping and return policy instead of repeating it.
+- **Login required to submit a review:** The review form is visible to everyone, and a guest is sent to Login on submit. The written review is restored afterward.
 
 ## Metrics
 
 | Metric | Value |
 |---|---|
-| Commits | 63 (on 6 November 2026) |
-| Days with commits | 14 |
+| Commits | 60 (on 5 November 2026) |
+| Days with commits | 13 |
 | Merged PRs | 0 (all work was committed straight to `main`) |
 | Closed Issues | 0 (no GitHub Issues were created) |
 | Main JavaScript bundle | 274 kB (about 87 kB gzip), was 450 kB (141 kB gzip) |
@@ -151,8 +149,6 @@ The estimate is a lower bound: 16 sessions over 13 days. Work that leaves few co
 
 ## What I Would Do Differently
 
-<!-- Draft written from the project history; reread it and change anything that does not match your experience -->
-
 - **Use Issues and pull requests from the first day.** I committed straight to `main`, so the Issues, PRs and progress notes had to be reconstructed from the Git history at the end. Opening an Issue and a branch for each task would have kept the plan and the history connected.
 - **Write the progress note at the end of each week.** The notes for weeks 1 and 2 were written afterwards from commit messages, and the hours and blockers were hard to remember.
 - **Check each page at 375px as soon as it is built.** I tested mobile late, so on 4 November I had to shrink headings, cards, tables and inputs on almost every page at once. A quick check after each page would have caught this earlier.
@@ -160,8 +156,6 @@ The estimate is a lower bound: 16 sessions over 13 days. Work that leaves few co
 - **Compare each page with the PRD before calling it done.** A later review found gaps such as a missing type guard and an `as` cast where the PRD asks for a guard. A short checklist per page would have found them earlier.
 
 ## AI Usage Summary
-
-<!-- Draft written from the project history; reread it and change anything that does not match your experience -->
 
 I used Claude (Anthropic) as an assistant during the whole project.
 
